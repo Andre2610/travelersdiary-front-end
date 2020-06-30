@@ -3,6 +3,7 @@ import axios from "axios";
 import { apiUrl } from "../config/constants";
 import { Trip } from "../model";
 import TripCard from "../Components/TripCard";
+import { Flex, Text, Box, Heading } from "@chakra-ui/core";
 
 export default function Homepage() {
   const [trips, set_trips] = useState<Trip[]>([]);
@@ -22,7 +23,7 @@ export default function Homepage() {
   }, []);
 
   return (
-    <div>
+    <Box w="100vw" m="auto" bg="orange.200" p="2vh">
       {trips.map((trip) => {
         return (
           <div key={trip.id}>
@@ -36,6 +37,6 @@ export default function Homepage() {
           </div>
         );
       })}
-    </div>
+    </Box>
   );
 }
