@@ -1,8 +1,8 @@
 import React from "react";
 import { Trip, Picture } from "../model";
-import { Flex, Text, Box, Heading, Image } from "@chakra-ui/core";
-import { Carousel } from "react-responsive-carousel";
+import { Flex, Text, Box, Heading, Image, Button } from "@chakra-ui/core";
 import Slider from "./slider";
+import "../Style/TripCard.scss";
 
 export default function TripCard(props: Trip) {
   const { id, tripTitle, posts, startDate, endDate } = props;
@@ -58,6 +58,11 @@ export default function TripCard(props: Trip) {
           </Box>
         );
       })}
+      <Flex justify="space-around" pt="1rem">
+        <Button className="visitTrip" bg="red.500" color="blue.100" w="20%">
+          Check out this trip!
+        </Button>
+      </Flex>
     </Box>
   );
 }
