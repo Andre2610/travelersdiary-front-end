@@ -1,12 +1,12 @@
-export type Trips = {
+export type Trip = {
   id: number;
   tripTitle: string;
-  posts: Posts;
+  posts: Post;
   startDate: string;
   endDate: string;
 };
 
-export type Posts = {
+export type Post = {
   id: number;
   latitude: number;
   longitude: number;

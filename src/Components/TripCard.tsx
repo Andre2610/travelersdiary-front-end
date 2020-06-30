@@ -1,8 +1,7 @@
 import React from "react";
-import { Trips } from "../model";
-import { start } from "repl";
+import { Trip } from "../model";
 
-export default function TripCard(props: Trips) {
+export default function TripCard(props: Trip) {
   const { id, tripTitle, posts, startDate, endDate } = props;
   return (
     <div key={id}>

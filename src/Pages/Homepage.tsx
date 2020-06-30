@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { apiUrl } from "../config/constants";
-import { Trips, Posts } from "../model";
+import { Trip } from "../model";
 import TripCard from "../Components/TripCard";
 
 export default function Homepage() {
-  const [trips, set_trips] = useState<Trips[]>([]);
+  const [trips, set_trips] = useState<Trip[]>([]);
 
   async function fetchTrips() {
     try {
