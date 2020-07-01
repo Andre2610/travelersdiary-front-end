@@ -22,3 +22,9 @@ export type Picture = {
   imageUrl: string;
   postId: number;
 };
+
+export type StoreState = {
+  trips: Trip[];
+};
+
+export type GetState = () => StoreState;

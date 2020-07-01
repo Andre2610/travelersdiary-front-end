@@ -1,30 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { apiUrl } from "../config/constants";
-import { Trip } from "../model";
+import { Trip } from "../Types/model";
 import TripCard from "../Components/TripCard";
 import { Flex, Text, Box, Heading, Button } from "@chakra-ui/core";
+import { fetchTrips } from "../Store/trips/actions";
+import { selectAllTrips } from "../Store/trips/selector";
 
 export default function Homepage() {
-  const [trips, set_trips] = useState<Trip[]>([]);
+  const dispatch = useDispatch();
+  const allTrips: Trip[] = useSelector(selectAllTrips);
+  console.log("what is in allTrips", allTrips);
 
-  async function fetchTrips() {
-    try {
-      const res = await axios.get(`${apiUrl}/trips`);
-      console.log("What is my response", res.data);
-      set_trips(res.data);
-    } catch (e) {
-      console.log(e.message);
-    }
-  }
+  // const [trips, set_trips] = useState<Trip[]>([]);
 
   useEffect(() => {
-    fetchTrips();
+    dispatch(fetchTrips());
   }, []);
 
   return (
     <Box w="100vw" m="auto" bg="orange.200" p="2vh">
-      {trips.map((trip) => {
+      {allTrips.map((trip) => {
         return (
           <Box key={trip.id}>
             <TripCard

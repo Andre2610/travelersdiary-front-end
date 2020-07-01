@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/core";
 import Navigation from "./Components/Navigation";
 import Homepage from "./Pages/Homepage";
+import TripDetails from "./Pages/TripDetails";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Navigation />
         <Switch>
           <Route exact path="/" component={Homepage} />
+          <Route path="/trip/:id?" component={TripDetails} />
         </Switch>
       </ColorModeProvider>
     </ThemeProvider>
