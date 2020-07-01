@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../Style/slider.scss";
 import { POINT_CONVERSION_UNCOMPRESSED } from "constants";
-import { Picture } from "../model";
+import { Picture } from "../Types/model";
 const leftarrow: string = require("../Style/leftarrow.svg");
 const rightarrow: string = require("../Style/rightarrow.svg");
 

@@ -1,4 +1,4 @@
-import { Trip } from "../../model";
+import { Trip } from "../../Types/model";
 
 export const selectAllTrips = (state: any) => {
   console.log("my state", state);

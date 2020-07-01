@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { apiUrl } from "../config/constants";
-import { Trip } from "../model";
+import { Trip } from "../Types/model";
 import TripCard from "../Components/TripCard";
 import { Flex, Text, Box, Heading, Button } from "@chakra-ui/core";
 import { fetchTrips } from "../Store/trips/actions";

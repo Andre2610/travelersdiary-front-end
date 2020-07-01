@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Trip, Picture } from "../model";
+import { Trip, Picture } from "../Types/model";
 import { Flex, Text, Box, Heading, Image, Button } from "@chakra-ui/core";
 import Slider from "./slider";
 import "../Style/TripCard.scss";
