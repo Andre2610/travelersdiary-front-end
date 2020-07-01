@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Trip, Picture } from "../model";
 import { Flex, Text, Box, Heading, Image, Button } from "@chakra-ui/core";
 import Slider from "./slider";
@@ -6,6 +7,7 @@ import "../Style/TripCard.scss";
 
 export default function TripCard(props: Trip) {
   const { id, tripTitle, posts, startDate, endDate } = props;
+  const history = useHistory();
 
   function postsRender(title: string, content: string, pictures: Picture[]) {
     if (pictures.length > 0) {
@@ -31,6 +33,9 @@ export default function TripCard(props: Trip) {
     );
   }
 
+  function visitTripOnClickHandler(id: number) {
+    history.push(`/trip/${id}`);
+  }
   return (
     <Box
       key={id}
@@ -59,7 +64,13 @@ export default function TripCard(props: Trip) {
         );
       })}
       <Flex justify="space-around" pt="1rem">
-        <Button className="visitTrip" bg="red.500" color="blue.100" w="20%">
+        <Button
+          className="visitTrip"
+          bg="red.500"
+          color="blue.100"
+          w="20%"
+          onClick={(e) => visitTripOnClickHandler(id)}
+        >
           Check out this trip!
         </Button>
       </Flex>

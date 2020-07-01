@@ -18,7 +18,7 @@ export default function Navbar() {
           </Button>
         </Text>
         <Text>
-          <Button>Log out</Button>
+          <Button>Log in</Button>
         </Text>
       </Flex>
     </Flex>
