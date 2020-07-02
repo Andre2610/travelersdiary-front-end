@@ -16,19 +16,21 @@ export default function Homepage() {
 
   return (
     <Box w="100vw" m="auto" bg="orange.200" p="2vh">
-      {allTrips.map((trip) => {
-        return (
-          <Box key={trip.id}>
-            <TripCard
-              id={trip.id}
-              tripTitle={trip.tripTitle}
-              posts={trip.posts}
-              startDate={trip.startDate}
-              endDate={trip.endDate}
-            />
-          </Box>
-        );
-      })}
+      {allTrips
+        .sort((a: Trip, b: Trip) => a.id - b.id)
+        .map((trip) => {
+          return (
+            <Box key={trip.id}>
+              <TripCard
+                id={trip.id}
+                tripTitle={trip.tripTitle}
+                posts={trip.posts}
+                startDate={trip.startDate}
+                endDate={trip.endDate}
+              />
+            </Box>
+          );
+        })}
     </Box>
   );
 }

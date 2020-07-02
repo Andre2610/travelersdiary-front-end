@@ -24,6 +24,12 @@ export default function TripDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const oneTrip: Trip = useSelector(selectIdTrip(id));
+  // const [sortedPosts, set_sortedPosts] = useState<Post[]>([]);
+  // if (oneTrip) {
+  //   set_sortedPosts(oneTrip.posts.sort((a: Post, b: Post) => a.id - b.id));
+  // }
+  // console.log("is it sorted", sortedPosts);
+  const [postIndex, set_postIndex] = useState(0);
   const [moveToMarker, set_moveToMarker] = useState<DefaultMarker>({
     lat: 0,
     lng: 0,
@@ -57,12 +63,20 @@ export default function TripDetails() {
     //@ts-ignore
     return <GoogleMaps posts={posts} moveToMarker={moveToMarker} />;
   }
+  function tabOnClickHandler(tabIndex: number, post: Post) {
+    set_moveToMarker({
+      lat: post.latitude,
+      lng: post.latitude,
+    });
+    console.log("my tabindex", tabIndex);
+    set_postIndex(tabIndex);
+  }
 
   useEffect(() => {
     if (!oneTrip) {
       dispatch(fetchSpecificTrip(id));
     }
-  }, [id, moveToMarker]);
+  }, [id]);
 
   if (oneTrip) {
     return (
@@ -73,6 +87,8 @@ export default function TripDetails() {
           my="3rem"
           textAlign="center"
           bg="blue.100"
+          maxH="60vh"
+          minH="40vh"
         >
           <Box w="50%">
             <Heading as="h2" mb="2rem">
@@ -81,27 +97,26 @@ export default function TripDetails() {
             <Tabs variant="soft-rounded" variantColor="cyan">
               <Flex w="100%" flexDirection="row" justify="space-around">
                 <TabList d="row" alignSelf="left" w="35%">
-                  {oneTrip.posts.map((post) => {
-                    return (
-                      <Tab
-                        h="4rem"
-                        w="95%"
-                        onClick={(e) =>
-                          set_moveToMarker({
-                            lat: post.latitude,
-                            lng: post.latitude,
-                          })
-                        }
-                      >
-                        {post.title}
-                      </Tab>
-                    );
-                  })}
+                  {oneTrip.posts
+                    .sort((a: Post, b: Post) => a.id - b.id)
+                    .map((post, i) => {
+                      return (
+                        <Tab
+                          h="4rem"
+                          w="95%"
+                          onClick={(e) => tabOnClickHandler(i, post)}
+                        >
+                          {post.title}
+                        </Tab>
+                      );
+                    })}
                 </TabList>
                 <TabPanels float="right" w="60%">
-                  {oneTrip.posts.map((post) => {
-                    return <Slider pictures={post.pictures} />;
-                  })}
+                  {console.log(
+                    "what is this",
+                    oneTrip.posts[postIndex].pictures
+                  )}
+                  <Slider pictures={oneTrip.posts[postIndex].pictures} />;
                 </TabPanels>
               </Flex>
             </Tabs>
