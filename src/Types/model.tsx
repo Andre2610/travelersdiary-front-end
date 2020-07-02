@@ -28,3 +28,5 @@ export type StoreState = {
 };
 
 export type GetState = () => StoreState;
+
+export type DefaultMarker = { lat: number; lng: number };
