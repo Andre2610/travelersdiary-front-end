@@ -13,9 +13,9 @@ export default function Navbar() {
       </Flex>
       <Flex float="right" w="20%" justify="space-around">
         <Text>
-          <Button>
-            <NavLink to="/">Home</NavLink>
-          </Button>
+          <NavLink to="/">
+            <Button>Home</Button>
+          </NavLink>
         </Text>
         <Text>
           <Button>Log in</Button>

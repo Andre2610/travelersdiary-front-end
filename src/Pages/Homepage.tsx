@@ -1,19 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { apiUrl } from "../config/constants";
 import { Trip } from "../Types/model";
 import TripCard from "../Components/TripCard";
-import { Flex, Text, Box, Heading, Button } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
 import { fetchTrips } from "../Store/trips/actions";
 import { selectAllTrips } from "../Store/trips/selector";
 
 export default function Homepage() {
   const dispatch = useDispatch();
   const allTrips: Trip[] = useSelector(selectAllTrips);
-  console.log("what is in allTrips", allTrips);
-
-  // const [trips, set_trips] = useState<Trip[]>([]);
 
   useEffect(() => {
     dispatch(fetchTrips());

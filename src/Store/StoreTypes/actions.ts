@@ -18,6 +18,6 @@ export type loadMoreTrips = {
 };
 
 export type TripActionTypes = loadInitialTrips | fetchSingTrip;
-// export type UserActionTypes =
+// export type UserActionTypes = getUser | getAllUser
 
 export type AppActions = TripActionTypes;
