@@ -23,10 +23,15 @@ export type Picture = {
   postId: number;
 };
 
-export type StoreState = {
+export type User = {
+  id: number | null;
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  about: string | null;
+  title: string | null;
+  token: string | null;
   trips: Trip[];
 };
-
-export type GetState = () => StoreState;
 
 export type DefaultMarker = { lat: number; lng: number };

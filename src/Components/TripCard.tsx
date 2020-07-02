@@ -57,7 +57,7 @@ export default function TripCard(props: Trip) {
       m="auto"
       p="15px"
       my="3vh"
-      border="3px solid black"
+      border="3px solid olive"
       overflow="scroll"
     >
       <Heading as="h2" size="md" bg="white.100">

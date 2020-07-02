@@ -112,10 +112,10 @@ export default function TripDetails() {
                     })}
                 </TabList>
                 <TabPanels float="right" w="60%">
-                  {console.log(
+                  {/* {console.log(
                     "what is this",
                     oneTrip.posts[postIndex].pictures
-                  )}
+                  )} */}
                   <Slider pictures={oneTrip.posts[postIndex].pictures} />;
                 </TabPanels>
               </Flex>

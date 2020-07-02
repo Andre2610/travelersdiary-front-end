@@ -7,7 +7,7 @@ import {
   CSSReset,
   Box,
 } from "@chakra-ui/core";
-import Navigation from "./Components/Navigation";
+import Navigation from "./Components/Navigation/Navigation";
 import Homepage from "./Pages/Homepage";
 import TripDetails from "./Pages/TripDetails";
 
