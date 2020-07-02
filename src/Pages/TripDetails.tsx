@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSpecificTrip } from "../Store/trips/actions";
 import { selectIdTrip } from "../Store/trips/selector";
-import { Trip, Picture } from "../Types/model";
+import { Trip, Post, Picture } from "../Types/model";
 import Slider from "../Components/slider";
+import GoogleMaps from "../Components/GoogleMaps";
 import {
   Flex,
   Text,
@@ -49,6 +50,11 @@ export default function TripDetails() {
     );
   }
 
+  function googleMapsRender(posts: Post[]) {
+    //@ts-ignore
+    return <GoogleMaps posts={posts} />;
+  }
+
   useEffect(() => {
     if (!oneTrip) {
       dispatch(fetchSpecificTrip(id));
@@ -58,7 +64,13 @@ export default function TripDetails() {
   if (oneTrip) {
     return (
       <Flex flexDirection="column" justify="center" w="80vw" m="auto">
-        <Flex w="100%" justify="space-evenly" my="3rem" textAlign="center">
+        <Flex
+          w="100%"
+          justify="space-evenly"
+          my="3rem"
+          textAlign="center"
+          bg="blue.100"
+        >
           <Box w="50%">
             <Heading as="h2" mb="2rem">
               {oneTrip.tripTitle}
@@ -69,7 +81,7 @@ export default function TripDetails() {
                   {oneTrip.posts.map((post) => {
                     return (
                       <Tab h="4rem" w="95%">
-                        {post.id}
+                        {post.title}
                       </Tab>
                     );
                   })}
@@ -82,7 +94,9 @@ export default function TripDetails() {
               </Flex>
             </Tabs>
           </Box>
-          <Box w="50%">TODO: Map with pins on locations</Box>
+          <Box w="40%" justifyContent="center" alignItems="center" mt=".5rem">
+            {googleMapsRender(oneTrip.posts)}
+          </Box>
         </Flex>
 
         {oneTrip.posts.map((post) => {
