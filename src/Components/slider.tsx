@@ -18,15 +18,21 @@ export default function Slider(props: { pictures: Picture[] }) {
         {props.pictures.map((picture) => {
           return (
             <TabPanel>
-              <Image src={picture.imageUrl} w="100%" />
+              <Image
+                src={picture.imageUrl}
+                w="100%"
+                objectFit="fill"
+                fallbackSrc="https://via.placeholder.com/150"
+              />
             </TabPanel>
           );
         })}
       </TabPanels>
       {props.pictures.length > 1 ? (
         <TabList>
-          {props.pictures.map((picture) => {
-            return <Tab>⦿</Tab>;
+          {props.pictures.map((picture, i) => {
+            return <Tab>{i + 1}</Tab>;
+            // return <Tab>⦿</Tab>;
           })}
         </TabList>
       ) : null}

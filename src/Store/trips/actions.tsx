@@ -21,7 +21,7 @@ export function fetchTrips() {
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     try {
       const res = await axios.get(`${apiUrl}/trips`);
-      console.log("What is my response inside actions", res.data);
+      // console.log("What is my response inside actions", res.data);
       dispatch(allTripsFetched(res.data));
     } catch (e) {
       console.log(e.message);
@@ -33,7 +33,7 @@ export function fetchSpecificTrip(id: number) {
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     try {
       const res = await axios.get(`${apiUrl}/trips/${id}`);
-      console.log("What is my response", res.data);
+      // console.log("What is my response", res.data);
       dispatch(fetchOneTrip(res.data));
     } catch (e) {
       console.log(e.message);
