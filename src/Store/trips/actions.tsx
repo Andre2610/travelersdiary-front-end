@@ -3,10 +3,11 @@ import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
 import {
   AppActions,
+  GetState,
   FETCH_TRIPS,
   FETCH_SINGLE_TRIP,
 } from "../StoreTypes/actions";
-import { Trip, GetState } from "../../Types/model";
+import { Trip } from "../../Types/model";
 
 export const allTripsFetched = (trips: Trip[]): AppActions => ({
   type: FETCH_TRIPS,

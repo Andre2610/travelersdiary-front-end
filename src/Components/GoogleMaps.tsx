@@ -41,11 +41,11 @@ const MyMapComponent = withScriptjs(
 );
 
 export default (props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
-  console.log("Whats my GapiKey", api);
+  // console.log("Whats my GapiKey", api);
   return (
     <MyMapComponent
       //@ts-ignore
-      googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyDuG4OWXClcdlTOrb8LgkulwasOEUJ9I3o`}
+      googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleAPIkey}`}
       //@ts-ignore
       loadingElement={<div style={{ height: `100%` }} />}
       //@ts-ignore

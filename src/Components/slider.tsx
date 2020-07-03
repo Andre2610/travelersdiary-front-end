@@ -15,9 +15,9 @@ export default function Slider(props: { pictures: Picture[] }) {
   return (
     <Tabs defaultIndex={0} align="center">
       <TabPanels>
-        {props.pictures.map((picture) => {
+        {props.pictures.map((picture, i) => {
           return (
-            <TabPanel>
+            <TabPanel key={i}>
               <Image
                 src={picture.imageUrl}
                 w="100%"
@@ -31,7 +31,7 @@ export default function Slider(props: { pictures: Picture[] }) {
       {props.pictures.length > 1 ? (
         <TabList>
           {props.pictures.map((picture, i) => {
-            return <Tab>{i + 1}</Tab>;
+            return <Tab key={i}>{i + 1}</Tab>;
             // return <Tab>⦿</Tab>;
           })}
         </TabList>
