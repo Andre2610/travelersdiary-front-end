@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signUp } from "../../Store/users/actions";
+import { SignupData } from "../../Types/model";
 import {
   Flex,
   Text,
@@ -18,7 +21,34 @@ import {
 } from "@chakra-ui/core";
 
 export default function SignupForm(props: any) {
+  const dispatch = useDispatch();
   const { onClose, set_ModalForm } = props;
+  const [signUpData, set_signUpData] = useState<SignupData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    title: "",
+    about: "",
+  });
+
+  function submitHandler(event: any) {
+    event.preventDefault();
+    const { firstName, lastName, email, password } = signUpData;
+    if (!firstName || !lastName || !email || !password) {
+      console.log("unhappy path, send message to user");
+    } else {
+      dispatch(signUp(signUpData));
+      set_signUpData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        title: "",
+        about: "",
+      });
+    }
+  }
 
   return (
     <>
@@ -39,6 +69,10 @@ export default function SignupForm(props: any) {
                   placeholder="First Name"
                   variant="flushed"
                   isRequired
+                  value={signUpData.firstName}
+                  onChange={(e: any) =>
+                    set_signUpData({ ...signUpData, firstName: e.target.value })
+                  }
                 />
               </Flex>
             </InputGroup>
@@ -52,6 +86,10 @@ export default function SignupForm(props: any) {
                   placeholder="Last Name"
                   variant="flushed"
                   isRequired
+                  value={signUpData.lastName}
+                  onChange={(e: any) =>
+                    set_signUpData({ ...signUpData, lastName: e.target.value })
+                  }
                 />
               </Flex>
             </InputGroup>
@@ -65,6 +103,10 @@ export default function SignupForm(props: any) {
                   placeholder="Email"
                   variant="flushed"
                   isRequired
+                  value={signUpData.email}
+                  onChange={(e: any) =>
+                    set_signUpData({ ...signUpData, email: e.target.value })
+                  }
                 />
               </Flex>
             </InputGroup>
@@ -78,11 +120,15 @@ export default function SignupForm(props: any) {
                   placeholder="Password"
                   variant="flushed"
                   isRequired
+                  value={signUpData.password}
+                  onChange={(e: any) =>
+                    set_signUpData({ ...signUpData, password: e.target.value })
+                  }
                 />
               </Flex>
             </InputGroup>
           </FormControl>
-          <FormControl isRequired>
+          <FormControl>
             <InputGroup maxH="10vh">
               <Flex w="35%" d="column" style={{ height: "10vh" }}>
                 <FormLabel htmlFor="text">Homepage title</FormLabel>
@@ -90,12 +136,15 @@ export default function SignupForm(props: any) {
                   type="text"
                   placeholder="Your homepage title"
                   variant="flushed"
-                  isRequired
+                  value={signUpData.title}
+                  onChange={(e: any) =>
+                    set_signUpData({ ...signUpData, title: e.target.value })
+                  }
                 />
               </Flex>
             </InputGroup>
           </FormControl>
-          <FormControl isRequired>
+          <FormControl>
             <InputGroup maxH="10vh">
               <Flex w="35%" d="column" style={{ height: "10vh" }}>
                 <FormLabel htmlFor="text">A line to describe you</FormLabel>
@@ -103,7 +152,10 @@ export default function SignupForm(props: any) {
                   type="text"
                   placeholder="Tell us a line about you"
                   variant="flushed"
-                  isRequired
+                  value={signUpData.about}
+                  onChange={(e: any) =>
+                    set_signUpData({ ...signUpData, about: e.target.value })
+                  }
                 />
               </Flex>
             </InputGroup>
@@ -111,7 +163,7 @@ export default function SignupForm(props: any) {
         </ModalBody>
 
         <ModalFooter>
-          <Button variantColor="blue" mr={3}>
+          <Button variantColor="blue" mr={3} onClick={(e) => submitHandler(e)}>
             Submit
           </Button>
           <Button variant="ghost" onClick={onClose}>

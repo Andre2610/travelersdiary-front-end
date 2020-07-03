@@ -1,6 +1,7 @@
 import { Trip } from "../../Types/model";
+import { StoreState } from "../StoreTypes/actions";
 
-export const selectAllTrips = (state: any) => {
+export const selectAllTrips = (state: StoreState) => {
   // console.log("my state", state);
   return state.trips;
 };

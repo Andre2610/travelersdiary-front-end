@@ -2,7 +2,7 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
 import { AppActions, GetState, FETCH_USER } from "../StoreTypes/actions";
-import { User, Trip, Credentials } from "../../Types/model";
+import { User, Trip, Credentials, SignupData } from "../../Types/model";
 
 export const userFetched = (user: User): AppActions => ({
   type: FETCH_USER,
@@ -32,7 +32,6 @@ export const login = (credentials: Credentials) => {
         email,
         password,
       });
-      console.log("What is my response", res.data);
 
       dispatch(userFetched(res.data));
     } catch (e) {
@@ -40,26 +39,21 @@ export const login = (credentials: Credentials) => {
     }
   };
 };
-export const signUp = (
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  title: string,
-  about: string
-) => {
+export const signUp = (signUpData: SignupData) => {
   return async (dispatch: Dispatch, getState: GetState) => {
-    try {
-      const response = await axios.post(`${apiUrl}/signup`, {
-        firstName,
-        lastName,
-        email,
-        password,
-        title,
-        about,
-      });
+    const title = !signUpData.title
+      ? `${signUpData.firstName}'s homepage`
+      : signUpData.title;
+    const about = !signUpData.about
+      ? (signUpData.about = "Nothing to say about myself!")
+      : signUpData.about;
 
-      dispatch(userFetched(response.data));
+    const data = { ...signUpData, title, about };
+    try {
+      const res = await axios.post(`${apiUrl}/auth/signup`, {
+        data,
+      });
+      dispatch(userFetched(res.data));
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);

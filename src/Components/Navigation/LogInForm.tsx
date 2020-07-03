@@ -34,11 +34,16 @@ export default function LogInForm(props: any) {
 
   function submitHandler(event: any) {
     event.preventDefault();
-    dispatch(login(credentials));
-    set_credentials({
-      email: "",
-      password: "",
-    });
+    const { email, password } = credentials;
+    if (!email || !password) {
+      console.log("unhappy path, send message to user");
+    } else {
+      dispatch(login(credentials));
+      set_credentials({
+        email: "",
+        password: "",
+      });
+    }
   }
   // useEffect(() => {
   //   if (token !== null) {

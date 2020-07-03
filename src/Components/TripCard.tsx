@@ -80,7 +80,7 @@ export default function TripCard(props: Trip) {
           className="visitTrip"
           bg="red.500"
           color="blue.100"
-          w="20%"
+          minW="20%"
           onClick={(e) => visitTripOnClickHandler(id)}
         >
           Check out this trip!
