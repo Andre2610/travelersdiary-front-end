@@ -1,27 +1,33 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
-import { AppActions, GetState, FETCH_USER } from "../StoreTypes/actions";
-import { User, Trip, Credentials, SignupData } from "../../Types/model";
+import {
+  AppActions,
+  GetState,
+  FETCH_USER,
+  TOKEN_STILL_VALID,
+  LOG_OUT,
+} from "../StoreTypes/actions";
+import {
+  User,
+  NoTokenUser,
+  Trip,
+  Credentials,
+  SignupData,
+} from "../../Types/model";
+import { selectToken } from "./selector";
 
 export const userFetched = (user: User): AppActions => ({
   type: FETCH_USER,
   user,
 });
 
-// const loginSuccess = (userWithToken) => {
-//   return {
-//     type: LOGIN_SUCCESS,
-//     payload: userWithToken,
-//   };
-// };
+const tokenStillValid = (noTokenUser: NoTokenUser): AppActions => ({
+  type: TOKEN_STILL_VALID,
+  noTokenUser,
+});
 
-// const tokenStillValid = (userWithoutToken) => ({
-//   type: TOKEN_STILL_VALID,
-//   payload: userWithoutToken,
-// });
-
-// export const logOut = () => ({ type: LOG_OUT });
+export const logOut = () => ({ type: LOG_OUT });
 
 export const login = (credentials: Credentials) => {
   const { email, password } = credentials;
@@ -64,35 +70,29 @@ export const signUp = (signUpData: SignupData) => {
   };
 };
 
-// export const getUserWithStoredToken = () => {
-//   return async (dispatch: Dispatch, getState: GetState) => {
-//     // get token from the state
-//     const token = selectToken(getState());
+export const getUserWithStoredToken = () => {
+  return async (dispatch: Dispatch, getState: GetState) => {
+    const token = selectToken(getState());
 
-//     // if we have no token, stop
-//     if (token === null) return;
-
-//     dispatch(appLoading());
-//     try {
-//       // if we do have a token,
-//       // check wether it is still valid or if it is expired
-//       const response = await axios.get(`${apiUrl}/me`, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       });
-
-//       // token is still valid
-//       dispatch(tokenStillValid(response.data));
-//       dispatch(appDoneLoading());
-//     } catch (error) {
-//       if (error.response) {
-//         console.log(error.response.message);
-//       } else {
-//         console.log(error);
-//       }
-//       // if we get a 4xx or 5xx response,
-//       // get rid of the token by logging out
-//       dispatch(logOut());
-//       dispatch(appDoneLoading());
-//     }
-//   };
-// };
+    if (token === null) return;
+    console.log("got here?");
+    // dispatch(appLoading());
+    try {
+      const res = await axios.get(`${apiUrl}/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(tokenStillValid(res.data));
+      // dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+      // if we get a 4xx or 5xx response,
+      // get rid of the token by logging out
+      dispatch(logOut());
+      // dispatch(appDoneLoading());
+    }
+  };
+};

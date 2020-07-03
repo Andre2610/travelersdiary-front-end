@@ -34,6 +34,16 @@ export type User = {
   trips: Trip[];
 };
 
+export type NoTokenUser = {
+  id: number | null;
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  about: string | null;
+  title: string | null;
+  trips: Trip[];
+};
+
 export type DefaultMarker = { lat: number; lng: number };
 
 export type Credentials = {

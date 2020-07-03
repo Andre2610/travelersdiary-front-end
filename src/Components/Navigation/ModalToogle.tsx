@@ -25,7 +25,9 @@ export default function ModalToogle() {
 
   return (
     <>
-      <Button onClick={onOpen}>Log In</Button>
+      <Button onClick={onOpen} minW="7vw">
+        Log In
+      </Button>
       <Modal scrollBehavior="outside" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         {modalForm === "Login" ? (
