@@ -112,7 +112,7 @@ export default function SignupForm(props: any) {
 
         <ModalFooter>
           <Button variantColor="blue" mr={3}>
-            Log in
+            Submit
           </Button>
           <Button variant="ghost" onClick={onClose}>
             Close

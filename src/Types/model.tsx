@@ -35,3 +35,17 @@ export type User = {
 };
 
 export type DefaultMarker = { lat: number; lng: number };
+
+export type Credentials = {
+  email: string;
+  password: string;
+};
+
+export type SignupData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  title: string;
+  about: string;
+};

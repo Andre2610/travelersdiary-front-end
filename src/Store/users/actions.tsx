@@ -2,7 +2,7 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
 import { AppActions, GetState, FETCH_USER } from "../StoreTypes/actions";
-import { User, Trip } from "../../Types/model";
+import { User, Trip, Credentials } from "../../Types/model";
 
 export const userFetched = (user: User): AppActions => ({
   type: FETCH_USER,
@@ -23,14 +23,17 @@ export const userFetched = (user: User): AppActions => ({
 
 // export const logOut = () => ({ type: LOG_OUT });
 
-export const login = (email: string, password: string) => {
+export const login = (credentials: Credentials) => {
+  const { email, password } = credentials;
+
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     try {
-      const res = await axios.post(`${apiUrl}/users/login`, {
+      const res = await axios.post(`${apiUrl}/auth/login`, {
         email,
         password,
       });
-      // console.log("What is my response", res.data);
+      console.log("What is my response", res.data);
+
       dispatch(userFetched(res.data));
     } catch (e) {
       console.log(e.message);

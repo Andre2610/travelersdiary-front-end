@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Credentials } from "../../Types/model";
+import { useHistory } from "react-router-dom";
+import { login } from "../../Store/users/actions";
 import {
   Flex,
   Text,
@@ -20,6 +24,27 @@ import {
 
 export default function LogInForm(props: any) {
   const { onClose, set_ModalForm } = props;
+  const [credentials, set_credentials] = useState<Credentials>({
+    email: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
+  // const token = useSelector(selectToken);
+  // const history = useHistory();
+
+  function submitHandler(event: any) {
+    event.preventDefault();
+    dispatch(login(credentials));
+    set_credentials({
+      email: "",
+      password: "",
+    });
+  }
+  // useEffect(() => {
+  //   if (token !== null) {
+  //     history.push("/");
+  //   }
+  // }, [token, history]);
 
   return (
     <>
@@ -42,6 +67,10 @@ export default function LogInForm(props: any) {
                   placeholder="Email"
                   variant="flushed"
                   isRequired
+                  value={credentials.email}
+                  onChange={(e: any) =>
+                    set_credentials({ ...credentials, email: e.target.value })
+                  }
                 />
               </Flex>
             </InputGroup>
@@ -55,6 +84,13 @@ export default function LogInForm(props: any) {
                   placeholder="Password"
                   variant="flushed"
                   isRequired
+                  value={credentials.password}
+                  onChange={(e: any) =>
+                    set_credentials({
+                      ...credentials,
+                      password: e.target.value,
+                    })
+                  }
                 />
               </Flex>
             </InputGroup>
@@ -62,7 +98,7 @@ export default function LogInForm(props: any) {
         </ModalBody>
 
         <ModalFooter>
-          <Button variantColor="blue" mr={3}>
+          <Button variantColor="blue" mr={3} onClick={(e) => submitHandler(e)}>
             Log in
           </Button>
           <Button variant="ghost" onClick={onClose}>
