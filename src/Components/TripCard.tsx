@@ -65,7 +65,7 @@ export default function TripCard(props: Trip) {
       </Heading>
       <Text bg="white.500" mb="1rem">
         Trip started on: {startDate}
-        {endDate ? `and ended on ${endDate}` : null}
+        {endDate ? ` and ended on ${endDate}` : null}
       </Text>
       {posts.map((post) => {
         const { id, title, content, latitude, longitude, pictures } = post;

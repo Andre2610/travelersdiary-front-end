@@ -10,6 +10,7 @@ import {
 import Navigation from "./Components/Navigation/Navigation";
 import Homepage from "./Pages/Homepage";
 import TripDetails from "./Pages/TripDetails";
+import MyPage from "./Pages/MyPage";
 import { getUserWithStoredToken } from "./Store/users/actions";
 import { selectToken } from "./Store/users/selector";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,10 +18,11 @@ import { useDispatch, useSelector } from "react-redux";
 function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  console.log("my token", token);
+
   useEffect(() => {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
+
   return (
     <ThemeProvider>
       <ColorModeProvider>
@@ -29,6 +31,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/trip/:id?" component={TripDetails} />
+          <Route path="/users/:id" component={MyPage} />
         </Switch>
       </ColorModeProvider>
     </ThemeProvider>
