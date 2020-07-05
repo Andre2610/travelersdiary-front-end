@@ -23,7 +23,6 @@ export function fetchTrips() {
     try {
       const res = await axios.get(`${apiUrl}/trips`);
       // console.log("What is my response inside actions", res.data);
-      console.log("my res", res);
       dispatch(allTripsFetched(res.data));
     } catch (e) {
       console.log(e.message);

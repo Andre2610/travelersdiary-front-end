@@ -81,7 +81,7 @@ export default function TripDetails() {
 
   if (oneTrip) {
     return (
-      <Flex flexDirection="column" justify="center" w="80vw" m="auto">
+      <Flex flexDirection="column" justify="center" w="80vw" m="auto" mt="3rem">
         <Flex
           w="100%"
           justify="space-evenly"

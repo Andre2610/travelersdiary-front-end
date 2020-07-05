@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
@@ -29,9 +28,9 @@ function App() {
         <CSSReset />
         <Navigation />
         <Switch>
-          <Route exact path="/" component={Homepage} />
           <Route path="/trip/:id?" component={TripDetails} />
-          <Route path="/users/:id" component={MyPage} />
+          <Route path="/users/:id?" component={MyPage} />
+          <Route path="/" component={Homepage} />
         </Switch>
       </ColorModeProvider>
     </ThemeProvider>
