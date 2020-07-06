@@ -39,6 +39,7 @@ export default function Navbar() {
       position="fixed"
       w="100vw"
       top="0"
+      style={{ zIndex: 99 }}
     >
       <Flex w="20%" justify="space-around">
         <NavLink to="/">

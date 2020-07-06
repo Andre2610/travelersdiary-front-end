@@ -4,6 +4,7 @@ import {
   FETCH_USER,
   TOKEN_STILL_VALID,
   LOG_OUT,
+  UPDATE_USER_TRIPS,
 } from "../StoreTypes/actions";
 
 const token = localStorage.getItem("token");
@@ -30,6 +31,10 @@ export default (state = initialState, action: UserActionTypes) => {
     case LOG_OUT:
       localStorage.removeItem("token");
       return { ...initialState, token: null };
+    case UPDATE_USER_TRIPS:
+      console.log("my payload", action.trip);
+      console.log("my state", state);
+      return { ...state, trips: [...state.trips, { ...action.trip }] };
     default:
       return state;
   }

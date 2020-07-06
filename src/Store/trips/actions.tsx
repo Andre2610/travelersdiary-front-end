@@ -6,8 +6,9 @@ import {
   GetState,
   FETCH_TRIPS,
   FETCH_SINGLE_TRIP,
+  UPDATE_USER_TRIPS,
 } from "../StoreTypes/actions";
-import { Trip } from "../../Types/model";
+import { Trip, TripDetails } from "../../Types/model";
 
 export const allTripsFetched = (trips: Trip[]): AppActions => ({
   type: FETCH_TRIPS,
@@ -16,6 +17,11 @@ export const allTripsFetched = (trips: Trip[]): AppActions => ({
 export const fetchOneTrip = (trips: Trip[]): AppActions => ({
   type: FETCH_SINGLE_TRIP,
   trips,
+});
+
+export const updateUserTrips = (trip: Trip): AppActions => ({
+  type: UPDATE_USER_TRIPS,
+  trip,
 });
 
 export function fetchTrips() {
@@ -35,6 +41,54 @@ export function fetchSpecificTrip(id: number) {
     try {
       const res = await axios.get(`${apiUrl}/trips/${id}`);
       // console.log("What is my response", res.data);
+      dispatch(fetchOneTrip(res.data));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+}
+
+// Create new trip
+export function createNewTrip(tripDetails: TripDetails) {
+  return async function thunk(dispatch: Dispatch, getState: GetState) {
+    const userId = getState().users.id;
+    const token = getState().users.token;
+    const data = { ...tripDetails, userId };
+    try {
+      const res = await axios.post(
+        `${apiUrl}/trips/newtrip`,
+        { data },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("new trip res", res.data);
+      dispatch(updateUserTrips(res.data));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+}
+
+// end trip
+export function endTrip(data: Trip) {
+  return async function thunk(dispatch: Dispatch, getState: GetState) {
+    const token = getState().users.token;
+    console.log("endtrip data", data);
+    console.log(`the endpoint: ${apiUrl}/trips/endtrip/${data.id}`);
+    try {
+      const res = await axios.patch(
+        `${apiUrl}/trips/endtrip/${data.id}`,
+        { data },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("trip ended?", res.data);
       dispatch(fetchOneTrip(res.data));
     } catch (e) {
       console.log(e.message);

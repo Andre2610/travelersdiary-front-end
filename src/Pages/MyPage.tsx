@@ -5,6 +5,7 @@ import { getUserWithStoredToken } from "../Store/users/actions";
 import { selectUser } from "../Store/users/selector";
 import { Trip } from "../Types/model";
 import TripCard from "../Components/TripCard";
+import NewTripModal from "../Components/NewTripModal";
 import "../Style/MyPage.scss";
 
 import {
@@ -12,16 +13,14 @@ import {
   Text,
   Box,
   Heading,
-  Image,
   Button,
-  TabList,
-  Tab,
-  Tabs,
-  TabPanel,
-  TabPanels,
+  Modal,
+  ModalOverlay,
+  useDisclosure,
 } from "@chakra-ui/core";
 
 export default function MyPage() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const history = useHistory();
   const [edit, set_edit] = useState(false);
   const dispatch = useDispatch();
@@ -81,6 +80,9 @@ export default function MyPage() {
             Edit
           </Button> */}
         </Box>
+        <Flex justify="center">
+          <NewTripModal />
+        </Flex>
 
         {user.trips
           .sort((a: Trip, b: Trip) => a.id - b.id)
@@ -93,6 +95,7 @@ export default function MyPage() {
                   posts={trip.posts}
                   startDate={trip.startDate}
                   endDate={trip.endDate}
+                  userId={trip.userId}
                 />
               </Box>
             );

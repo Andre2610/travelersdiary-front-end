@@ -19,6 +19,7 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/core";
+import "../../Style/Navigation.scss";
 
 export default function SignupForm(props: any) {
   const dispatch = useDispatch();
@@ -163,10 +164,15 @@ export default function SignupForm(props: any) {
         </ModalBody>
 
         <ModalFooter>
-          <Button variantColor="blue" mr={3} onClick={(e) => submitHandler(e)}>
+          <Button
+            minW="7vw"
+            className="navbtn"
+            mr={3}
+            onClick={(e) => submitHandler(e)}
+          >
             Submit
           </Button>
-          <Button variant="ghost" onClick={onClose}>
+          <Button minW="7vw" className="navbtn" onClick={onClose}>
             Close
           </Button>
         </ModalFooter>

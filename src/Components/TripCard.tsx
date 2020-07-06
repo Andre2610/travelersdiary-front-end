@@ -61,6 +61,7 @@ export default function TripCard(props: Trip) {
   function visitTripOnClickHandler(id: number) {
     history.push(`/trip/${id}`);
   }
+  console.log("my props in trip card", props);
   return (
     <Box
       key={id}
@@ -78,16 +79,26 @@ export default function TripCard(props: Trip) {
         Trip started on: {startDate}
         {endDate ? ` and ended on ${endDate}` : null}
       </Text>
+
       {posts
-        .sort((a, b) => b.id - a.id)
-        .map((post) => {
-          const { id, title, content, latitude, longitude, pictures } = post;
-          return (
-            <Box color="black.500" key={id}>
-              {postsRender(title, content, pictures)}
-            </Box>
-          );
-        })}
+        ? posts
+            .sort((a, b) => b.id - a.id)
+            .map((post) => {
+              const {
+                id,
+                title,
+                content,
+                latitude,
+                longitude,
+                pictures,
+              } = post;
+              return (
+                <Box color="black.500" key={id}>
+                  {postsRender(title, content, pictures)}
+                </Box>
+              );
+            })
+        : null}
       <Flex justify="space-around" pt="1rem">
         <Button
           className="visitTripBtn"
