@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { createNewTrip } from "../Store/trips/actions";
-import { TripDetails } from "../Types/model";
+import { NewPost } from "../Types/model";
 import {
   Flex,
   Box,
@@ -23,27 +24,44 @@ import "../Style/MyPage.scss";
 
 export default function NewTripModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const [tripDetails, set_tripDetails] = useState<TripDetails>({
-    tripTitle: "",
-    startDate: "",
-    endDate: "",
-  });
-  function submitHandler(e: any) {
-    e.preventDefault();
-    const { tripTitle, startDate, endDate } = tripDetails;
-    if (!tripTitle || !startDate) {
-      console.log("unhappy path, send message to user");
-    } else {
-      dispatch(createNewTrip(tripDetails));
-      set_tripDetails({
-        tripTitle: "",
-        startDate: "",
-        endDate: "",
-      });
-    }
+  const [geoLocation, set_geoLocation] = useState({ lat: 0, lng: 0 });
+
+  function getLocation() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      set_geoLocation({ ...geoLocation, lat: position.coords.latitude });
+      set_geoLocation({ ...geoLocation, lng: position.coords.longitude });
+    });
   }
 
+  const [newPost, set_newPost] = useState<NewPost>({
+    latitude: geoLocation.lat,
+    longitude: geoLocation.lng,
+    title: "",
+    content: "",
+    pictures: [],
+    tripId: id,
+  });
+
+  function submitHandler(e: any) {
+    e.preventDefault();
+    // const { tripTitle, startDate, endDate } = tripDetails;
+    // if (!tripTitle || !startDate) {
+    //   console.log("unhappy path, send message to user");
+    // } else {
+    //   dispatch(createNewTrip(tripDetails));
+    //   set_tripDetails({
+    //     tripTitle: "",
+    //     startDate: "",
+    //     endDate: "",
+    //   });
+    // }
+  }
+
+  useEffect(() => {
+    getLocation();
+  }, [id]);
   return (
     <>
       <Button onClick={onOpen} minW="7vw" className="navbtn">

@@ -61,7 +61,6 @@ export default function TripCard(props: Trip) {
   function visitTripOnClickHandler(id: number) {
     history.push(`/trip/${id}`);
   }
-  console.log("my props in trip card", props);
   return (
     <Box
       key={id}

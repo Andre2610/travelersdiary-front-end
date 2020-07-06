@@ -66,3 +66,12 @@ export type TripDetails = {
   startDate: string;
   endDate: string;
 };
+
+export type NewPost = {
+  latitude: number;
+  longitude: number;
+  title: string;
+  content: string;
+  pictures: Picture[];
+  tripId: number;
+};
