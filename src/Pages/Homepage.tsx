@@ -15,7 +15,7 @@ export default function Homepage() {
   useEffect(() => {
     dispatch(fetchTrips());
     history.push("/");
-  }, []);
+  }, [dispatch]);
 
   return (
     <Box w="100vw" m="auto" bg="#B8B08D" p="2vh" top="1" mt="3rem">
@@ -30,6 +30,7 @@ export default function Homepage() {
                 posts={trip.posts}
                 startDate={trip.startDate}
                 endDate={trip.endDate}
+                userId={trip.userId}
               />
             </Box>
           );

@@ -6,6 +6,7 @@ export const FETCH_MORE_TRIPS = "FETCH_MORE_TRIPS";
 export const FETCH_USER = "FETCH_USER";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const UPDATE_USER_TRIPS = "UPDATE_USER_TRIPS";
 
 export type StoreState = {
   users: User;
@@ -38,8 +39,16 @@ export type fetchNoTokenUser = {
 export type logOut = {
   type: typeof LOG_OUT;
 };
+export type updateUserTrips = {
+  type: typeof UPDATE_USER_TRIPS;
+  trip: Trip;
+};
 
 export type TripActionTypes = loadInitialTrips | fetchSingleTrip;
-export type UserActionTypes = fetchUser | fetchNoTokenUser | logOut;
+export type UserActionTypes =
+  | fetchUser
+  | fetchNoTokenUser
+  | logOut
+  | updateUserTrips;
 
 export type AppActions = TripActionTypes | UserActionTypes;

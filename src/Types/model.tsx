@@ -4,6 +4,7 @@ export type Trip = {
   posts: Post[];
   startDate: string;
   endDate: string;
+  userId: number;
 };
 
 export type Post = {
@@ -58,4 +59,10 @@ export type SignupData = {
   password: string;
   title: string;
   about: string;
+};
+
+export type TripDetails = {
+  tripTitle: string;
+  startDate: string;
+  endDate: string;
 };

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "../Style/slider.scss";
-import { POINT_CONVERSION_UNCOMPRESSED } from "constants";
 import {
   Image,
   TabList,

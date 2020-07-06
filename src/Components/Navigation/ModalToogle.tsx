@@ -1,23 +1,7 @@
 import React, { useState } from "react";
 import LogInForm from "./LogInForm";
 import SignupForm from "./SignupForm";
-import {
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-  Input,
-  InputGroup,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from "@chakra-ui/core";
+import { Button, Modal, ModalOverlay, useDisclosure } from "@chakra-ui/core";
 import "../../Style/Navigation.scss";
 
 export default function ModalToogle() {
