@@ -7,6 +7,7 @@ import { selectUser } from "../Store/users/selector";
 import { Trip, Post, Picture, DefaultMarker } from "../Types/model";
 import Slider from "../Components/slider";
 import GoogleMaps from "../Components/GoogleMaps";
+import NewPostModal from "../Components/NewPostModal";
 import {
   Flex,
   Text,
@@ -150,9 +151,7 @@ export default function TripDetails() {
       {user.token && !oneTrip.endDate && user.id === oneTrip.userId ? (
         <>
           <Flex w="30vw" m="auto">
-            <Button minW="10vw" maxW="10vw" className="btn" m="auto">
-              New Post
-            </Button>
+            <NewPostModal />
             <Button
               minW="10vw"
               maxW="10vw"

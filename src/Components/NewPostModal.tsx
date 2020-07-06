@@ -5,7 +5,7 @@ import { createNewTrip } from "../Store/trips/actions";
 import { NewPost } from "../Types/model";
 import {
   Flex,
-  Box,
+  Text,
   Button,
   Modal,
   ModalOverlay,
@@ -26,24 +26,29 @@ export default function NewTripModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [geoLocation, set_geoLocation] = useState({ lat: 0, lng: 0 });
 
   function getLocation() {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      set_geoLocation({ ...geoLocation, lat: position.coords.latitude });
-      set_geoLocation({ ...geoLocation, lng: position.coords.longitude });
-    });
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+
+  function success(position: any) {
+    set_newPost({ ...newPost, latitude: position.coords.latitude });
+    set_newPost({ ...newPost, longitude: position.coords.longitude });
+  }
+  function error(err: any) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
   const [newPost, set_newPost] = useState<NewPost>({
-    latitude: geoLocation.lat,
-    longitude: geoLocation.lng,
+    latitude: 0,
+    longitude: 0,
     title: "",
     content: "",
     pictures: [],
     tripId: id,
   });
 
+  console.log("new post state", newPost);
   function submitHandler(e: any) {
     e.preventDefault();
     // const { tripTitle, startDate, endDate } = tripDetails;
@@ -58,22 +63,23 @@ export default function NewTripModal() {
     //   });
     // }
   }
-
   useEffect(() => {
     getLocation();
   }, [id]);
   return (
     <>
       <Button onClick={onOpen} minW="7vw" className="navbtn">
-        Start a new trip!
+        New Post
       </Button>
       <Modal scrollBehavior="outside" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent
           alignItems="center"
+          minW="90vw"
+          minH="60vh"
           h="auto"
-          maxH="70vh"
-          style={{ backgroundColor: "#B8B08D" }}
+          maxH="90vh"
+          style={{ backgroundColor: "#E3EBFF" }}
         >
           <ModalHeader>New trip</ModalHeader>
           <ModalCloseButton />
@@ -86,14 +92,13 @@ export default function NewTripModal() {
                   </FormLabel>
                   <Input
                     type="text"
-                    placeholder="Trip title"
                     variant="flushed"
                     isRequired
-                    value={tripDetails.tripTitle}
+                    value={newPost.title}
                     onChange={(e: any) =>
-                      set_tripDetails({
-                        ...tripDetails,
-                        tripTitle: e.target.value,
+                      set_newPost({
+                        ...newPost,
+                        title: e.target.value,
                       })
                     }
                   />
@@ -102,27 +107,28 @@ export default function NewTripModal() {
             </FormControl>
             <FormControl isRequired>
               <InputGroup h="10vh">
-                <Flex d="column" style={{ height: "10vh" }}>
+                <Flex d="column" style={{ height: "10vh", width: "100%" }}>
                   <FormLabel htmlFor="date" className="modalLabel">
-                    Start date
+                    Share your thoughts:
                   </FormLabel>
                   <Input
-                    type="date"
-                    placeholder="When will your trip begin"
+                    as="textarea"
+                    minW="80%"
+                    h="20vh"
                     variant="flushed"
                     isRequired
-                    value={tripDetails.startDate}
+                    value={newPost.content}
                     onChange={(e: any) =>
-                      set_tripDetails({
-                        ...tripDetails,
-                        startDate: e.target.value,
+                      set_newPost({
+                        ...newPost,
+                        content: e.target.value,
                       })
                     }
                   />
                 </Flex>
               </InputGroup>
             </FormControl>
-            <FormControl>
+            {/* <FormControl>
               <InputGroup h="10vh">
                 <Flex d="column" style={{ height: "10vh" }}>
                   <FormLabel htmlFor="date" className="modalLabel">
@@ -143,7 +149,7 @@ export default function NewTripModal() {
                   />
                 </Flex>
               </InputGroup>
-            </FormControl>
+            </FormControl> */}
           </ModalBody>
 
           <ModalFooter>
