@@ -21,6 +21,7 @@ import {
   FormHelperText,
   CSSReset,
 } from "@chakra-ui/core";
+import "../../Style/Navigation.scss";
 
 export default function LogInForm(props: any) {
   const { onClose, set_ModalForm } = props;

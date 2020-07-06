@@ -13,7 +13,7 @@ const api = process.env.GOOGLE_MAPS_API_KEY;
 const MyMapComponent = withScriptjs(
   withGoogleMap((props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
     const { lat, lng } = props.moveToMarker;
-    const [center, setCenter] = useState({ lat: lat, lng: lng });
+    // const [center, setCenter] = useState({ lat: lat, lng: lng });
     const refMap = useRef(null);
     // console.log(`my lat ${lat} and my lng ${lng}`, typeof lat);
 

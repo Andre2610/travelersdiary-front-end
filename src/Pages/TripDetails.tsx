@@ -63,6 +63,7 @@ export default function TripDetails() {
     //@ts-ignore
     return <GoogleMaps posts={posts} moveToMarker={moveToMarker} />;
   }
+
   function tabOnClickHandler(tabIndex: number, post: Post) {
     set_moveToMarker({
       lat: post.latitude,
@@ -80,7 +81,7 @@ export default function TripDetails() {
 
   if (oneTrip) {
     return (
-      <Flex flexDirection="column" justify="center" w="80vw" m="auto">
+      <Flex flexDirection="column" justify="center" w="80vw" m="auto" mt="3rem">
         <Flex
           w="100%"
           justify="space-evenly"
@@ -102,6 +103,7 @@ export default function TripDetails() {
                     .map((post, i) => {
                       return (
                         <Tab
+                          key={i}
                           h="4rem"
                           w="95%"
                           onClick={(e) => tabOnClickHandler(i, post)}
@@ -121,9 +123,9 @@ export default function TripDetails() {
               </Flex>
             </Tabs>
           </Box>
-          <Box w="40%" justifyContent="center" alignItems="center" mt=".5rem">
+          {/* <Box w="40%" justifyContent="center" alignItems="center" mt=".5rem">
             {googleMapsRender(oneTrip.posts, moveToMarker)}
-          </Box>
+          </Box> */}
         </Flex>
 
         {oneTrip.posts.map((post) => {

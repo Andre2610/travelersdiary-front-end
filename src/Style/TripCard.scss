@@ -1,5 +1,16 @@
-.visitTrip:hover {
+.visitTripBtn:hover {
   cursor: pointer !important;
-  color: red !important;
+  color: #a62639 !important;
+  background-color: #e3ebff !important;
   text-align: center !important;
+}
+
+.visitTripBtn {
+  cursor: pointer !important;
+  color: #e3ebff !important;
+  background-color: #a62639 !important;
+  text-align: center !important;
+}
+
+.tripTitle {
 }

@@ -75,7 +75,6 @@ export const getUserWithStoredToken = () => {
     const token = selectToken(getState());
 
     if (token === null) return;
-    console.log("got here?");
     // dispatch(appLoading());
     try {
       const res = await axios.get(`${apiUrl}/auth/me`, {

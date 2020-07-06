@@ -5,17 +5,20 @@ import TripCard from "../Components/TripCard";
 import { Box } from "@chakra-ui/core";
 import { fetchTrips } from "../Store/trips/actions";
 import { selectAllTrips } from "../Store/trips/selector";
+import { useHistory } from "react-router-dom";
 
 export default function Homepage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const allTrips: Trip[] = useSelector(selectAllTrips);
 
   useEffect(() => {
     dispatch(fetchTrips());
+    history.push("/");
   }, []);
 
   return (
-    <Box w="100vw" m="auto" bg="orange.200" p="2vh">
+    <Box w="100vw" m="auto" bg="#B8B08D" p="2vh" top="1" mt="3rem">
       {allTrips
         .sort((a: Trip, b: Trip) => a.id - b.id)
         .map((trip) => {
