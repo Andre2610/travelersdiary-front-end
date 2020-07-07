@@ -3,7 +3,9 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { createNewPost } from "../Store/trips/actions";
 import { NewPost } from "../Types/model";
-import { Image, Transformation, CloudinaryContext } from "cloudinary-react";
+import { fetchPhotos, openUploadWidget } from "../config/CloudinaryService";
+import { cloud_name, upload_preset } from "../config/constants";
+
 import {
   Flex,
   Button,
@@ -24,6 +26,7 @@ import "../Style/MyPage.scss";
 
 export default function NewTripModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [images, setImages] = useState([]);
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -32,19 +35,31 @@ export default function NewTripModal() {
     longitude: 0,
     title: "",
     content: "",
-    pictures: [
-      {
-        imageUrl:
-          "https://www.google.com/search?q=images&sxsrf=ALeKk03wj08dDzUucrnBcFg3ws5Jl7_B2w:1594109195321&tbm=isch&source=iu&ictx=1&fir=PDxUM2uh-Nz6cM%252CLlgDpz1LoiuznM%252C_&vet=1&usg=AI4_-kQCcjzkqo7IesobXHjm6gM8REv3pA&sa=X&ved=2ahUKEwj7yMfC17rqAhXRjKQKHU1nCiAQ9QEwAnoECAoQMg&biw=1920&bih=976#imgrc=zhse6Cj7W9ui0M",
-      },
-      {
-        imageUrl:
-          "https://www.google.com/search?q=images&sxsrf=ALeKk03wj08dDzUucrnBcFg3ws5Jl7_B2w:1594109195321&tbm=isch&source=iu&ictx=1&fir=PDxUM2uh-Nz6cM%252CLlgDpz1LoiuznM%252C_&vet=1&usg=AI4_-kQCcjzkqo7IesobXHjm6gM8REv3pA&sa=X&ved=2ahUKEwj7yMfC17rqAhXRjKQKHU1nCiAQ9QEwAnoECAoQMg&biw=1920&bih=976#imgrc=EGFOzeq7lbggrM",
-      },
-    ],
+    pictures: [],
     tripId: id,
   });
-  console.log(newPost.pictures[1].imageUrl.length);
+
+  const beginUpload = (tag: string) => {
+    console.log("whis my upload preset", upload_preset);
+    const uploadOptions = {
+      cloudName: "dui8yvobq",
+      tags: [tag],
+      uploadPreset: "cloudinaryapi",
+    };
+
+    openUploadWidget(uploadOptions, (error: any, photos: any) => {
+      if (!error) {
+        console.log(photos);
+        if (photos.event === "success") {
+          // @ts-ignore
+          setImages([...images, photos.info.url]);
+        }
+      } else {
+        console.log(error);
+      }
+    });
+  };
+
   function getLocation() {
     navigator.geolocation.getCurrentPosition(success, error);
   }
@@ -66,7 +81,7 @@ export default function NewTripModal() {
     if (!title || !content) {
       console.log("unhappy path, send message to user");
     } else {
-      dispatch(createNewPost(newPost));
+      dispatch(createNewPost(newPost, images));
       //   set_newPost({
       //     latitude: 0,
       //     longitude: 0,
@@ -152,7 +167,8 @@ export default function NewTripModal() {
                   <FormLabel htmlFor="date" className="modalLabel">
                     Upload your pictures
                   </FormLabel>
-                  <Input
+                  <Button onClick={() => beginUpload("image")}>Upload</Button>
+                  {/* <Input
                     type="file"
                     placeholder="When will your trip begin"
                     variant="flushed"
@@ -162,7 +178,7 @@ export default function NewTripModal() {
                         pictures: [...newPost.pictures, e.target.value],
                       })
                     }
-                  />
+                  /> */}
                 </Flex>
               </InputGroup>
             </FormControl>

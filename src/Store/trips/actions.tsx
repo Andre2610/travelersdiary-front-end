@@ -97,22 +97,22 @@ export function endTrip(data: Trip) {
 }
 
 // Create new post
-export function createNewPost(newPost: NewPost) {
+export function createNewPost(newPost: NewPost, images: any) {
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     const token = getState().users.token;
     const { latitude, longitude, title, content, tripId } = newPost;
-    const pictures = newPost.pictures;
-    console.log("my pictures", pictures);
+    console.log("my pictures", images);
+
     const data = {
       latitude,
       longitude,
       title,
       content,
       tripId,
-      pictures: [...pictures],
+      pictures: [...images],
     };
     try {
-      const postRes = await axios.post(
+      const res = await axios.post(
         `${apiUrl}/trips/newpost`,
         { data },
         {
@@ -121,12 +121,8 @@ export function createNewPost(newPost: NewPost) {
           },
         }
       );
-      // const picturesUrl = pictures.map(async (picture) => {
-      //   await axios.post(`${cloudinaryUrl}`, { picture });
-      // });
-      // await Promise.all(picturesUrl);
       // console.log("whats in here,", picturesUrl);
-      console.log("new trip res", postRes.data);
+      console.log("new post res", res.data);
       // dispatch(updateUserTrips(res.data));
     } catch (e) {
       console.log(e.message);
