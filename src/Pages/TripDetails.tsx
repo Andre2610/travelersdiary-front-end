@@ -89,8 +89,6 @@ export default function TripDetails() {
   }
 
   useEffect(() => {
-    if (user.token) {
-    }
     if (!oneTrip) {
       dispatch(fetchSpecificTrip(id));
     }
