@@ -4,7 +4,6 @@ import { createNewTrip } from "../Store/trips/actions";
 import { TripDetails } from "../Types/model";
 import {
   Flex,
-  Box,
   Button,
   Modal,
   ModalOverlay,
@@ -19,6 +18,7 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/core";
+import "../Style/MyPage.scss";
 
 export default function NewTripModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,7 +30,7 @@ export default function NewTripModal() {
   });
   function submitHandler(e: any) {
     e.preventDefault();
-    const { tripTitle, startDate, endDate } = tripDetails;
+    const { tripTitle, startDate } = tripDetails;
     if (!tripTitle || !startDate) {
       console.log("unhappy path, send message to user");
     } else {
@@ -52,8 +52,9 @@ export default function NewTripModal() {
         <ModalOverlay />
         <ModalContent
           alignItems="center"
-          maxH="auto"
-          style={{ backgroundColor: "#F6F0C6" }}
+          h="auto"
+          maxH="70vh"
+          style={{ backgroundColor: "#B8B08D" }}
         >
           <ModalHeader>New trip</ModalHeader>
           <ModalCloseButton />
@@ -61,7 +62,7 @@ export default function NewTripModal() {
             <FormControl isRequired>
               <InputGroup h="10vh">
                 <Flex w="35%" d="column" style={{ height: "10vh" }}>
-                  <FormLabel htmlFor="title" w="10%">
+                  <FormLabel htmlFor="title" w="10%" className="modalLabel">
                     Title
                   </FormLabel>
                   <Input
@@ -83,7 +84,9 @@ export default function NewTripModal() {
             <FormControl isRequired>
               <InputGroup h="10vh">
                 <Flex d="column" style={{ height: "10vh" }}>
-                  <FormLabel htmlFor="date">Start date</FormLabel>
+                  <FormLabel htmlFor="date" className="modalLabel">
+                    Start date
+                  </FormLabel>
                   <Input
                     type="date"
                     placeholder="When will your trip begin"
@@ -103,7 +106,9 @@ export default function NewTripModal() {
             <FormControl>
               <InputGroup h="10vh">
                 <Flex d="column" style={{ height: "10vh" }}>
-                  <FormLabel htmlFor="date">End date</FormLabel>
+                  <FormLabel htmlFor="date" className="modalLabel">
+                    End date
+                  </FormLabel>
                   <Input
                     type="date"
                     placeholder="When will your trip begin"

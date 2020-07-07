@@ -1,34 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserWithStoredToken } from "../Store/users/actions";
+import { useSelector } from "react-redux";
 import { selectUser } from "../Store/users/selector";
 import { Trip } from "../Types/model";
 import TripCard from "../Components/TripCard";
 import NewTripModal from "../Components/NewTripModal";
 import "../Style/MyPage.scss";
 
-import {
-  Flex,
-  Text,
-  Box,
-  Heading,
-  Button,
-  Modal,
-  ModalOverlay,
-  useDisclosure,
-} from "@chakra-ui/core";
+import { Flex, Text, Box, Heading } from "@chakra-ui/core";
 
 export default function MyPage() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const history = useHistory();
-  const [edit, set_edit] = useState(false);
-  const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  console.log("whats user", user);
 
   useEffect(() => {
     if (!user.id) {
-      //   history.push("/");
+      history.push("/");
     }
   }, [user]);
 
@@ -38,14 +26,6 @@ export default function MyPage() {
   const about = user.about
     .split("\n")
     .map((paragraph, i) => <Text key={i}>{paragraph}</Text>);
-
-  // const editAbout = edit ? (
-  //   <Text as="textarea" className="textArea">
-  //     {about}
-  //   </Text>
-  // ) : (
-  //   <Text>{about}</Text>
-  // );
 
   return (
     <Box bg="#B8B08D" w="100vw" top="1" mt="3rem">

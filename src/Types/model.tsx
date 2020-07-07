@@ -19,7 +19,6 @@ export type Post = {
 
 export type Picture = {
   id: number;
-  caption: string;
   imageUrl: string;
   postId: number;
 };
@@ -65,4 +64,15 @@ export type TripDetails = {
   tripTitle: string;
   startDate: string;
   endDate: string;
+};
+
+export type NewPicture = string[];
+
+export type NewPost = {
+  latitude: number;
+  longitude: number;
+  title: string;
+  content: string;
+  pictures: NewPicture[];
+  tripId: number;
 };

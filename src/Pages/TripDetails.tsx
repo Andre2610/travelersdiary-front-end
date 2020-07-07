@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSpecificTrip, endTrip } from "../Store/trips/actions";
 import { selectIdTrip } from "../Store/trips/selector";
-import { selectUser } from "../Store/users/selector";
+import { selectUser, selectUserTrip } from "../Store/users/selector";
 import { Trip, Post, Picture, DefaultMarker } from "../Types/model";
 import Slider from "../Components/slider";
 import GoogleMaps from "../Components/GoogleMaps";
+import NewPostModal from "../Components/NewPostModal";
 import {
   Flex,
   Text,
@@ -28,8 +29,10 @@ import "../Style/MyPage.scss";
 export default function TripDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const oneTrip: Trip = useSelector(selectIdTrip(id));
   const user = useSelector(selectUser);
+  const userTrip = useSelector(selectUserTrip(id));
+  const tripFromTripReducer = useSelector(selectIdTrip(id));
+  const oneTrip: Trip = userTrip ? userTrip : tripFromTripReducer;
   const [toggle_endDate, set_toggle_endDate] = useState(false);
   const [endDate, set_endDate] = useState("");
   const [postIndex, set_postIndex] = useState(0);
@@ -86,10 +89,12 @@ export default function TripDetails() {
   }
 
   useEffect(() => {
+    if (user.token) {
+    }
     if (!oneTrip) {
       dispatch(fetchSpecificTrip(id));
     }
-  }, [id]);
+  }, [id, user]);
 
   if (!oneTrip) return <Heading mt="3rem">Loading...</Heading>;
 
@@ -132,10 +137,6 @@ export default function TripDetails() {
                     })}
                 </TabList>
                 <TabPanels float="right" w="60%">
-                  {/* {console.log(
-                    "what is this",
-                    oneTrip.posts[postIndex].pictures
-                  )} */}
                   <Slider pictures={oneTrip.posts[postIndex].pictures} />;
                 </TabPanels>
               </Flex>
@@ -143,16 +144,14 @@ export default function TripDetails() {
           )}
         </Box>
         {/* <Box w="40%" justifyContent="center" alignItems="center" mt=".5rem">
-            {googleMapsRender(oneTrip.posts, moveToMarker)}
-          </Box> */}
+          {googleMapsRender(oneTrip.posts, moveToMarker)}
+        </Box> */}
       </Flex>
 
       {user.token && !oneTrip.endDate && user.id === oneTrip.userId ? (
         <>
           <Flex w="30vw" m="auto">
-            <Button minW="10vw" maxW="10vw" className="btn" m="auto">
-              New Post
-            </Button>
+            <NewPostModal />
             <Button
               minW="10vw"
               maxW="10vw"

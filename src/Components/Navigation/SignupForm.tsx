@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signUp } from "../../Store/users/actions";
 import { SignupData } from "../../Types/model";
 import {
@@ -64,7 +64,9 @@ export default function SignupForm(props: any) {
           <FormControl isRequired>
             <InputGroup maxH="10vh">
               <Flex w="35%" d="column" style={{ height: "10vh" }}>
-                <FormLabel htmlFor="text">First Name</FormLabel>
+                <FormLabel htmlFor="text" className="modalLabel">
+                  First Name
+                </FormLabel>
                 <Input
                   type="text"
                   placeholder="First Name"
@@ -81,7 +83,9 @@ export default function SignupForm(props: any) {
           <FormControl isRequired>
             <InputGroup maxH="10vh">
               <Flex w="35%" d="column" style={{ height: "10vh" }}>
-                <FormLabel htmlFor="text">Last Name</FormLabel>
+                <FormLabel htmlFor="text" className="modalLabel">
+                  Last Name
+                </FormLabel>
                 <Input
                   type="text"
                   placeholder="Last Name"
@@ -98,7 +102,9 @@ export default function SignupForm(props: any) {
           <FormControl isRequired>
             <InputGroup maxH="10vh">
               <Flex w="35%" d="column" style={{ height: "10vh" }}>
-                <FormLabel htmlFor="email">Email</FormLabel>
+                <FormLabel htmlFor="email" className="modalLabel">
+                  Email
+                </FormLabel>
                 <Input
                   type="email"
                   placeholder="Email"
@@ -115,7 +121,9 @@ export default function SignupForm(props: any) {
           <FormControl isRequired>
             <InputGroup maxH="10vh">
               <Flex w="35%" d="column" style={{ height: "10vh" }}>
-                <FormLabel htmlFor="password">Password</FormLabel>
+                <FormLabel htmlFor="password" className="modalLabel">
+                  Password
+                </FormLabel>
                 <Input
                   type="password"
                   placeholder="Password"
@@ -132,7 +140,9 @@ export default function SignupForm(props: any) {
           <FormControl>
             <InputGroup maxH="10vh">
               <Flex w="35%" d="column" style={{ height: "10vh" }}>
-                <FormLabel htmlFor="text">Homepage title</FormLabel>
+                <FormLabel htmlFor="text" className="modalLabel">
+                  Homepage title
+                </FormLabel>
                 <Input
                   type="text"
                   placeholder="Your homepage title"
@@ -148,7 +158,9 @@ export default function SignupForm(props: any) {
           <FormControl>
             <InputGroup maxH="10vh">
               <Flex w="35%" d="column" style={{ height: "10vh" }}>
-                <FormLabel htmlFor="text">A line to describe you</FormLabel>
+                <FormLabel htmlFor="text" className="modalLabel">
+                  A line to describe you
+                </FormLabel>
                 <Input
                   type="text"
                   placeholder="Tell us a line about you"

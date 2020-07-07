@@ -8,13 +8,7 @@ import {
   TOKEN_STILL_VALID,
   LOG_OUT,
 } from "../StoreTypes/actions";
-import {
-  User,
-  NoTokenUser,
-  Trip,
-  Credentials,
-  SignupData,
-} from "../../Types/model";
+import { User, NoTokenUser, Credentials, SignupData } from "../../Types/model";
 import { selectToken } from "./selector";
 
 export const userFetched = (user: User): AppActions => ({
