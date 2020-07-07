@@ -12,10 +12,11 @@ import { Flex, Text, Box, Heading } from "@chakra-ui/core";
 export default function MyPage() {
   const history = useHistory();
   const user = useSelector(selectUser);
+  console.log("whats user", user);
 
   useEffect(() => {
     if (!user.id) {
-      //   history.push("/");
+      history.push("/");
     }
   }, [user]);
 

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { createNewPost } from "../Store/trips/actions";
-import { NewPost } from "../Types/model";
+import { NewPost, NewPicture } from "../Types/model";
 import { fetchPhotos, openUploadWidget } from "../config/CloudinaryService";
-import { cloud_name, upload_preset } from "../config/constants";
 
 import {
   Flex,
@@ -24,12 +23,12 @@ import {
 } from "@chakra-ui/core";
 import "../Style/MyPage.scss";
 
+let images: NewPicture = [];
+
 export default function NewTripModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [images, setImages] = useState([]);
   const { id } = useParams();
   const dispatch = useDispatch();
-
   const [newPost, set_newPost] = useState<NewPost>({
     latitude: 0,
     longitude: 0,
@@ -38,9 +37,9 @@ export default function NewTripModal() {
     pictures: [],
     tripId: id,
   });
+  //   console.log("images state", images);
 
   const beginUpload = (tag: string) => {
-    console.log("whis my upload preset", upload_preset);
     const uploadOptions = {
       cloudName: "dui8yvobq",
       tags: [tag],
@@ -52,7 +51,8 @@ export default function NewTripModal() {
         console.log(photos);
         if (photos.event === "success") {
           // @ts-ignore
-          setImages([...images, photos.info.url]);
+          images = [...images, photos.info.url];
+          console.log("whats in images", images);
         }
       } else {
         console.log(error);
@@ -82,14 +82,15 @@ export default function NewTripModal() {
       console.log("unhappy path, send message to user");
     } else {
       dispatch(createNewPost(newPost, images));
-      //   set_newPost({
-      //     latitude: 0,
-      //     longitude: 0,
-      //     title: "",
-      //     content: "",
-      //     pictures: [],
-      //     tripId: id,
-      //   });
+      set_newPost({
+        latitude: 0,
+        longitude: 0,
+        title: "",
+        content: "",
+        pictures: [],
+        tripId: id,
+      });
+      images = [];
     }
   }
   useEffect(() => {

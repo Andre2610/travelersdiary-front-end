@@ -7,8 +7,9 @@ import {
   FETCH_TRIPS,
   FETCH_SINGLE_TRIP,
   UPDATE_USER_TRIPS,
+  UPDATE_USER_POSTS,
 } from "../StoreTypes/actions";
-import { Trip, TripDetails, NewPost } from "../../Types/model";
+import { Trip, TripDetails, NewPost, Post } from "../../Types/model";
 
 export const allTripsFetched = (trips: Trip[]): AppActions => ({
   type: FETCH_TRIPS,
@@ -22,6 +23,11 @@ export const fetchOneTrip = (trips: Trip[]): AppActions => ({
 export const updateUserTrips = (trip: Trip): AppActions => ({
   type: UPDATE_USER_TRIPS,
   trip,
+});
+
+export const updateUserPosts = (post: Post): AppActions => ({
+  type: UPDATE_USER_POSTS,
+  post,
 });
 
 export function fetchTrips() {
@@ -101,7 +107,6 @@ export function createNewPost(newPost: NewPost, images: any) {
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     const token = getState().users.token;
     const { latitude, longitude, title, content, tripId } = newPost;
-    console.log("my pictures", images);
 
     const data = {
       latitude,
@@ -121,9 +126,8 @@ export function createNewPost(newPost: NewPost, images: any) {
           },
         }
       );
-      // console.log("whats in here,", picturesUrl);
       console.log("new post res", res.data);
-      // dispatch(updateUserTrips(res.data));
+      dispatch(updateUserPosts(res.data));
     } catch (e) {
       console.log(e.message);
     }

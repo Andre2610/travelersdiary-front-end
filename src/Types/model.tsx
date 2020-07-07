@@ -66,7 +66,7 @@ export type TripDetails = {
   endDate: string;
 };
 
-export type NewPicture = { imageUrl: string };
+export type NewPicture = string[];
 
 export type NewPost = {
   latitude: number;
