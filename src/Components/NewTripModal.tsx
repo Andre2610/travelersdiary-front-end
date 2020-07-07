@@ -4,7 +4,6 @@ import { createNewTrip } from "../Store/trips/actions";
 import { TripDetails } from "../Types/model";
 import {
   Flex,
-  Box,
   Button,
   Modal,
   ModalOverlay,
@@ -31,7 +30,7 @@ export default function NewTripModal() {
   });
   function submitHandler(e: any) {
     e.preventDefault();
-    const { tripTitle, startDate, endDate } = tripDetails;
+    const { tripTitle, startDate } = tripDetails;
     if (!tripTitle || !startDate) {
       console.log("unhappy path, send message to user");
     } else {

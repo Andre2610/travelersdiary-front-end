@@ -1,19 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { Trip, Picture } from "../Types/model";
-import {
-  Flex,
-  Text,
-  Box,
-  Heading,
-  Image,
-  Button,
-  TabPanels,
-  TabPanel,
-  Tab,
-  TabList,
-  Tabs,
-} from "@chakra-ui/core";
+import { Flex, Text, Box, Heading, Button } from "@chakra-ui/core";
 import Slider from "./slider";
 import "../Style/TripCard.scss";
 
@@ -83,14 +71,7 @@ export default function TripCard(props: Trip) {
         ? posts
             .sort((a, b) => b.id - a.id)
             .map((post) => {
-              const {
-                id,
-                title,
-                content,
-                latitude,
-                longitude,
-                pictures,
-              } = post;
+              const { id, title, content, pictures } = post;
               return (
                 <Box color="black.500" key={id}>
                   {postsRender(title, content, pictures)}

@@ -1,19 +1,13 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import {
-  ThemeProvider,
-  ColorModeProvider,
-  CSSReset,
-  Box,
-} from "@chakra-ui/core";
+import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core";
 import Navigation from "./Components/Navigation/Navigation";
 import Homepage from "./Pages/Homepage";
 import TripDetails from "./Pages/TripDetails";
 import MyPage from "./Pages/MyPage";
 import { getUserWithStoredToken } from "./Store/users/actions";
-import { selectToken } from "./Store/users/selector";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import { Trip, Post, Picture, User, NoTokenUser } from "../../Types/model";
+import { Trip, User, NoTokenUser } from "../../Types/model";
 
 export const FETCH_TRIPS = "FETCH_TRIPS";
 export const FETCH_SINGLE_TRIP = "FETCH_SINGLE_TRIP";

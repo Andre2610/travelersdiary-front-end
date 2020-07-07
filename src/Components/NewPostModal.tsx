@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { createNewTrip } from "../Store/trips/actions";
+import { createNewPost } from "../Store/trips/actions";
 import { NewPost } from "../Types/model";
+import { Image, Transformation, CloudinaryContext } from "cloudinary-react";
 import {
   Flex,
-  Text,
   Button,
   Modal,
   ModalOverlay,
@@ -27,41 +27,55 @@ export default function NewTripModal() {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  function getLocation() {
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-
-  function success(position: any) {
-    set_newPost({ ...newPost, latitude: position.coords.latitude });
-    set_newPost({ ...newPost, longitude: position.coords.longitude });
-  }
-  function error(err: any) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
-
   const [newPost, set_newPost] = useState<NewPost>({
     latitude: 0,
     longitude: 0,
     title: "",
     content: "",
-    pictures: [],
+    pictures: [
+      {
+        imageUrl:
+          "https://www.google.com/search?q=images&sxsrf=ALeKk03wj08dDzUucrnBcFg3ws5Jl7_B2w:1594109195321&tbm=isch&source=iu&ictx=1&fir=PDxUM2uh-Nz6cM%252CLlgDpz1LoiuznM%252C_&vet=1&usg=AI4_-kQCcjzkqo7IesobXHjm6gM8REv3pA&sa=X&ved=2ahUKEwj7yMfC17rqAhXRjKQKHU1nCiAQ9QEwAnoECAoQMg&biw=1920&bih=976#imgrc=zhse6Cj7W9ui0M",
+      },
+      {
+        imageUrl:
+          "https://www.google.com/search?q=images&sxsrf=ALeKk03wj08dDzUucrnBcFg3ws5Jl7_B2w:1594109195321&tbm=isch&source=iu&ictx=1&fir=PDxUM2uh-Nz6cM%252CLlgDpz1LoiuznM%252C_&vet=1&usg=AI4_-kQCcjzkqo7IesobXHjm6gM8REv3pA&sa=X&ved=2ahUKEwj7yMfC17rqAhXRjKQKHU1nCiAQ9QEwAnoECAoQMg&biw=1920&bih=976#imgrc=EGFOzeq7lbggrM",
+      },
+    ],
     tripId: id,
   });
+  console.log(newPost.pictures[1].imageUrl.length);
+  function getLocation() {
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
 
-  console.log("new post state", newPost);
+  function success(position: any) {
+    set_newPost({
+      ...newPost,
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    });
+  }
+  function error(err: any) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
   function submitHandler(e: any) {
     e.preventDefault();
-    // const { tripTitle, startDate, endDate } = tripDetails;
-    // if (!tripTitle || !startDate) {
-    //   console.log("unhappy path, send message to user");
-    // } else {
-    //   dispatch(createNewTrip(tripDetails));
-    //   set_tripDetails({
-    //     tripTitle: "",
-    //     startDate: "",
-    //     endDate: "",
-    //   });
-    // }
+    const { title, content } = newPost;
+    if (!title || !content) {
+      console.log("unhappy path, send message to user");
+    } else {
+      dispatch(createNewPost(newPost));
+      //   set_newPost({
+      //     latitude: 0,
+      //     longitude: 0,
+      //     title: "",
+      //     content: "",
+      //     pictures: [],
+      //     tripId: id,
+      //   });
+    }
   }
   useEffect(() => {
     getLocation();
@@ -81,9 +95,9 @@ export default function NewTripModal() {
           maxH="90vh"
           style={{ backgroundColor: "#E3EBFF" }}
         >
-          <ModalHeader>New trip</ModalHeader>
+          <ModalHeader>New Post</ModalHeader>
           <ModalCloseButton />
-          <ModalBody m="auto" w="80%">
+          <ModalBody m="auto" w="80%" position="relative">
             <FormControl isRequired>
               <InputGroup h="10vh">
                 <Flex w="35%" d="column" style={{ height: "10vh" }}>
@@ -128,28 +142,30 @@ export default function NewTripModal() {
                 </Flex>
               </InputGroup>
             </FormControl>
-            {/* <FormControl>
-              <InputGroup h="10vh">
+            <FormControl>
+              <InputGroup
+                h="10vh"
+                position="absolute"
+                style={{ bottom: 2, left: 2 }}
+              >
                 <Flex d="column" style={{ height: "10vh" }}>
                   <FormLabel htmlFor="date" className="modalLabel">
-                    End date
+                    Upload your pictures
                   </FormLabel>
                   <Input
-                    type="date"
+                    type="file"
                     placeholder="When will your trip begin"
                     variant="flushed"
-                    isRequired
-                    value={tripDetails.endDate}
                     onChange={(e: any) =>
-                      set_tripDetails({
-                        ...tripDetails,
-                        startDate: e.target.value,
+                      set_newPost({
+                        ...newPost,
+                        pictures: [...newPost.pictures, e.target.value],
                       })
                     }
                   />
                 </Flex>
               </InputGroup>
-            </FormControl> */}
+            </FormControl>
           </ModalBody>
 
           <ModalFooter>
@@ -159,7 +175,7 @@ export default function NewTripModal() {
               mr={3}
               onClick={(e) => submitHandler(e)}
             >
-              Start your trip!
+              Submit
             </Button>
             <Button minW="7vw" className="navbtn" onClick={onClose}>
               Close

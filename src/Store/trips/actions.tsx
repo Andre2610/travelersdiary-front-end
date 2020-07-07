@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { apiUrl } from "../../config/constants";
+import { apiUrl, cloudinaryUrl } from "../../config/constants";
 import {
   AppActions,
   GetState,
@@ -8,7 +8,7 @@ import {
   FETCH_SINGLE_TRIP,
   UPDATE_USER_TRIPS,
 } from "../StoreTypes/actions";
-import { Trip, TripDetails } from "../../Types/model";
+import { Trip, TripDetails, NewPost } from "../../Types/model";
 
 export const allTripsFetched = (trips: Trip[]): AppActions => ({
   type: FETCH_TRIPS,
@@ -90,6 +90,44 @@ export function endTrip(data: Trip) {
       );
       console.log("trip ended?", res.data);
       dispatch(fetchOneTrip(res.data));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+}
+
+// Create new post
+export function createNewPost(newPost: NewPost) {
+  return async function thunk(dispatch: Dispatch, getState: GetState) {
+    const token = getState().users.token;
+    const { latitude, longitude, title, content, tripId } = newPost;
+    const pictures = newPost.pictures;
+    console.log("my pictures", pictures);
+    const data = {
+      latitude,
+      longitude,
+      title,
+      content,
+      tripId,
+      pictures: [...pictures],
+    };
+    try {
+      const postRes = await axios.post(
+        `${apiUrl}/trips/newpost`,
+        { data },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // const picturesUrl = pictures.map(async (picture) => {
+      //   await axios.post(`${cloudinaryUrl}`, { picture });
+      // });
+      // await Promise.all(picturesUrl);
+      // console.log("whats in here,", picturesUrl);
+      console.log("new trip res", postRes.data);
+      // dispatch(updateUserTrips(res.data));
     } catch (e) {
       console.log(e.message);
     }

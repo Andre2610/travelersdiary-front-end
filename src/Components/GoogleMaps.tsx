@@ -5,6 +5,7 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  InfoWindow,
 } from "react-google-maps";
 import { googleAPIkey } from "../config/constants";
 require("dotenv").config();
@@ -12,8 +13,18 @@ const api = process.env.GOOGLE_MAPS_API_KEY;
 
 const MyMapComponent = withScriptjs(
   withGoogleMap((props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
+    // const initialState = {
+    //   id: null,
+    //   latitude: null,
+    //   longitude: null,
+    //   title: null,
+    //   content: null,
+    //   pictures: null,
+    //   tripId: null,
+    // };
     const { lat, lng } = props.moveToMarker;
-    // const [center, setCenter] = useState({ lat: lat, lng: lng });
+    const [center, setCenter] = useState({ lat: lat, lng: lng });
+    // const [selectedCenter, set_selectedCenter] = useState<Post>(initialState);
     const refMap = useRef(null);
     // console.log(`my lat ${lat} and my lng ${lng}`, typeof lat);
 
@@ -32,9 +43,26 @@ const MyMapComponent = withScriptjs(
             <Marker
               key={post.id}
               position={{ lat: latitude, lng: longitude }}
+              title={post.title}
+              animation={google.maps.Animation.DROP}
+              // @ts-ignore
+              // onClick={() => {
+              //   set_selectedCenter(post);
+              // }}
             />
           );
         })}
+        {/* {selectedCenter && (
+          <InfoWindow
+            onCloseClick={() => {
+              set_selectedCenter("");
+            }}
+            position={{
+              lat: selectedCenter.latitude,
+              lng: selectedCenter.longitude,
+            }}
+          ></InfoWindow>
+        )} */}
       </GoogleMap>
     );
   })

@@ -137,6 +137,7 @@ export default function TripDetails() {
                     "what is this",
                     oneTrip.posts[postIndex].pictures
                   )} */}
+                  {console.log(oneTrip.posts[postIndex].pictures)}
                   <Slider pictures={oneTrip.posts[postIndex].pictures} />;
                 </TabPanels>
               </Flex>
@@ -144,8 +145,8 @@ export default function TripDetails() {
           )}
         </Box>
         {/* <Box w="40%" justifyContent="center" alignItems="center" mt=".5rem">
-            {googleMapsRender(oneTrip.posts, moveToMarker)}
-          </Box> */}
+          {googleMapsRender(oneTrip.posts, moveToMarker)}
+        </Box> */}
       </Flex>
 
       {user.token && !oneTrip.endDate && user.id === oneTrip.userId ? (
