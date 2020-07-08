@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/core";
 import ModalToogle from "./ModalToogle";
 import Logout from "./Logout";
-import "../../Style/Navigation.scss";
+import "../../Style/GenStyle.scss";
 
 export default function Navbar() {
   function ColorMode() {
@@ -23,9 +23,19 @@ export default function Navbar() {
         {/*
         // *@ts-ignore  */}
         {colorMode === "dark" ? (
-          <IconButton icon="sun" aria-label="toggleMode" />
+          <IconButton
+            variantColor="customRed"
+            icon="sun"
+            aria-label="toggleMode"
+            className="navbtn"
+          />
         ) : (
-          <IconButton icon="moon" aria-label="toggleMode" />
+          <IconButton
+            variantColor="customRed"
+            className="navbtn"
+            icon="moon"
+            aria-label="toggleMode"
+          />
         )}
       </Box>
     );
@@ -41,6 +51,8 @@ export default function Navbar() {
             minW="7vw"
             onClick={() => history.push(`/users/${user.id}`)}
             className="navbtn"
+            mr={5}
+            variantColor="customRed"
           >
             {user.firstName}
           </Button>
@@ -55,28 +67,25 @@ export default function Navbar() {
   return (
     <Flex
       padding="15px"
-      bg="blue.300"
+      bg="customBlue.200"
       justify="space-around"
+      d="flex"
       position="fixed"
       w="100vw"
       top="0"
       style={{ zIndex: 99 }}
     >
-      <Flex w="20%" justify="space-around">
+      <Box w="20%" d="flex">
         {ColorMode()}
         <NavLink to="/">
-          <Button minW="7vw" className="navbtn">
+          <Button ml={5} minW="7vw" className="navbtn" variantColor="customRed">
             Traveler's Diary
           </Button>
         </NavLink>
-      </Flex>
-      <Flex w="50%" justify="space-around">
-        <Text></Text>
-      </Flex>
-      <Flex float="right" w="20%" justify="space-around">
-        {/* {userProfile} */}
+      </Box>
+      <Box w="20%" textAlign="right">
         {loggedIn()}
-      </Flex>
+      </Box>
     </Flex>
   );
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { Trip, Picture } from "../Types/model";
-import { Flex, Text, Box, Heading, Button } from "@chakra-ui/core";
+import { Flex, Text, Box, Heading, Button, Divider } from "@chakra-ui/core";
 import Slider from "./slider";
-import "../Style/TripCard.scss";
+import "../Style/GenStyle.scss";
 
 export default function TripCard(props: Trip) {
   const { id, tripTitle, posts, startDate, endDate } = props;
@@ -50,17 +50,7 @@ export default function TripCard(props: Trip) {
     history.push(`/trip/${id}`);
   }
   return (
-    <Box
-      key={id}
-      bg="blue.100"
-      w="60vw"
-      maxH="100vh"
-      m="auto"
-      p="15px"
-      my="3vh"
-      border="3px solid olive"
-      overflow="hidden"
-    >
+    <>
       <Heading className="tripTitle">{tripTitle}</Heading>
       <Text bg="white.500" mb="1rem">
         Trip started on: {startDate}
@@ -73,21 +63,23 @@ export default function TripCard(props: Trip) {
             .map((post) => {
               const { id, title, content, pictures } = post;
               return (
-                <Box color="black.500" key={id}>
-                  {postsRender(title, content, pictures)}
+                <Box key={id}>
+                  <Box key={id}>{postsRender(title, content, pictures)}</Box>
+                  <Divider borderColor="gray.500" py={2} />
                 </Box>
               );
             })
         : null}
       <Flex justify="space-around" pt="1rem">
         <Button
-          className="visitTripBtn"
+          variantColor="customRed"
+          className="navbtn"
           minW="20%"
           onClick={(e) => visitTripOnClickHandler(id)}
         >
-          Check out this trip!
+          Explore this trip!
         </Button>
       </Flex>
-    </Box>
+    </>
   );
 }

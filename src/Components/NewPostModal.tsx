@@ -20,8 +20,9 @@ import {
   InputGroup,
   FormControl,
   FormLabel,
+  Textarea,
 } from "@chakra-ui/core";
-import "../Style/MyPage.scss";
+import "../Style/GenStyle.scss";
 
 let images: NewPicture = [];
 
@@ -98,10 +99,20 @@ export default function NewTripModal() {
   }, [id]);
   return (
     <>
-      <Button onClick={onOpen} minW="7vw" className="navbtn">
+      <Button
+        onClick={onOpen}
+        minW="10vw"
+        className="navbtn"
+        variantColor="customRed"
+      >
         New Post
       </Button>
-      <Modal scrollBehavior="outside" isOpen={isOpen} onClose={onClose}>
+      <Modal
+        preserveScrollBarGap
+        scrollBehavior="outside"
+        isOpen={isOpen}
+        onClose={onClose}
+      >
         <ModalOverlay />
         <ModalContent
           alignItems="center"
@@ -109,7 +120,6 @@ export default function NewTripModal() {
           minH="60vh"
           h="auto"
           maxH="90vh"
-          style={{ backgroundColor: "#E3EBFF" }}
         >
           <ModalHeader>New Post</ModalHeader>
           <ModalCloseButton />
@@ -141,10 +151,12 @@ export default function NewTripModal() {
                   <FormLabel htmlFor="date" className="modalLabel">
                     Share your thoughts:
                   </FormLabel>
-                  <Input
+                  <Textarea
+                    position="relative"
                     as="textarea"
                     minW="80%"
                     h="20vh"
+                    resize="vertical"
                     variant="flushed"
                     isRequired
                     value={newPost.content}
@@ -168,7 +180,13 @@ export default function NewTripModal() {
                   <FormLabel htmlFor="date" className="modalLabel">
                     Upload your pictures
                   </FormLabel>
-                  <Button onClick={() => beginUpload("image")}>Upload</Button>
+                  <Button
+                    onClick={() => beginUpload("image")}
+                    className="navbtn"
+                    variantColor="customRed"
+                  >
+                    Choose
+                  </Button>
                   {/* <Input
                     type="file"
                     placeholder="When will your trip begin"
@@ -189,12 +207,18 @@ export default function NewTripModal() {
             <Button
               minW="7vw"
               className="navbtn"
+              variantColor="customRed"
               mr={3}
               onClick={(e) => submitHandler(e)}
             >
               Submit
             </Button>
-            <Button minW="7vw" className="navbtn" onClick={onClose}>
+            <Button
+              minW="7vw"
+              className="navbtn"
+              variantColor="customRed"
+              onClick={onClose}
+            >
               Close
             </Button>
           </ModalFooter>

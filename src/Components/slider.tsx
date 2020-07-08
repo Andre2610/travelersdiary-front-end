@@ -1,5 +1,5 @@
 import React from "react";
-import "../Style/slider.scss";
+import "../Style/GenStyle.scss";
 import {
   Image,
   TabList,
@@ -12,7 +12,7 @@ import { Picture } from "../Types/model";
 
 export default function Slider(props: { pictures: Picture[] }) {
   return (
-    <Tabs defaultIndex={0} align="center">
+    <Tabs defaultIndex={0} align="center" variantColor="whiteAlpha" pb={4}>
       <TabPanels>
         {props.pictures.map((picture, i) => {
           return (
@@ -30,7 +30,11 @@ export default function Slider(props: { pictures: Picture[] }) {
       {props.pictures.length > 1 ? (
         <TabList>
           {props.pictures.map((picture, i) => {
-            return <Tab key={i}>{i + 1}</Tab>;
+            return (
+              <Tab color="white.500" className="navbtn" key={i}>
+                {i + 1}
+              </Tab>
+            );
             // return <Tab>⦿</Tab>;
           })}
         </TabList>

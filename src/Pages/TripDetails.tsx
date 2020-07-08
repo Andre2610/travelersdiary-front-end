@@ -24,7 +24,7 @@ import {
   InputGroup,
   FormLabel,
 } from "@chakra-ui/core";
-import "../Style/MyPage.scss";
+import "../Style/GenStyle.scss";
 
 export default function TripDetails() {
   const { id } = useParams();
@@ -103,7 +103,7 @@ export default function TripDetails() {
         justify="space-evenly"
         my="3rem"
         textAlign="center"
-        bg="blue.100"
+        bg="blackAlpha.400"
         maxH="60vh"
         minH="40vh"
       >
@@ -116,7 +116,7 @@ export default function TripDetails() {
               <Heading mt="3rem">No Posts yet</Heading>
             </>
           ) : (
-            <Tabs variant="soft-rounded" variantColor="cyan">
+            <Tabs variant="soft-rounded" variantColor="gray">
               <Flex w="100%" flexDirection="row" justify="space-around">
                 <TabList d="row" alignSelf="left" w="35%">
                   {oneTrip.posts
@@ -125,9 +125,11 @@ export default function TripDetails() {
                       return (
                         <Tab
                           key={i}
+                          color="whiteAlpha"
                           h="4rem"
                           w="95%"
                           onClick={(e) => tabOnClickHandler(i, post)}
+                          className="navbtn"
                         >
                           {i + 1}
                         </Tab>
@@ -153,7 +155,8 @@ export default function TripDetails() {
             <Button
               minW="10vw"
               maxW="10vw"
-              className="btn"
+              className="navbtn"
+              variantColor="customRed"
               m="auto"
               onClick={(e) => set_toggle_endDate(!toggle_endDate)}
             >
@@ -183,7 +186,7 @@ export default function TripDetails() {
               <Button
                 minW="10vw"
                 maxW="10vw"
-                className="btn"
+                className="navbtn"
                 m="auto"
                 onClick={(e) => endtrip(e)}
               >
@@ -200,18 +203,16 @@ export default function TripDetails() {
           return (
             <Box
               key={id}
-              bg="blue.100"
+              bg="blackAlpha.400"
               w="60vw"
               //   maxH="35vh"
               m="auto"
               p="15px"
               my="3vh"
-              border="3px solid black"
+              border="2px solid gray"
               overflow="hidden"
             >
-              <Box color="black.500">
-                {postsRender(title, content, pictures)}
-              </Box>
+              <Box>{postsRender(title, content, pictures)}</Box>
               <Flex justify="space-around" pt="1rem">
                 {/* <Button
                   className="visitTrip"

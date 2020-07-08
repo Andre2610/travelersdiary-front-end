@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import { CloudinaryContext } from "cloudinary-react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core";
+import {
+  ThemeProvider,
+  ColorModeProvider,
+  CSSReset,
+  theme,
+} from "@chakra-ui/core";
 import Navigation from "./Components/Navigation/Navigation";
 import Homepage from "./Pages/Homepage";
 import TripDetails from "./Pages/TripDetails";
@@ -10,20 +15,18 @@ import MyPage from "./Pages/MyPage";
 import { getUserWithStoredToken } from "./Store/users/actions";
 import { cloud_name } from "./config/constants";
 import { useDispatch } from "react-redux";
-import customTheme from "./Style/CustomTheme";
+import { CustomTheme } from "./Style/CustomTheme";
 
 function App() {
   const dispatch = useDispatch();
-
+  console.log("chakra theme", CustomTheme);
   useEffect(() => {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
 
   return (
-    <ThemeProvider>
-      {/* 
-      // @ts-ignore */}
-      <ColorModeProvider theme={customTheme}>
+    <ThemeProvider theme={CustomTheme}>
+      <ColorModeProvider>
         <CloudinaryContext cloudname={cloud_name}>
           <CSSReset />
           <Navigation />

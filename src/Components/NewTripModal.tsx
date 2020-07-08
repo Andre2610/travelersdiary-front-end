@@ -18,7 +18,7 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/core";
-import "../Style/MyPage.scss";
+import "../Style/GenStyle.scss";
 
 export default function NewTripModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -45,17 +45,17 @@ export default function NewTripModal() {
 
   return (
     <>
-      <Button onClick={onOpen} minW="7vw" className="navbtn">
+      <Button
+        onClick={onOpen}
+        minW="7vw"
+        className="navbtn"
+        variantColor="customRed"
+      >
         Start a new trip!
       </Button>
       <Modal scrollBehavior="outside" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent
-          alignItems="center"
-          h="auto"
-          maxH="70vh"
-          style={{ backgroundColor: "#B8B08D" }}
-        >
+        <ModalContent alignItems="center" h="auto" maxH="70vh">
           <ModalHeader>New trip</ModalHeader>
           <ModalCloseButton />
           <ModalBody m="auto" w="80%">
@@ -131,12 +131,18 @@ export default function NewTripModal() {
             <Button
               minW="7vw"
               className="navbtn"
+              variantColor="customRed"
               mr={3}
               onClick={(e) => submitHandler(e)}
             >
               Start your trip!
             </Button>
-            <Button minW="7vw" className="navbtn" onClick={onClose}>
+            <Button
+              minW="7vw"
+              className="navbtn"
+              variantColor="customRed"
+              onClick={onClose}
+            >
               Close
             </Button>
           </ModalFooter>
