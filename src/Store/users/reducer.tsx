@@ -33,13 +33,10 @@ export default (state = initialState, action: UserActionTypes) => {
       localStorage.removeItem("token");
       return { ...initialState, token: null };
     case UPDATE_USER_TRIPS:
+      console.log("whats my payload", action.trip);
       return { ...state, trips: [...state.trips, { ...action.trip }] };
     case UPDATE_USER_POSTS:
       const updateTrips = state.trips.map((trip) => {
-        // console.log(
-        //   `does ${trip.id} match ${action.post.tripId}`,
-        //   trip.id === action.post.tripId
-        // );
         if (trip.id === action.post.tripId) {
           console.log("do I get here?");
           return { ...trip, posts: [...trip.posts, { ...action.post }] };
@@ -48,8 +45,6 @@ export default (state = initialState, action: UserActionTypes) => {
       });
       console.log("my previous trips", state.trips);
       console.log("my updateTrips", updateTrips);
-      // console.log("my payload", action.post);
-      // console.log("my state", state);
       return { ...state, trips: [...updateTrips] };
     default:
       return state;

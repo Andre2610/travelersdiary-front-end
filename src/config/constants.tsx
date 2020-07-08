@@ -8,3 +8,5 @@ export const cloudinaryUrl =
 
 export const cloud_name = "dui8yvobq";
 export const upload_preset = "cloudinaryapi";
+
+export const DEFAULT_MESSAGE_TIMEOUT = 3000;
