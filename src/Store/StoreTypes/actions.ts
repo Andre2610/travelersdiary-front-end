@@ -1,4 +1,11 @@
-import { Trip, Post, User, NoTokenUser, AppState } from "../../Types/model";
+import {
+  Trip,
+  Post,
+  User,
+  NoTokenUser,
+  AppState,
+  UserMessage,
+} from "../../Types/model";
 
 export const FETCH_TRIPS = "FETCH_TRIPS";
 export const FETCH_SINGLE_TRIP = "FETCH_SINGLE_TRIP";
@@ -56,20 +63,24 @@ export type updateUserPosts = {
 
 export type appLoading = {
   type: typeof APP_LOADING;
-  message: null;
 };
 export type appDoneLoading = {
   type: typeof APP_DONE_LOADING;
-  message: null;
 };
 export type setMessage = {
   type: typeof SET_MESSAGE;
-  message: string;
+  userMessage: UserMessage;
 };
 export type clearMessage = {
   type: typeof CLEAR_MESSAGE;
-  message: null;
 };
+
+export type showMessageWithTimeout = (
+  variant: string,
+  dismissable: boolean,
+  text: string,
+  timeOutMilliSeconds: number
+) => void;
 
 export type TripActionTypes = loadInitialTrips | fetchSingleTrip;
 export type UserActionTypes =

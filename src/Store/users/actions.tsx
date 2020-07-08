@@ -10,6 +10,12 @@ import {
 } from "../StoreTypes/actions";
 import { User, NoTokenUser, Credentials, SignupData } from "../../Types/model";
 import { selectToken } from "./selector";
+import {
+  showMessageWithTimeout,
+  setMessage,
+  appDoneLoading,
+  appLoading,
+} from "../appState/actions";
 
 export const userFetched = (user: User): AppActions => ({
   type: FETCH_USER,
@@ -21,21 +27,26 @@ const tokenStillValid = (noTokenUser: NoTokenUser): AppActions => ({
   noTokenUser,
 });
 
-export const logOut = () => ({ type: LOG_OUT });
+export const logOut = (): AppActions => ({ type: LOG_OUT });
 
 export const login = (credentials: Credentials) => {
   const { email, password } = credentials;
 
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     try {
+      dispatch(appLoading());
       const res = await axios.post(`${apiUrl}/auth/login`, {
         email,
         password,
       });
 
       dispatch(userFetched(res.data));
+      // @ts-ignore
+      dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
+      dispatch(appDoneLoading());
     } catch (e) {
       console.log(e.message);
+      dispatch(appDoneLoading());
     }
   };
 };

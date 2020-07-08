@@ -3,14 +3,15 @@ import {
   APP_DONE_LOADING,
   SET_MESSAGE,
   CLEAR_MESSAGE,
-} from "./actions";
+} from "../StoreTypes/actions";
+import { AppStateActionTypes } from "../StoreTypes/actions";
 
 const initialState = {
   loading: false,
   message: null,
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: AppStateActionTypes) => {
   switch (action.type) {
     case APP_LOADING:
       return { ...state, loading: true };
@@ -19,7 +20,8 @@ export default (state = initialState, action) => {
       return { ...state, loading: false };
 
     case SET_MESSAGE:
-      return { ...state, message: action.payload };
+      console.log(action.userMessage);
+      return { ...state, message: { ...action.userMessage } };
 
     case CLEAR_MESSAGE:
       return { ...state, message: null };

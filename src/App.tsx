@@ -9,6 +9,7 @@ import {
   theme,
 } from "@chakra-ui/core";
 import Navigation from "./Components/Navigation/Navigation";
+import Messagebox from "./Components/Messagebox";
 import Homepage from "./Pages/Homepage";
 import TripDetails from "./Pages/TripDetails";
 import MyPage from "./Pages/MyPage";
@@ -30,6 +31,7 @@ function App() {
         <CloudinaryContext cloudname={cloud_name}>
           <CSSReset />
           <Navigation />
+          <Messagebox />
           <Switch>
             <Route path="/trip/:id?" component={TripDetails} />
             <Route path="/users/:id?" component={MyPage} />
