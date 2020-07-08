@@ -5,17 +5,16 @@ import { selectUser } from "../Store/users/selector";
 import { Trip } from "../Types/model";
 import TripCard from "../Components/TripCard";
 import NewTripModal from "../Components/NewTripModal";
-import "../Style/MyPage.scss";
+import "../Style/GenStyle.scss";
 
 import { Flex, Text, Box, Heading } from "@chakra-ui/core";
 
 export default function MyPage() {
   const history = useHistory();
   const user = useSelector(selectUser);
-  console.log("whats user", user);
 
   useEffect(() => {
-    if (!user.id) {
+    if (!user.token) {
       history.push("/");
     }
   }, [user]);
@@ -28,12 +27,11 @@ export default function MyPage() {
     .map((paragraph, i) => <Text key={i}>{paragraph}</Text>);
 
   return (
-    <Box bg="#B8B08D" w="100vw" top="1" mt="3rem">
+    <Box w="100vw" m="auto" bg="blackAlpha.300" p="2vh" top="1" mt="3rem">
       <Flex flexDirection="column" justify="center" w="80vw" m="auto">
         <Box
           w="100%"
           my="3rem"
-          bg="blue.100"
           maxH="60vh"
           minH="25vh "
           h="auto"
@@ -68,7 +66,16 @@ export default function MyPage() {
           .sort((a: Trip, b: Trip) => a.id - b.id)
           .map((trip) => {
             return (
-              <Box key={trip.id}>
+              <Box
+                key={trip.id}
+                rounded="lg"
+                w="80%"
+                m="auto"
+                p="15px"
+                my="3vh"
+                border="2px solid gray"
+                overflow="hidden"
+              >
                 <TripCard
                   id={trip.id}
                   tripTitle={trip.tripTitle}

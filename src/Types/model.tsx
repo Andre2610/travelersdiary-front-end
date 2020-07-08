@@ -76,3 +76,5 @@ export type NewPost = {
   pictures: NewPicture[];
   tripId: number;
 };
+
+export type AppState = { loading: Boolean; message: string | null };

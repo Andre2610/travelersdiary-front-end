@@ -24,7 +24,7 @@ import {
   InputGroup,
   FormLabel,
 } from "@chakra-ui/core";
-import "../Style/MyPage.scss";
+import "../Style/GenStyle.scss";
 
 export default function TripDetails() {
   const { id } = useParams();
@@ -41,11 +41,12 @@ export default function TripDetails() {
     lng: 0,
   });
 
-  function postsRender(title: string, content: string, pictures: Picture[]) {
+  function postsRender(post: Post) {
+    const { title, content, pictures } = post;
     if (pictures.length > 0) {
       return (
         <Flex wrap="wrap" flexDirection="row" justify="space-evenly" w="100%">
-          <Heading as="h3" size="sm" w="95%" m="auto" mb="1.5rem">
+          <Heading as="h3" size="sm" w="95%" m="auto" my={2}>
             {title}
           </Heading>
           <Text w="45%">{content}</Text>
@@ -57,17 +58,73 @@ export default function TripDetails() {
     }
     return (
       <>
-        <Heading as="h3" size="sm" w="100%" m="auto">
+        <Heading as="h3" size="sm" w="95%" m="auto" my={2}>
           {title}
         </Heading>
-        <Text w="100%">{content}</Text>
+        <Text w="95%" m="auto">
+          {content}
+        </Text>
       </>
     );
   }
 
   function googleMapsRender(posts: Post[], moveToMarker: DefaultMarker) {
+    console.log("whats in posts", posts);
+
     //@ts-ignore
     return <GoogleMaps posts={posts} moveToMarker={moveToMarker} />;
+  }
+
+  function tripControlMenu() {
+    console.log("where am i?");
+    return (
+      <>
+        <Flex w="30vw" m="auto">
+          <NewPostModal />
+          <Button
+            minW="10vw"
+            maxW="10vw"
+            className="navbtn"
+            variantColor="customRed"
+            m="auto"
+            onClick={(e) => set_toggle_endDate(!toggle_endDate)}
+          >
+            End Trip
+          </Button>
+        </Flex>
+        <Collapse mt={4} isOpen={toggle_endDate} m="auto" w="15vw">
+          <FormControl>
+            <InputGroup maxH="10vh">
+              <Flex
+                w="5vw"
+                d="column"
+                style={{ height: "10vh" }}
+                m="auto"
+                mt={2}
+              >
+                <FormLabel htmlFor="text">Please confirm the date</FormLabel>
+                <Input
+                  type="date"
+                  variant="flushed"
+                  onChange={(e: any) => set_endDate(e.target.value)}
+                />
+              </Flex>
+            </InputGroup>
+          </FormControl>
+          <Flex>
+            <Button
+              minW="10vw"
+              maxW="10vw"
+              className="navbtn"
+              m="auto"
+              onClick={(e) => endtrip(e)}
+            >
+              Confirm
+            </Button>
+          </Flex>
+        </Collapse>
+      </>
+    );
   }
 
   function tabOnClickHandler(tabIndex: number, post: Post) {
@@ -78,6 +135,7 @@ export default function TripDetails() {
     console.log("my tabindex", tabIndex);
     set_postIndex(tabIndex);
   }
+
   function endtrip(e: any) {
     e.preventDefault();
     if (!endDate) {
@@ -89,8 +147,6 @@ export default function TripDetails() {
   }
 
   useEffect(() => {
-    if (user.token) {
-    }
     if (!oneTrip) {
       dispatch(fetchSpecificTrip(id));
     }
@@ -99,135 +155,62 @@ export default function TripDetails() {
   if (!oneTrip) return <Heading mt="3rem">Loading...</Heading>;
 
   return (
-    <Flex flexDirection="column" justify="center" w="80vw" m="auto" mt="3rem">
-      <Flex
-        w="100%"
-        justify="space-evenly"
-        my="3rem"
-        textAlign="center"
-        bg="blue.100"
-        maxH="60vh"
-        minH="40vh"
-      >
-        <Box w="50%">
-          <Heading as="h2" mb="2rem">
-            {oneTrip.tripTitle}
-          </Heading>
-          {!oneTrip.posts[0] ? (
-            <>
-              <Heading mt="3rem">No Posts yet</Heading>
-            </>
-          ) : (
-            <Tabs variant="soft-rounded" variantColor="cyan">
-              <Flex w="100%" flexDirection="row" justify="space-around">
-                <TabList d="row" alignSelf="left" w="35%">
-                  {oneTrip.posts
-                    .sort((a: Post, b: Post) => a.id - b.id)
-                    .map((post, i) => {
-                      return (
-                        <Tab
-                          key={i}
-                          h="4rem"
-                          w="95%"
-                          onClick={(e) => tabOnClickHandler(i, post)}
-                        >
-                          {i + 1}
-                        </Tab>
-                      );
-                    })}
-                </TabList>
-                <TabPanels float="right" w="60%">
-                  <Slider pictures={oneTrip.posts[postIndex].pictures} />;
-                </TabPanels>
-              </Flex>
-            </Tabs>
-          )}
-        </Box>
-        {/* <Box w="40%" justifyContent="center" alignItems="center" mt=".5rem">
-          {googleMapsRender(oneTrip.posts, moveToMarker)}
-        </Box> */}
-      </Flex>
-
-      {user.token && !oneTrip.endDate && user.id === oneTrip.userId ? (
+    <Box w="90vw" m="auto" mt="6rem">
+      <Box>
+        <Heading textAlign="center" mb="4rem">
+          {oneTrip.tripTitle}
+        </Heading>
+      </Box>
+      {!oneTrip.posts[0] ? (
         <>
-          <Flex w="30vw" m="auto">
-            <NewPostModal />
-            <Button
-              minW="10vw"
-              maxW="10vw"
-              className="btn"
-              m="auto"
-              onClick={(e) => set_toggle_endDate(!toggle_endDate)}
-            >
-              End Trip
-            </Button>
-          </Flex>
-          <Collapse mt={4} isOpen={toggle_endDate} m="auto" w="15vw">
-            <FormControl>
-              <InputGroup maxH="10vh">
-                <Flex
-                  w="5vw"
-                  d="column"
-                  style={{ height: "10vh" }}
-                  m="auto"
-                  mt={2}
-                >
-                  <FormLabel htmlFor="text">Please confirm the date</FormLabel>
-                  <Input
-                    type="date"
-                    variant="flushed"
-                    onChange={(e: any) => set_endDate(e.target.value)}
-                  />
-                </Flex>
-              </InputGroup>
-            </FormControl>
-            <Flex>
-              <Button
-                minW="10vw"
-                maxW="10vw"
-                className="btn"
-                m="auto"
-                onClick={(e) => endtrip(e)}
-              >
-                Confirm
-              </Button>
-            </Flex>
-          </Collapse>
+          <Heading textAlign="center" my="3rem">
+            No Posts yet
+          </Heading>
+          {tripControlMenu()}
         </>
-      ) : null}
-      {oneTrip.posts
-        .sort((a, b) => a.id - b.id)
-        .map((post) => {
-          const { id, title, content, latitude, longitude, pictures } = post;
-          return (
-            <Box
-              key={id}
-              bg="blue.100"
-              w="60vw"
-              //   maxH="35vh"
-              m="auto"
-              p="15px"
-              my="3vh"
-              border="3px solid black"
-              overflow="hidden"
-            >
-              <Box color="black.500">
-                {postsRender(title, content, pictures)}
-              </Box>
-              <Flex justify="space-around" pt="1rem">
-                {/* <Button
-                  className="visitTrip"
-                  bg="red.500"
-                  color="blue.100"
-                  w="20%"
-                  //   onClick={(e) => visitTripOnClickHandler(id)}
-                >
-                  Read more!
-                </Button> */}
+      ) : (
+        <Tabs variant="soft-rounded" variantColor="gray">
+          <Box w="100%">
+            {user.token && !oneTrip.endDate && user.id === oneTrip.userId ? (
+              <>{tripControlMenu()}</>
+            ) : null}
+            <Box w="25%" position="fixed">
+              <TabList d="row" alignSelf="left" w="100%" position="relative">
+                {oneTrip.posts
+                  .sort((a: Post, b: Post) => a.id - b.id)
+                  .map((post, i) => {
+                    return (
+                      <Tab
+                        key={i}
+                        color="whiteAlpha"
+                        h="auto"
+                        w="100%"
+                        my={5}
+                        onClick={(e) => tabOnClickHandler(i, post)}
+                        className="navbtn"
+                      >
+                        {post.title}
+                      </Tab>
+                    );
+                  })}
+              </TabList>
+            </Box>
+            <Box m="auto" display="block" w="100%" alignSelf="right">
+              <TabPanels
+                float="right"
+                w="70%"
+                border="2px solid gray"
+                mb="2rem"
+              >
+                {postsRender(oneTrip.posts[postIndex])}
+              </TabPanels>
+              <Flex float="right" mb="2rem">
+                {googleMapsRender(oneTrip.posts, moveToMarker)}
               </Flex>
             </Box>
-          );
-        })}
-    </Flex>
+          </Box>
+        </Tabs>
+      )}
+    </Box>
   );
 }

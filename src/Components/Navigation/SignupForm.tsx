@@ -19,7 +19,7 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/core";
-import "../../Style/Navigation.scss";
+import "../../Style/GenStyle.scss";
 
 export default function SignupForm(props: any) {
   const dispatch = useDispatch();
@@ -53,11 +53,7 @@ export default function SignupForm(props: any) {
 
   return (
     <>
-      <ModalContent
-        alignItems="center"
-        maxH="auto"
-        style={{ backgroundColor: "#F6F0C6" }}
-      >
+      <ModalContent alignItems="center" maxH="auto">
         <ModalHeader>Sign up</ModalHeader>
         <ModalCloseButton />
         <ModalBody w="75%" m="auto">
@@ -191,12 +187,14 @@ export default function SignupForm(props: any) {
         <Box>
           <Text size="xsm">
             Already have an account? Log in{" "}
-            <span
+            <Text
+              as="span"
               onClick={(e) => set_ModalForm("Login")}
-              style={{ color: "blue", cursor: "pointer" }}
+              style={{ cursor: "pointer" }}
+              color="blue.500"
             >
               HERE
-            </span>
+            </Text>
           </Text>
         </Box>
       </ModalContent>

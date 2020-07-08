@@ -69,21 +69,25 @@ const MyMapComponent = withScriptjs(
 );
 
 export default (props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
-  // console.log("Whats my GapiKey", api);
   return (
     <MyMapComponent
       //@ts-ignore
       googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleAPIkey}`}
       //@ts-ignore
-      loadingElement={<div style={{ height: `100%` }} />}
+      loadingElement={<div style={{ height: `100%`, width: `100%` }} />}
       //@ts-ignore
       containerElement={
         <div
-          style={{ height: `95%`, alignSelf: "center", justifySelf: "center" }}
+          style={{
+            height: `100%`,
+            width: `100%`,
+            alignSelf: "center",
+            justifySelf: "center",
+          }}
         />
       }
       //@ts-ignore
-      mapElement={<div style={{ height: `100%` }} />}
+      mapElement={<div style={{ height: `50vh`, width: `63vw` }} />}
       //@ts-ignore
       posts={props.posts}
       moveToMarker={props.moveToMarker}

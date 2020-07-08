@@ -17,7 +17,7 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/core";
-import "../../Style/Navigation.scss";
+import "../../Style/GenStyle.scss";
 
 export default function LogInForm(props: any) {
   const { onClose, set_ModalForm } = props;
@@ -50,11 +50,7 @@ export default function LogInForm(props: any) {
 
   return (
     <>
-      <ModalContent
-        alignItems="center"
-        maxH="auto"
-        style={{ backgroundColor: "#F6F0C6" }}
-      >
+      <ModalContent alignItems="center" maxH="auto">
         <ModalHeader>Log In</ModalHeader>
         <ModalCloseButton />
         <ModalBody m="auto" w="80%">
@@ -105,22 +101,30 @@ export default function LogInForm(props: any) {
             className="navbtn"
             mr={3}
             onClick={(e) => submitHandler(e)}
+            variantColor="customRed"
           >
             Log in
           </Button>
-          <Button minW="7vw" className="navbtn" onClick={onClose}>
+          <Button
+            minW="7vw"
+            className="navbtn"
+            onClick={onClose}
+            variantColor="customRed"
+          >
             Close
           </Button>
         </ModalFooter>
         <Box>
           <Text as="span" size="sm">
             Don't have an account yet? Sign up{" "}
-            <span
+            <Text
+              as="span"
               onClick={(e) => set_ModalForm("Signup")}
-              style={{ color: "blue", cursor: "pointer" }}
+              style={{ cursor: "pointer" }}
+              color="blue.500"
             >
               HERE
-            </span>
+            </Text>
           </Text>
         </Box>
       </ModalContent>
