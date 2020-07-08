@@ -10,6 +10,7 @@ import MyPage from "./Pages/MyPage";
 import { getUserWithStoredToken } from "./Store/users/actions";
 import { cloud_name } from "./config/constants";
 import { useDispatch } from "react-redux";
+import customTheme from "./Style/CustomTheme";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,7 +21,9 @@ function App() {
 
   return (
     <ThemeProvider>
-      <ColorModeProvider>
+      {/* 
+      // @ts-ignore */}
+      <ColorModeProvider theme={customTheme}>
         <CloudinaryContext cloudname={cloud_name}>
           <CSSReset />
           <Navigation />
