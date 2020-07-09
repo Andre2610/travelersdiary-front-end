@@ -12,3 +12,39 @@ Hi, I am Andre, and this is my portfolio project, a web application App called T
 ## **Traveler's Diary**
 
 The idea behind this project is to give user's a platform to write their experiences while traveling by starting a trip and then make posts on that trip in a blog like style. Once the trip is over, the user can end the trip and all of the posts created during his/her trip will always remain grouped up. Once a user visits a trip, they will be able to read all the posts of that trip as well as check where the posts where made from, creating a sort of timeline of the trip.
+
+## **Goals of this project**
+
+My main goal with this project was to explore new technologies and see how well and how fast I would be able to adapt to something new as well gain experience with technologies learnt during the academy. For that purpose, I decided to use typescript in the front-end while keeping it simple in the back-end with technologies I was already familiar with. I used a Chakra-UI for the UI design which was also new to me. </br> I tried to commit with clear messages and when merging, I tried to give a bullet point list of what was done while being a bit more descriptive on more intrecate merges.</br>
+A few examples of pull requests:
+
+- [Feat-user-login/signup](https://github.com/Andre2610/travelersdiary-front-end/pull/8)
+- [Feat-start-newtrip](https://github.com/Andre2610/travelersdiary-front-end/pull/10)
+- [Styling](https://github.com/Andre2610/travelersdiary-front-end/pull/12)
+- [Feat-appState](https://github.com/Andre2610/travelersdiary-front-end/pull/13)
+
+## **Technologies used**
+
+**Back end**
+
+- Express
+- REST
+- Sequelize
+- Postgres
+- NodeJS
+
+**Front end**
+
+- Typescript
+- React
+- Redux
+- Axios
+- Chakra-UI
+- Geocode-Geolocation
+- React-google-maps
+
+**External API's**
+
+- Google maps
+- OpenCage
+- Cloudinary
