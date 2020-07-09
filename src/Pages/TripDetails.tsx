@@ -97,7 +97,7 @@ export default function TripDetails() {
     console.log("where am i?");
     return (
       <>
-        <Flex w="30vw" m="auto">
+        <Flex w="30vw" m="auto" mb="2rem">
           <NewPostModal />
           <Button
             minW="10vw"
@@ -221,6 +221,7 @@ export default function TripDetails() {
                   w="70%"
                   border="2px solid gray"
                   mb="2rem"
+                  py="1rem"
                 >
                   {postsRender(oneTrip.posts[postIndex])}
                 </TabPanels>
