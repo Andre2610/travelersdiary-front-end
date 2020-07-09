@@ -44,7 +44,12 @@ export type NoTokenUser = {
   trips: Trip[];
 };
 
-export type DefaultMarker = { lat: number; lng: number };
+export type DefaultMarker = {
+  lat: number;
+  lng: number;
+  address: string;
+  flag: string;
+};
 
 export type Credentials = {
   email: string;

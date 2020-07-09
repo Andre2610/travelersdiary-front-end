@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { opencageAPIkey } from "../config/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { showMessageWithTimeout } from "../Store/appState/actions";
 import { fetchSpecificTrip, endTrip } from "../Store/trips/actions";
 import { selectIdTrip } from "../Store/trips/selector";
 import { selectUser, selectUserTrip } from "../Store/users/selector";
 import { selectAppLoading } from "../Store/appState/selector";
-import { Trip, Post, Picture, DefaultMarker } from "../Types/model";
+import { Trip, Post, DefaultMarker } from "../Types/model";
 import Slider from "../Components/slider";
 import GoogleMaps from "../Components/GoogleMaps";
 import NewPostModal from "../Components/NewPostModal";
@@ -42,7 +45,21 @@ export default function TripDetails() {
   const [moveToMarker, set_moveToMarker] = useState<DefaultMarker>({
     lat: 0,
     lng: 0,
+    address: "",
+    flag: "",
   });
+  async function reverseGeoCode(lat: number, lng: number) {
+    const res = await axios.get(
+      `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${opencageAPIkey}`
+    );
+    console.log("whats this", res.data.results);
+    set_moveToMarker({
+      lat: lat,
+      lng: lng,
+      address: res.data.results[0].formatted,
+      flag: res.data.results[0].annotations.flag,
+    });
+  }
 
   function postsRender(post: Post) {
     const { title, content, pictures } = post;
@@ -72,8 +89,6 @@ export default function TripDetails() {
   }
 
   function googleMapsRender(posts: Post[], moveToMarker: DefaultMarker) {
-    console.log("whats in posts", posts);
-
     //@ts-ignore
     return <GoogleMaps posts={posts} moveToMarker={moveToMarker} />;
   }
@@ -131,18 +146,17 @@ export default function TripDetails() {
   }
 
   function tabOnClickHandler(tabIndex: number, post: Post) {
-    set_moveToMarker({
-      lat: post.latitude,
-      lng: post.latitude,
-    });
-    console.log("my tabindex", tabIndex);
+    const { latitude, longitude } = post;
+    reverseGeoCode(latitude, longitude);
+
     set_postIndex(tabIndex);
   }
 
   function endtrip(e: any) {
     e.preventDefault();
     if (!endDate) {
-      console.log("unhappy path, send message to user");
+      const message = "Please pick a date to end your trip";
+      dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       const endingTrip = { ...oneTrip, endDate };
       dispatch(endTrip(endingTrip));

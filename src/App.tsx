@@ -18,7 +18,6 @@ import { CustomTheme } from "./Style/CustomTheme";
 function App() {
   const dispatch = useDispatch();
   const loading = useSelector(selectAppLoading);
-  console.log("chakra theme", CustomTheme);
   useEffect(() => {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
