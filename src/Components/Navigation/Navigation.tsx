@@ -3,7 +3,15 @@ import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectToken, selectUser } from "../../Store/users/selector";
-import { Flex, Button, useColorMode, IconButton, Box } from "@chakra-ui/core";
+import { FaGithub } from "react-icons/fa";
+import {
+  Flex,
+  Button,
+  useColorMode,
+  IconButton,
+  Link,
+  Box,
+} from "@chakra-ui/core";
 import ModalToogle from "./ModalToogle";
 import Logout from "./Logout";
 import "../../Style/GenStyle.scss";
@@ -78,6 +86,19 @@ export default function Navbar() {
       </Box>
       <Box w="20%" textAlign="right">
         {loggedIn()}
+        <Link
+          href="https://github.com/Andre2610/travelersdiary-front-end"
+          isExternal
+        >
+          {/* 
+        //@ts-ignore */}
+          <IconButton
+            ml={5}
+            icon={FaGithub}
+            variantColor="customIcon"
+            className="iconBtn"
+          />
+        </Link>
       </Box>
     </Flex>
   );
