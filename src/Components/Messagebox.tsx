@@ -9,7 +9,7 @@ import {
   AlertDescription,
   CloseButton,
 } from "@chakra-ui/core";
-// import { clearMessage } from "../Store/appState/actions";
+import { clearMessage } from "../Store/appState/actions";
 
 export default function MessageBox() {
   const message = useSelector(selectMessage);
@@ -17,23 +17,29 @@ export default function MessageBox() {
   const showMessage = message !== null;
   if (!showMessage) return null;
 
-  return <h1>hey</h1>;
-  //@ts-ignore
-  // <Alert status={message.variant}>
-  //   <AlertIcon />
-  //   {/*
-  //   //@ts-ignore */}
-  //   <AlertDescription>{message.text}</AlertDescription>
-  //   {/*
-  //   //@ts-ignore */}
-  //   {message.dismissable ? (
-  //     <CloseButton
-  //       // onClick={() => dispatch(clearMessage())}
-  //       position="absolute"
-  //       right="8px"
-  //       top="8px"
-  //     />
-  //   ) : null}
-  // </Alert>
-  // );
+  return (
+    <Alert
+      // @ts-ignore
+      status={message.variant}
+      style={{ zIndex: 60 }}
+      variant="solid"
+      position="absolute"
+      top="4.5rem"
+    >
+      <AlertIcon />
+      {/*
+    //@ts-ignore */}
+      <AlertDescription>{message.text}</AlertDescription>
+      {/*
+    //@ts-ignore */}
+      {message.dismissable ? (
+        <CloseButton
+          onClick={() => dispatch(clearMessage())}
+          position="absolute"
+          right="0px"
+          top="-0.5rem"
+        />
+      ) : null}
+    </Alert>
+  );
 }

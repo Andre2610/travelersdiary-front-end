@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAppLoading } from "../../Store/appState/selector";
 import { Credentials } from "../../Types/model";
 import { login } from "../../Store/users/actions";
 import {
@@ -17,23 +18,24 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/core";
+import { showMessageWithTimeout } from "../../Store/appState/actions";
 import "../../Style/GenStyle.scss";
 
 export default function LogInForm(props: any) {
+  const loading = useSelector(selectAppLoading);
   const { onClose, set_ModalForm } = props;
   const [credentials, set_credentials] = useState<Credentials>({
     email: "",
     password: "",
   });
   const dispatch = useDispatch();
-  // const token = useSelector(selectToken);
-  // const history = useHistory();
 
   function submitHandler(event: any) {
     event.preventDefault();
     const { email, password } = credentials;
     if (!email || !password) {
-      console.log("unhappy path, send message to user");
+      const message = "Email or password incorrect";
+      dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       dispatch(login(credentials));
       set_credentials({
@@ -42,12 +44,7 @@ export default function LogInForm(props: any) {
       });
     }
   }
-  // useEffect(() => {
-  //   if (token !== null) {
-  //     history.push("/");
-  //   }
-  // }, [token, history]);
-
+  if (loading) return <h1>Loading</h1>;
   return (
     <>
       <ModalContent alignItems="center" maxH="auto">

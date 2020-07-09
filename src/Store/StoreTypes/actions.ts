@@ -4,7 +4,7 @@ import {
   User,
   NoTokenUser,
   AppState,
-  UserMessage,
+  Message,
 } from "../../Types/model";
 
 export const FETCH_TRIPS = "FETCH_TRIPS";
@@ -69,7 +69,7 @@ export type appDoneLoading = {
 };
 export type setMessage = {
   type: typeof SET_MESSAGE;
-  userMessage: UserMessage;
+  message: Message;
 };
 export type clearMessage = {
   type: typeof CLEAR_MESSAGE;

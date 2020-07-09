@@ -39,7 +39,6 @@ export const showMessageWithTimeout = (
   timeOutMilliSeconds: number
 ) => {
   return (dispatch: any) => {
-    console.log("does it get here?", variant);
     dispatch(setMessage(variant, dismissable, text));
 
     const timeout = timeOutMilliSeconds || DEFAULT_MESSAGE_TIMEOUT;

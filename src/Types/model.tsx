@@ -79,10 +79,10 @@ export type NewPost = {
 
 export type AppState = {
   loading: Boolean;
-  userMessage: UserMessage | null;
+  message: Message | null;
 };
 
-export type UserMessage = {
+export type Message = {
   variant: string;
   dismissable: boolean;
   text: string;
