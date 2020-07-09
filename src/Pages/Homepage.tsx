@@ -26,7 +26,7 @@ export default function Homepage() {
     return (
       <Box w="100vw" m="auto" bg="blackAlpha.300" p="2vh" top="1" mt="3rem">
         {allTrips
-          .sort((a: Trip, b: Trip) => a.id - b.id)
+          .sort((a: Trip, b: Trip) => b.id - a.id)
           .map((trip) => {
             const sortedPosts = trip.posts.sort((a, b) => {
               return b.id - a.id;

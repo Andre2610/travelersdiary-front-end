@@ -8,26 +8,16 @@ import {
   InfoWindow,
 } from "react-google-maps";
 import { googleAPIkey } from "../config/constants";
-require("dotenv").config();
-const api = process.env.GOOGLE_MAPS_API_KEY;
+import { findAllByLabelText } from "@testing-library/react";
 
 const MyMapComponent = withScriptjs(
   withGoogleMap((props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
-    // const initialState = {
-    //   id: null,
-    //   latitude: null,
-    //   longitude: null,
-    //   title: null,
-    //   content: null,
-    //   pictures: null,
-    //   tripId: null,
-    // };
-    const { lat, lng } = props.moveToMarker;
-    const [center, setCenter] = useState({ lat: lat, lng: lng });
-    // const [selectedCenter, set_selectedCenter] = useState<Post>(initialState);
+    const { lat, lng, address, flag } = props.moveToMarker;
+    const center = { lat: lat, lng: lng };
+    // const [center, setCenter] = useState({ lat: lat, lng: lng });
+    const [infoOpen, setInfoOpen] = useState(false);
     const refMap = useRef(null);
-    // console.log(`my lat ${lat} and my lng ${lng}`, typeof lat);
-
+    console.log("whats my center", center);
     return (
       <GoogleMap
         ref={refMap}
@@ -36,6 +26,7 @@ const MyMapComponent = withScriptjs(
           lat: lat ? lat : props.posts[0].latitude,
           lng: lng ? lng : props.posts[0].longitude,
         }}
+        center={center}
       >
         {props.posts.map((post) => {
           const { latitude, longitude } = post;
@@ -47,7 +38,7 @@ const MyMapComponent = withScriptjs(
               animation={google.maps.Animation.DROP}
               // @ts-ignore
               // onClick={() => {
-              //   set_selectedCenter(post);
+              //   null;
               // }}
             />
           );
@@ -69,6 +60,7 @@ const MyMapComponent = withScriptjs(
 );
 
 export default (props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
+  console.log("move", props.moveToMarker);
   return (
     <MyMapComponent
       //@ts-ignore

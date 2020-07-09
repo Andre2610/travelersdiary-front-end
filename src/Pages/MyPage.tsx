@@ -68,7 +68,7 @@ export default function MyPage() {
           </Flex>
 
           {user.trips
-            .sort((a: Trip, b: Trip) => a.id - b.id)
+            .sort((a: Trip, b: Trip) => b.id - a.id)
             .map((trip) => {
               return (
                 <Box

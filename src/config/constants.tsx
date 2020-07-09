@@ -1,8 +1,6 @@
-import { allTripsFetched } from "../Store/trips/actions";
-
-require("dotenv").config();
 export const apiUrl = process.env.API_URL || "http://localhost:5000";
-export const googleAPIkey = "AIzaSyCHyLdIPlfoLbZCd6AYkX4DM7JPpR97yA0";
+export const opencageAPIkey = "fcc03450647a4e74940e8aaf46082204";
+export const googleAPIkey = "AIzaSyD4gANItWmlUyOdU2jvFsdQ4khgO_iUeLM";
 export const cloudinaryUrl =
   "https://api.cloudinary.com/v1_1/dui8yvobq/image/upload";
 

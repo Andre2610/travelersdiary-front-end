@@ -106,28 +106,6 @@ export default function NewTripModal() {
                 </Flex>
               </InputGroup>
             </FormControl>
-            <FormControl>
-              <InputGroup h="10vh">
-                <Flex d="column" style={{ height: "10vh" }}>
-                  <FormLabel htmlFor="date" className="modalLabel">
-                    End date
-                  </FormLabel>
-                  <Input
-                    type="date"
-                    placeholder="When will your trip begin"
-                    variant="flushed"
-                    isRequired
-                    value={tripDetails.endDate}
-                    onChange={(e: any) =>
-                      set_tripDetails({
-                        ...tripDetails,
-                        startDate: e.target.value,
-                      })
-                    }
-                  />
-                </Flex>
-              </InputGroup>
-            </FormControl>
           </ModalBody>
 
           <ModalFooter>
