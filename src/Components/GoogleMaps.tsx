@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Post, DefaultMarker } from "../Types/model";
+import { Text } from "@chakra-ui/core";
 import {
   withScriptjs,
   withGoogleMap,
@@ -8,25 +9,45 @@ import {
   InfoWindow,
 } from "react-google-maps";
 import { googleAPIkey } from "../config/constants";
-import { findAllByLabelText } from "@testing-library/react";
 
 const MyMapComponent = withScriptjs(
   withGoogleMap((props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
     const { lat, lng, address, flag } = props.moveToMarker;
     const center = { lat: lat, lng: lng };
-    // const [center, setCenter] = useState({ lat: lat, lng: lng });
     const [infoOpen, setInfoOpen] = useState(false);
+    const [selectPost, set_selectPost] = useState<Post>({
+      id: 0,
+      latitude: 0,
+      longitude: 0,
+      title: "",
+      content: "",
+      pictures: [],
+      tripId: 0,
+    });
     const refMap = useRef(null);
     console.log("whats my center", center);
+
+    const markerClickHandler = (event: any, post: Post) => {
+      console.log("post in the click handler", post);
+      // Remember which place was clicked
+      set_selectPost(post);
+
+      // Required so clicking a 2nd marker works as expected
+      if (infoOpen) {
+        setInfoOpen(false);
+      }
+      setInfoOpen(true);
+    };
+
     return (
       <GoogleMap
         ref={refMap}
         defaultZoom={8}
-        defaultCenter={{
-          lat: lat ? lat : props.posts[0].latitude,
-          lng: lng ? lng : props.posts[0].longitude,
-        }}
-        center={center}
+        center={
+          center.lat && center.lng
+            ? center
+            : { lat: props.posts[0].latitude, lng: props.posts[0].longitude }
+        }
       >
         {props.posts.map((post) => {
           const { latitude, longitude } = post;
@@ -36,23 +57,22 @@ const MyMapComponent = withScriptjs(
               position={{ lat: latitude, lng: longitude }}
               title={post.title}
               animation={google.maps.Animation.DROP}
-              // @ts-ignore
-              // onClick={() => {
-              //   null;
-              // }}
-            />
+              onClick={(event) => markerClickHandler(event, post)}
+            ></Marker>
           );
         })}
-        {/* {selectedCenter && (
+
+        {/* {infoOpen && selectPost && (
           <InfoWindow
-            onCloseClick={() => {
-              set_selectedCenter("");
-            }}
+            // @ts-ignore
             position={{
-              lat: selectedCenter.latitude,
-              lng: selectedCenter.longitude,
+              lat: selectPost.latitude * 1,
+              lng: selectPost.longitude * 1,
             }}
-          ></InfoWindow>
+            // onCloseClick={() => setInfoOpen(false)}
+          >
+            <Text>RIGHT!</Text>
+          </InfoWindow>
         )} */}
       </GoogleMap>
     );

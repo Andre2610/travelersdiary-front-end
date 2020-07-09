@@ -167,7 +167,7 @@ export default function TripDetails() {
     if (!oneTrip) {
       dispatch(fetchSpecificTrip(id));
     }
-  }, [id, user, oneTrip]);
+  }, [id, user]);
 
   if (loading) {
     return <Loading />;
