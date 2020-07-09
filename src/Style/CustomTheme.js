@@ -4,6 +4,18 @@ export const CustomTheme = {
   ...theme,
   colors: {
     ...theme.colors,
+    customIcon: {
+      50: "#ffe6e8",
+      100: "#f6bfc0",
+      200: "#e3ebff", //dark mode color
+      300: "#df6d76",
+      400: "#d44455",
+      500: "rgba(0, 0, 0, 0.92)", //default color
+      600: "#92202a",
+      700: "#6a1618",
+      800: "#410c0a",
+      900: "#1d0400",
+    },
     customRed: {
       50: "#ffe6e8",
       100: "#f6bfc0",

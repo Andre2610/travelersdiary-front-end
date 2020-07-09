@@ -3,14 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectToken, selectUser } from "../../Store/users/selector";
-import {
-  Flex,
-  Text,
-  Button,
-  useColorMode,
-  IconButton,
-  Box,
-} from "@chakra-ui/core";
+import { Flex, Button, useColorMode, IconButton, Box } from "@chakra-ui/core";
 import ModalToogle from "./ModalToogle";
 import Logout from "./Logout";
 import "../../Style/GenStyle.scss";
