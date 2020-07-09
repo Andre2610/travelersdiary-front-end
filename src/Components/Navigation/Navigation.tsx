@@ -73,7 +73,7 @@ export default function Navbar() {
       position="fixed"
       w="100vw"
       top="0"
-      style={{ zIndex: 99 }}
+      style={{ zIndex: 10 }}
     >
       <Box w="20%" d="flex">
         {ColorMode()}

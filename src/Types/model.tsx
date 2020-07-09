@@ -77,4 +77,13 @@ export type NewPost = {
   tripId: number;
 };
 
-export type AppState = { loading: Boolean; message: string | null };
+export type AppState = {
+  loading: Boolean;
+  message: Message | null;
+};
+
+export type Message = {
+  variant: string;
+  dismissable: boolean;
+  text: string;
+};

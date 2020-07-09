@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createNewTrip } from "../Store/trips/actions";
+import { showMessageWithTimeout } from "../Store/appState/actions";
 import { TripDetails } from "../Types/model";
 import {
   Flex,
@@ -32,7 +33,9 @@ export default function NewTripModal() {
     e.preventDefault();
     const { tripTitle, startDate } = tripDetails;
     if (!tripTitle || !startDate) {
-      console.log("unhappy path, send message to user");
+      const message =
+        "Please make sure to provide a title and a starting date for your trip";
+      dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       dispatch(createNewTrip(tripDetails));
       set_tripDetails({

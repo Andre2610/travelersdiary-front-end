@@ -10,6 +10,12 @@ import {
   UPDATE_USER_POSTS,
 } from "../StoreTypes/actions";
 import { Trip, TripDetails, NewPost, Post } from "../../Types/model";
+import {
+  showMessageWithTimeout,
+  setMessage,
+  appDoneLoading,
+  appLoading,
+} from "../appState/actions";
 
 export const allTripsFetched = (trips: Trip[]): AppActions => ({
   type: FETCH_TRIPS,
@@ -33,11 +39,20 @@ export const updateUserPosts = (post: Post): AppActions => ({
 export function fetchTrips() {
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     try {
+      dispatch(appLoading());
       const res = await axios.get(`${apiUrl}/trips`);
       // console.log("What is my response inside actions", res.data);
       dispatch(allTripsFetched(res.data));
-    } catch (e) {
-      console.log(e.message);
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("error", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("error", true, error.message));
+      }
+      dispatch(appDoneLoading());
     }
   };
 }
@@ -45,11 +60,20 @@ export function fetchTrips() {
 export function fetchSpecificTrip(id: number) {
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     try {
+      dispatch(appLoading());
       const res = await axios.get(`${apiUrl}/trips/${id}`);
       // console.log("What is my response", res.data);
       dispatch(fetchOneTrip(res.data));
-    } catch (e) {
-      console.log(e.message);
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("error", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("error", true, error.message));
+      }
+      dispatch(appDoneLoading());
     }
   };
 }
@@ -61,6 +85,7 @@ export function createNewTrip(tripDetails: TripDetails) {
     const token = getState().users.token;
     const data = { ...tripDetails, userId };
     try {
+      dispatch(appLoading());
       const res = await axios.post(
         `${apiUrl}/trips/newtrip`,
         { data },
@@ -70,10 +95,17 @@ export function createNewTrip(tripDetails: TripDetails) {
           },
         }
       );
-      console.log("new trip res", res.data);
       dispatch(updateUserTrips(res.data));
-    } catch (e) {
-      console.log(e.message);
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("error", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("error", true, error.message));
+      }
+      dispatch(appDoneLoading());
     }
   };
 }
@@ -85,6 +117,7 @@ export function endTrip(data: Trip) {
     console.log("endtrip data", data);
     console.log(`the endpoint: ${apiUrl}/trips/endtrip/${data.id}`);
     try {
+      dispatch(appLoading());
       const res = await axios.patch(
         `${apiUrl}/trips/endtrip/${data.id}`,
         { data },
@@ -94,10 +127,17 @@ export function endTrip(data: Trip) {
           },
         }
       );
-      console.log("trip ended?", res.data);
       dispatch(fetchOneTrip(res.data));
-    } catch (e) {
-      console.log(e.message);
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("error", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("error", true, error.message));
+      }
+      dispatch(appDoneLoading());
     }
   };
 }
@@ -117,6 +157,7 @@ export function createNewPost(newPost: NewPost, images: any) {
       pictures: [...images],
     };
     try {
+      dispatch(appLoading());
       const res = await axios.post(
         `${apiUrl}/trips/newpost`,
         { data },
@@ -126,10 +167,17 @@ export function createNewPost(newPost: NewPost, images: any) {
           },
         }
       );
-      console.log("new post res", res.data);
       dispatch(updateUserPosts(res.data));
-    } catch (e) {
-      console.log(e.message);
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("error", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("error", true, error.message));
+      }
+      dispatch(appDoneLoading());
     }
   };
 }
