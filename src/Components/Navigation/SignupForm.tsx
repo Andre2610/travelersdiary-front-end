@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../Store/users/actions";
 import { SignupData } from "../../Types/model";
+import { showMessageWithTimeout } from "../../Store/appState/actions";
 import {
   Flex,
   Text,
@@ -37,7 +38,8 @@ export default function SignupForm(props: any) {
     event.preventDefault();
     const { firstName, lastName, email, password } = signUpData;
     if (!firstName || !lastName || !email || !password) {
-      console.log("unhappy path, send message to user");
+      const message = "Please fill in all the required fields";
+      dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       dispatch(signUp(signUpData));
       set_signUpData({

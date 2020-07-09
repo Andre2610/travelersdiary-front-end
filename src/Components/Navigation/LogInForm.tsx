@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAppLoading } from "../../Store/appState/selector";
 import { Credentials } from "../../Types/model";
 import { login } from "../../Store/users/actions";
 import {
@@ -22,7 +21,6 @@ import { showMessageWithTimeout } from "../../Store/appState/actions";
 import "../../Style/GenStyle.scss";
 
 export default function LogInForm(props: any) {
-  const loading = useSelector(selectAppLoading);
   const { onClose, set_ModalForm } = props;
   const [credentials, set_credentials] = useState<Credentials>({
     email: "",
@@ -44,7 +42,6 @@ export default function LogInForm(props: any) {
       });
     }
   }
-  if (loading) return <h1>Loading</h1>;
   return (
     <>
       <ModalContent alignItems="center" maxH="auto">

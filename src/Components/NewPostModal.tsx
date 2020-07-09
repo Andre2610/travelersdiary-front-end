@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { createNewPost } from "../Store/trips/actions";
+import { showMessageWithTimeout } from "../Store/appState/actions";
 import { NewPost, NewPicture } from "../Types/model";
-import { fetchPhotos, openUploadWidget } from "../config/CloudinaryService";
+import { openUploadWidget } from "../config/CloudinaryService";
 
 import {
   Flex,
@@ -38,7 +39,6 @@ export default function NewTripModal() {
     pictures: [],
     tripId: id,
   });
-  //   console.log("images state", images);
 
   const beginUpload = (tag: string) => {
     const uploadOptions = {
@@ -74,13 +74,15 @@ export default function NewTripModal() {
   }
   function error(err: any) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
+    dispatch(showMessageWithTimeout("error", true, err.message, 3000));
   }
 
   function submitHandler(e: any) {
     e.preventDefault();
     const { title, content } = newPost;
     if (!title || !content) {
-      console.log("unhappy path, send message to user");
+      const message = "Your post needs a title and some content";
+      dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       dispatch(createNewPost(newPost, images));
       set_newPost({

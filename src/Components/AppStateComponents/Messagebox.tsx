@@ -1,15 +1,14 @@
 import React from "react";
 // import { UserMessage } from "../Types/model";
 import { useSelector, useDispatch } from "react-redux";
-import { selectMessage } from "../Store/appState/selector";
+import { selectMessage } from "../../Store/appState/selector";
 import {
   Alert,
   AlertIcon,
-  AlertTitle,
   AlertDescription,
   CloseButton,
 } from "@chakra-ui/core";
-import { clearMessage } from "../Store/appState/actions";
+import { clearMessage } from "../../Store/appState/actions";
 
 export default function MessageBox() {
   const message = useSelector(selectMessage);
