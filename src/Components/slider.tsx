@@ -20,6 +20,8 @@ export default function Slider(props: { pictures: Picture[] }) {
               <Image
                 src={picture.imageUrl}
                 w="100%"
+                minH="35vh"
+                maxH="35vh"
                 objectFit="fill"
                 fallbackSrc="https://via.placeholder.com/150"
               />

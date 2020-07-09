@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { CloudinaryContext } from "cloudinary-react";
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core";
 import Navigation from "./Components/Navigation/Navigation";
 import Messagebox from "./Components/AppStateComponents/Messagebox";
@@ -17,11 +17,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { CustomTheme } from "./Style/CustomTheme";
 
 function App() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const loading = useSelector(selectAppLoading);
   useEffect(() => {
     dispatch(getUserWithStoredToken());
-  }, [dispatch]);
+  }, [dispatch, history]);
 
   return (
     <ThemeProvider theme={CustomTheme}>
@@ -36,7 +37,7 @@ function App() {
             <Route path="/users/:id?" component={MyPage} />
             <Route path="/" component={Homepage} />
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </CloudinaryContext>
       </ColorModeProvider>
     </ThemeProvider>

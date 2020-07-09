@@ -194,26 +194,33 @@ export default function TripDetails() {
               {user.token && !oneTrip.endDate && user.id === oneTrip.userId ? (
                 <>{tripControlMenu()}</>
               ) : null}
-              <Box w="25%" position="fixed">
-                <TabList d="row" alignSelf="left" w="100%" position="relative">
-                  {oneTrip.posts
-                    .sort((a: Post, b: Post) => a.id - b.id)
-                    .map((post, i) => {
-                      return (
-                        <Tab
-                          key={i}
-                          color="whiteAlpha"
-                          h="auto"
-                          w="100%"
-                          my={5}
-                          onClick={(e) => tabOnClickHandler(i, post)}
-                          className="navbtn"
-                        >
-                          {post.title}
-                        </Tab>
-                      );
-                    })}
-                </TabList>
+              <Box w="25%">
+                <Box w="25%" position="fixed">
+                  <TabList
+                    d="row"
+                    alignSelf="left"
+                    w="100%"
+                    position="relative"
+                  >
+                    {oneTrip.posts
+                      .sort((a: Post, b: Post) => a.id - b.id)
+                      .map((post, i) => {
+                        return (
+                          <Tab
+                            key={i}
+                            color="whiteAlpha"
+                            h="auto"
+                            w="100%"
+                            my={5}
+                            onClick={(e) => tabOnClickHandler(i, post)}
+                            className="navbtn"
+                          >
+                            {post.title}
+                          </Tab>
+                        );
+                      })}
+                  </TabList>
+                </Box>
               </Box>
               <Box m="auto" display="block" w="100%" alignSelf="right">
                 <TabPanels
