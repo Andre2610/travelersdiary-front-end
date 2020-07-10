@@ -20,7 +20,7 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/core";
-import "../../Style/GenStyle.scss";
+import "../../Style/GenStyle.css";
 
 export default function SignupForm(props: any) {
   const dispatch = useDispatch();

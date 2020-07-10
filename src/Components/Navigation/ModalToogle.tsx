@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LogInForm from "./LogInForm";
 import SignupForm from "./SignupForm";
 import { Button, Modal, ModalOverlay, useDisclosure } from "@chakra-ui/core";
-import "../../Style/GenStyle.scss";
+import "../../Style/GenStyle.css";
 
 export default function ModalToogle() {
   const [modalForm, set_ModalForm] = useState("Login");
@@ -14,7 +14,7 @@ export default function ModalToogle() {
         onClick={onOpen}
         minW="7vw"
         className="navbtn"
-        variantColor="customRed"
+        variantColor="customBtn"
       >
         Log In
       </Button>

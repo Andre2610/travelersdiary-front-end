@@ -5,7 +5,6 @@ import { createNewPost } from "../Store/trips/actions";
 import { showMessageWithTimeout } from "../Store/appState/actions";
 import { NewPost, NewPicture } from "../Types/model";
 import { openUploadWidget } from "../config/CloudinaryService";
-
 import {
   Flex,
   Button,
@@ -23,7 +22,7 @@ import {
   FormLabel,
   Textarea,
 } from "@chakra-ui/core";
-import "../Style/GenStyle.scss";
+import "../Style/GenStyle.css";
 
 let images: NewPicture = [];
 
@@ -105,7 +104,7 @@ export default function NewTripModal() {
         onClick={onOpen}
         minW="10vw"
         className="navbtn"
-        variantColor="customRed"
+        variantColor="customBtn"
       >
         New Post
       </Button>
@@ -185,7 +184,7 @@ export default function NewTripModal() {
                   <Button
                     onClick={() => beginUpload("image")}
                     className="navbtn"
-                    variantColor="customRed"
+                    variantColor="customBtn"
                   >
                     Choose
                   </Button>
@@ -209,7 +208,7 @@ export default function NewTripModal() {
             <Button
               minW="7vw"
               className="navbtn"
-              variantColor="customRed"
+              variantColor="customBtn"
               mr={3}
               onClick={(e) => submitHandler(e)}
             >
@@ -218,7 +217,7 @@ export default function NewTripModal() {
             <Button
               minW="7vw"
               className="navbtn"
-              variantColor="customRed"
+              variantColor="customBtn"
               onClick={onClose}
             >
               Close

@@ -4,29 +4,53 @@ export const CustomTheme = {
   ...theme,
   colors: {
     ...theme.colors,
+    customTab: {
+      // 50: "#fff1ee",
+      // 100: "#e0d7d6",
+      // 200: "#c4bebd",
+      // 300: "#a9a4a5",
+      // 400: "#8f8a8b",
+      // 500: "#757071",
+      // 600: "#5c5757",
+      // 700: "#e0d7d6",
+      // 800: "#e0d7d6",
+      // 900: "#e0d7d6",
+    },
+    gray: {
+      50: "#F7FAFC",
+      100: "#EDF2F7",
+      200: "#E2E8F0",
+      300: "#CBD5E0",
+      400: "#A0AEC0",
+      500: "#718096",
+      600: "#4A5568",
+      700: "#2D3748",
+      800: "#1A202C",
+      900: "#171923",
+    },
     customIcon: {
       50: "#ffe6e8",
       100: "#f6bfc0",
       200: "#e3ebff", //dark mode color
       300: "#df6d76",
       400: "#d44455",
-      500: "rgba(0, 0, 0, 0.92)", //default color
+      500: "rgba(0, 0, 0, 0.80)", //default color
       600: "#92202a",
       700: "#6a1618",
       800: "#410c0a",
       900: "#1d0400",
     },
-    customRed: {
-      50: "#ffe6e8",
-      100: "#f6bfc0",
+    customBtn: {
+      50: "#e3ebff",
+      100: "#e3ebff",
       200: "#e3ebff", //dark mode color
-      300: "#df6d76",
-      400: "#d44455",
-      500: "#a62639", //default color
-      600: "#92202a",
-      700: "#6a1618",
-      800: "#410c0a",
-      900: "#1d0400",
+      300: "#AEAEAE", // hover color dark mode
+      400: "#e3ebff",
+      500: "#1A202C", //default color
+      600: "#2D3748", // hover light mode
+      700: "#e3ebff",
+      800: "#e3ebff",
+      900: "#e3ebff",
     },
     customOlive: {
       50: "#f7f4e5",
@@ -76,6 +100,18 @@ export const CustomTheme = {
       700: "rgba(0, 0, 0, 0.64)",
       800: "rgba(0, 0, 0, 0.80)",
       900: "rgba(0, 0, 0, 0.92)",
+    },
+    customTab: {
+      50: "#000d1c",
+      100: "#717171", // tab  background color
+      200: "#000d1c",
+      300: "#000d1c",
+      400: "#000d1c",
+      500: "#e3ebff",
+      600: "#e3ebff",
+      700: "#e3ebff", // tab letter color
+      800: "#e3ebff",
+      900: "#e3ebff",
     },
     backgroundCustom: "#B8B08D",
   },

@@ -1,12 +1,10 @@
 import React, { useRef, useState } from "react";
 import { Post, DefaultMarker } from "../Types/model";
-import { Text } from "@chakra-ui/core";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
-  InfoWindow,
 } from "react-google-maps";
 import { googleAPIkey } from "../config/constants";
 
@@ -25,10 +23,8 @@ const MyMapComponent = withScriptjs(
       tripId: 0,
     });
     const refMap = useRef(null);
-    console.log("whats my center", center);
 
     const markerClickHandler = (event: any, post: Post) => {
-      console.log("post in the click handler", post);
       // Remember which place was clicked
       set_selectPost(post);
 
@@ -80,7 +76,6 @@ const MyMapComponent = withScriptjs(
 );
 
 export default (props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
-  console.log("move", props.moveToMarker);
   return (
     <MyMapComponent
       //@ts-ignore

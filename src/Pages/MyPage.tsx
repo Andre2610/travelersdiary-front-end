@@ -7,7 +7,7 @@ import { Trip } from "../Types/model";
 import TripCard from "../Components/TripCard";
 import NewTripModal from "../Components/NewTripModal";
 import Loading from "../Components/AppStateComponents/Loading";
-import "../Style/GenStyle.scss";
+import "../Style/GenStyle.css";
 import { Flex, Text, Box, Heading } from "@chakra-ui/core";
 
 export default function MyPage() {

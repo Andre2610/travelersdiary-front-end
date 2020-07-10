@@ -1,12 +1,4 @@
-// .navbtn {
-//   background-color: #a62639;
-//   color: #e3ebff;
-//   transition: ease-in 0.2s;
-// }
-
 .navbtn:hover {
-  // background-color: #e3ebff;
-  // color: #a62639;
   transition: ease-in 0.2s;
   transform: scale(1.1);
 }

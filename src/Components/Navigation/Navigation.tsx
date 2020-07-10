@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/core";
 import ModalToogle from "./ModalToogle";
 import Logout from "./Logout";
-import "../../Style/GenStyle.scss";
+import "../../Style/GenStyle.css";
 
 export default function Navbar() {
   function ColorMode() {
@@ -25,14 +25,14 @@ export default function Navbar() {
         // *@ts-ignore  */}
         {colorMode === "dark" ? (
           <IconButton
-            variantColor="customRed"
+            variantColor="customBtn"
             icon="sun"
             aria-label="toggleMode"
             className="navbtn"
           />
         ) : (
           <IconButton
-            variantColor="customRed"
+            variantColor="customBtn"
             className="navbtn"
             icon="moon"
             aria-label="toggleMode"
@@ -53,7 +53,7 @@ export default function Navbar() {
             onClick={() => history.push(`/users/${user.id}`)}
             className="navbtn"
             mr={5}
-            variantColor="customRed"
+            variantColor="customBtn"
           >
             {user.firstName}
           </Button>
@@ -67,7 +67,8 @@ export default function Navbar() {
 
   return (
     <Flex
-      padding="15px"
+      paddingY="0.5rem"
+      maxH="3.5rem"
       bg="customBlue.200"
       justify="space-around"
       d="flex"
@@ -79,7 +80,7 @@ export default function Navbar() {
       <Box w="20%" d="flex">
         {ColorMode()}
         <NavLink to="/">
-          <Button ml={5} minW="7vw" className="navbtn" variantColor="customRed">
+          <Button ml={5} minW="7vw" className="navbtn" variantColor="customBtn">
             Traveler's Diary
           </Button>
         </NavLink>

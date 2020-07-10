@@ -23,7 +23,6 @@ function App() {
   useEffect(() => {
     dispatch(getUserWithStoredToken());
   }, [dispatch, history]);
-
   return (
     <ThemeProvider theme={CustomTheme}>
       <ColorModeProvider>
