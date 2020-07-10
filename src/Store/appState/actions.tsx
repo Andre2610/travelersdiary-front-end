@@ -1,8 +1,6 @@
 import { DEFAULT_MESSAGE_TIMEOUT } from "../../config/constants";
-import { Dispatch } from "react";
 import {
   AppActions,
-  GetState,
   APP_LOADING,
   APP_DONE_LOADING,
   SET_MESSAGE,

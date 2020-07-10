@@ -17,8 +17,6 @@ import {
   InputGroup,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
 } from "@chakra-ui/core";
 import "../../Style/GenStyle.css";
 

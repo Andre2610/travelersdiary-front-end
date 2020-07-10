@@ -4,18 +4,6 @@ export const CustomTheme = {
   ...theme,
   colors: {
     ...theme.colors,
-    customTab: {
-      // 50: "#fff1ee",
-      // 100: "#e0d7d6",
-      // 200: "#c4bebd",
-      // 300: "#a9a4a5",
-      // 400: "#8f8a8b",
-      // 500: "#757071",
-      // 600: "#5c5757",
-      // 700: "#e0d7d6",
-      // 800: "#e0d7d6",
-      // 900: "#e0d7d6",
-    },
     gray: {
       50: "#F7FAFC",
       100: "#EDF2F7",
