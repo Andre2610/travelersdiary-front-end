@@ -22,6 +22,7 @@
     "@types/redux-thunk": "^2.1.0",
     "cloudinary-core": "^2.10.1",
     "cloudinary-react": "^1.6.0",
+    "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

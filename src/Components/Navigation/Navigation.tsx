@@ -96,8 +96,8 @@ export default function Navbar() {
           <IconButton
             ml={5}
             icon={FaGithub}
-            variantColor="customIcon"
-            className="iconBtn"
+            variantColor="customBtn"
+            className="navbtn"
           />
         </Link>
       </Box>

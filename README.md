@@ -2,12 +2,12 @@
 
 ## Table of contents
 
-- [Introduction](##Introduction)
-- [Traveler's Diary](##Traveler's-Diary)
-- [Goals of this project](##Goals-of-this-project)
-- [Technologies used](##Technologies-used)
-- [Demo](##Demo)
-- [Server repository](##Server-repository)
+- [Introduction](#Introduction)
+- [Traveler's Diary](#Traveler's-Diary)
+- [Goals of this project](#Goals-of-this-project)
+- [Technologies used](#Technologies-used)
+- [Demo](#Demo)
+- [Server repository](#Server-repository)
 
 ## **Introduction**
 
@@ -81,3 +81,6 @@ The back-end was built in express and it is a REST a API. The database is built 
   - on first run, run the script `npm run initialize`, this will run `npm install && react-scripts start`;
   - afterwards first run just run the script `npm run start` to start development;
   - client runs on localhost:3000 by default;
+
+:exclamation: You will need to create your own google API key and place it on /config/constants.tsx `export const googleAPIkey = YOUR_API_KEY`, in order for the app to your in your local host.
+:exclamation: Repeat the same process for the OpenCage API and Cloudinary

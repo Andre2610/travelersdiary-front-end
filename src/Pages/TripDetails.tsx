@@ -107,14 +107,13 @@ export default function TripDetails() {
   function tripControlMenu() {
     return (
       <>
-        <Flex w="30vw" m="auto" mb="2rem">
+        <Flex w="30vw" m="auto" justify="space-around" mb="2rem">
           <NewPostModal />
           <Button
             minW="10vw"
             maxW="10vw"
             className="navbtn"
             variantColor="customBtn"
-            m="auto"
             onClick={(e) => set_toggle_endDate(!toggle_endDate)}
           >
             End Trip
