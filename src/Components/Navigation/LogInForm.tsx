@@ -18,7 +18,7 @@ import {
   FormLabel,
 } from "@chakra-ui/core";
 import { showMessageWithTimeout } from "../../Store/appState/actions";
-import "../../Style/GenStyle.scss";
+import "../../Style/GenStyle.css";
 
 export default function LogInForm(props: any) {
   const { onClose, set_ModalForm } = props;
@@ -95,7 +95,7 @@ export default function LogInForm(props: any) {
             className="navbtn"
             mr={3}
             onClick={(e) => submitHandler(e)}
-            variantColor="customRed"
+            variantColor="customBtn"
           >
             Log in
           </Button>
@@ -103,7 +103,7 @@ export default function LogInForm(props: any) {
             minW="7vw"
             className="navbtn"
             onClick={onClose}
-            variantColor="customRed"
+            variantColor="customBtn"
           >
             Close
           </Button>

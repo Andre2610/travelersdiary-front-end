@@ -29,7 +29,7 @@ import {
   InputGroup,
   FormLabel,
 } from "@chakra-ui/core";
-import "../Style/GenStyle.scss";
+import "../Style/GenStyle.css";
 
 export default function TripDetails() {
   const { id } = useParams();
@@ -52,7 +52,6 @@ export default function TripDetails() {
     const res = await axios.get(
       `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${opencageAPIkey}`
     );
-    console.log("whats this", res.data.results);
     set_moveToMarker({
       lat: lat,
       lng: lng,
@@ -63,13 +62,23 @@ export default function TripDetails() {
 
   function postsRender(post: Post) {
     const { title, content, pictures } = post;
+
+    const paragraphs = content
+      ? content.split("\n")
+      : ["Something went wrong, dont yell at me!"];
     if (pictures.length > 0) {
       return (
-        <Flex wrap="wrap" flexDirection="row" justify="space-evenly" w="100%">
-          <Heading as="h3" size="sm" w="95%" m="auto" my={2}>
+        <Flex wrap="wrap" flexDirection="row" justify="space-around">
+          <Heading as="h3" size="sm" w="95%" m="auto" mt="1rem" mb="0.5rem">
             {title}
           </Heading>
-          <Text w="45%">{content}</Text>
+          <Box w="45%">
+            {paragraphs.map((paragraph, i) => (
+              <Text key={i} my="0.5rem" w="100%">
+                {paragraph}
+              </Text>
+            ))}
+          </Box>
           <Box float="right" w="45%">
             <Slider pictures={pictures} />
           </Box>
@@ -81,9 +90,11 @@ export default function TripDetails() {
         <Heading as="h3" size="sm" w="95%" m="auto" my={2}>
           {title}
         </Heading>
-        <Text w="95%" m="auto">
-          {content}
-        </Text>
+        {paragraphs.map((paragraph, i) => (
+          <Text key={i} m="auto" w="95%" my="0.5rem">
+            {paragraph}
+          </Text>
+        ))}
       </>
     );
   }
@@ -94,7 +105,6 @@ export default function TripDetails() {
   }
 
   function tripControlMenu() {
-    console.log("where am i?");
     return (
       <>
         <Flex w="30vw" m="auto" mb="2rem">
@@ -103,7 +113,7 @@ export default function TripDetails() {
             minW="10vw"
             maxW="10vw"
             className="navbtn"
-            variantColor="customRed"
+            variantColor="customBtn"
             m="auto"
             onClick={(e) => set_toggle_endDate(!toggle_endDate)}
           >
@@ -133,6 +143,7 @@ export default function TripDetails() {
             <Button
               minW="10vw"
               maxW="10vw"
+              variantColor="customBtn"
               className="navbtn"
               m="auto"
               onClick={(e) => endtrip(e)}
@@ -153,21 +164,26 @@ export default function TripDetails() {
   }
 
   function endtrip(e: any) {
-    e.preventDefault();
+    // e.preventDefault();
     if (!endDate) {
       const message = "Please pick a date to end your trip";
       dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       const endingTrip = { ...oneTrip, endDate };
       dispatch(endTrip(endingTrip));
+      set_toggle_endDate(!toggle_endDate);
     }
   }
 
   useEffect(() => {
-    if (!oneTrip) {
+    if (!user.token) {
       dispatch(fetchSpecificTrip(id));
     }
   }, [id, user]);
+
+  const isUser = oneTrip && user.id === oneTrip.userId;
+  const validation = oneTrip && user.token && !oneTrip.endDate && isUser;
+  const menu = validation ? tripControlMenu() : null;
 
   if (loading) {
     return <Loading />;
@@ -186,14 +202,12 @@ export default function TripDetails() {
             <Heading textAlign="center" my="3rem">
               No Posts yet
             </Heading>
-            {tripControlMenu()}
+            {menu}
           </>
         ) : (
-          <Tabs variant="soft-rounded" variantColor="gray">
+          <Tabs variant="soft-rounded" variantColor="customTab">
             <Box w="100%">
-              {user.token && !oneTrip.endDate && user.id === oneTrip.userId ? (
-                <>{tripControlMenu()}</>
-              ) : null}
+              {menu}
               <Box w="25%">
                 <Box w="25%" position="fixed">
                   <TabList
@@ -208,7 +222,6 @@ export default function TripDetails() {
                         return (
                           <Tab
                             key={i}
-                            color="whiteAlpha"
                             h="auto"
                             w="100%"
                             my={5}

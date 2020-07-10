@@ -13,6 +13,7 @@ export const FETCH_MORE_TRIPS = "FETCH_MORE_TRIPS";
 export const FETCH_USER = "FETCH_USER";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const ADD_USER_TRIP = "ADD_USER_TRIP";
 export const UPDATE_USER_TRIPS = "UPDATE_USER_TRIPS";
 export const UPDATE_USER_POSTS = "UPDATE_USER_POSTS";
 export const APP_LOADING = "APP_LOADING";
@@ -52,7 +53,11 @@ export type fetchNoTokenUser = {
 export type logOut = {
   type: typeof LOG_OUT;
 };
-export type updateUserTrips = {
+export type addnewtrip = {
+  type: typeof ADD_USER_TRIP;
+  trip: Trip;
+};
+export type updateUserTrip = {
   type: typeof UPDATE_USER_TRIPS;
   trip: Trip;
 };
@@ -87,7 +92,8 @@ export type UserActionTypes =
   | fetchUser
   | fetchNoTokenUser
   | logOut
-  | updateUserTrips
+  | addnewtrip
+  | updateUserTrip
   | updateUserPosts;
 export type AppStateActionTypes =
   | appLoading

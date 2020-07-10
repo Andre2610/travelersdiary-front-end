@@ -8,6 +8,7 @@ import {
   FETCH_SINGLE_TRIP,
   UPDATE_USER_TRIPS,
   UPDATE_USER_POSTS,
+  ADD_USER_TRIP,
 } from "../StoreTypes/actions";
 import { Trip, TripDetails, NewPost, Post } from "../../Types/model";
 import {
@@ -26,6 +27,10 @@ export const fetchOneTrip = (trips: Trip[]): AppActions => ({
   trips,
 });
 
+export const addUserTrip = (trip: Trip): AppActions => ({
+  type: ADD_USER_TRIP,
+  trip,
+});
 export const updateUserTrips = (trip: Trip): AppActions => ({
   type: UPDATE_USER_TRIPS,
   trip,
@@ -62,7 +67,6 @@ export function fetchSpecificTrip(id: number) {
     try {
       dispatch(appLoading());
       const res = await axios.get(`${apiUrl}/trips/${id}`);
-      // console.log("What is my response", res.data);
       dispatch(fetchOneTrip(res.data));
       dispatch(appDoneLoading());
     } catch (error) {
@@ -95,7 +99,7 @@ export function createNewTrip(tripDetails: TripDetails) {
           },
         }
       );
-      dispatch(updateUserTrips(res.data));
+      dispatch(addUserTrip(res.data));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -127,7 +131,8 @@ export function endTrip(data: Trip) {
           },
         }
       );
-      dispatch(fetchOneTrip(res.data));
+      console.log("my res", res.data);
+      dispatch(updateUserTrips(res.data));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

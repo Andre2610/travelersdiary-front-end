@@ -1,4 +1,4 @@
-export const apiUrl = process.env.API_URL || "http://localhost:5000";
+export const apiUrl = "http://localhost:5000";
 export const opencageAPIkey = "fcc03450647a4e74940e8aaf46082204";
 export const googleAPIkey = "AIzaSyD4gANItWmlUyOdU2jvFsdQ4khgO_iUeLM";
 export const cloudinaryUrl =
@@ -8,3 +8,4 @@ export const cloud_name = "dui8yvobq";
 export const upload_preset = "cloudinaryapi";
 
 export const DEFAULT_MESSAGE_TIMEOUT = 3000;
+// "https://travelersdiary-backend.herokuapp.com/"

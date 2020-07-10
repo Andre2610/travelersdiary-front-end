@@ -1,7 +1,7 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 import { Flex, Text, Divider, Link, IconButton } from "@chakra-ui/core";
-import "../../Style/GenStyle.scss";
+import "../../Style/GenStyle.css";
 
 export default function Footer() {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import "../Style/GenStyle.scss";
+import "../Style/GenStyle.css";
 import {
   Image,
   TabList,

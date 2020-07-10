@@ -4,6 +4,10 @@
 
 - [Introduction](##Introduction)
 - [Traveler's Diary](##Traveler's-Diary)
+- [Goals of this project](##Goals-of-this-project)
+- [Technologies used](##Technologies-used)
+- [Demo](##Demo)
+- [Server repository](##Server-repository)
 
 ## **Introduction**
 
@@ -15,13 +19,19 @@ The idea behind this project is to give user's a platform to write their experie
 
 ## **Goals of this project**
 
-My main goal with this project was to explore new technologies and see how well and how fast I would be able to adapt to something new as well gain experience with technologies learnt during the academy. For that purpose, I decided to use typescript in the front-end while keeping it simple in the back-end with technologies I was already familiar with. I used a Chakra-UI for the UI design which was also new to me. </br> I tried to commit with clear messages and when merging, I tried to give a bullet point list of what was done while being a bit more descriptive on more intrecate merges.</br>
-A few examples of pull requests:
+The main goal of this project is to gain experience developing a full-stack app. I also put a little extra emphasis on exploring new technologies and see how well and how fast I would be able to adapt to something new while also consolidating the knowledge of the technologies learned during the academy. For that purpose, I decided to use typescript in the front-end while keeping it simple in the back-end with technologies I was already familiar with. I used a Chakra-UI for the UI design which was also new to me. </br> I tried to commit with clear messages and when merging, I tried to give a bullet point list of what was done while being a bit more descriptive on more intrecate merges.</br> In short:
 
-- [Feat-user-login/signup](https://github.com/Andre2610/travelersdiary-front-end/pull/8)
-- [Feat-start-newtrip](https://github.com/Andre2610/travelersdiary-front-end/pull/10)
-- [Styling](https://github.com/Andre2610/travelersdiary-front-end/pull/12)
-- [Feat-appState](https://github.com/Andre2610/travelersdiary-front-end/pull/13)
+- Practice full-stack development;
+- Practice the use of external API's
+- Learn new technologies
+- Implement a developer's approach by creating and following User stories and wireframes which can be found here:
+  - [Kanban with user stories](https://github.com/Andre2610/travelersdiary-front-end/projects/1)
+- Practice with version control. A few examples of pull requests:
+
+  - [Feat-user-login/signup](https://github.com/Andre2610/travelersdiary-front-end/pull/8)
+  - [Feat-start-newtrip](https://github.com/Andre2610/travelersdiary-front-end/pull/10)
+  - [Styling](https://github.com/Andre2610/travelersdiary-front-end/pull/12)
+  - [Feat-appState](https://github.com/Andre2610/travelersdiary-front-end/pull/13)
 
 ## **Technologies used**
 
@@ -45,6 +55,29 @@ A few examples of pull requests:
 
 **External API's**
 
-- Google maps
-- OpenCage
-- Cloudinary
+- [Googlemaps API](https://cloud.google.com/maps-platform/?hl=en)
+- [OpenCage](https://opencagedata.com/api)
+- [Cloudinary](https://cloudinary.com/)
+
+## **Demo**
+
+## **Server repository**
+
+The back-end was built in express and it is a REST a API. The database is built using Postgres and Sequelize. You can find the back-end's repository [HERE](https://github.com/Andre2610/travelersdiary-back-end)
+
+## **Setup**
+
+- **Server setup**
+
+  - clone the repository;
+  - cd into the project directory
+  - on first run, run the script `npm run initialize`, this will run `npm i && npm run resetDB && npm run start`;
+  - afterwards simply run `npm run start` which will run the script `npx nodemon index.js` or `node index.js`
+  - server runs on port 5000 by default
+
+- **Client setup**
+  - clone the repository;
+  - cd into the project directory;
+  - on first run, run the script `npm run initialize`, this will run `npm install && react-scripts start`;
+  - afterwards first run just run the script `npm run start` to start development;
+  - client runs on localhost:3000 by default;
