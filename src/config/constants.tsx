@@ -1,11 +1,8 @@
-export const apiUrl = "https://travelersdiary-backend.herokuapp.com";
-export const opencageAPIkey = "fcc03450647a4e74940e8aaf46082204";
-export const googleAPIkey = "AIzaSyD4gANItWmlUyOdU2jvFsdQ4khgO_iUeLM";
-export const cloudinaryUrl =
-  "https://api.cloudinary.com/v1_1/dui8yvobq/image/upload";
+export const apiUrl = process.env.REACT_APP_API_URL;
+export const opencageAPIkey = process.env.REACT_APP_OPENCAGE_API_KEY;
+export const googleAPIkey = process.env.REACT_APP_GOOGLE_API;
+export const cloudinaryUrl = process.env.REACT_APP_CLOUDINARY_URL;
 
-export const cloud_name = "dui8yvobq";
-export const upload_preset = "cloudinaryapi";
-
+export const cloud_name = process.env.REACT_APP_CLOUD_NAME;
+export const upload_preset = process.env.REACT_APP_UPLOAD_PRESET;
 export const DEFAULT_MESSAGE_TIMEOUT = 3000;
-// "https://travelersdiary-backend.herokuapp.com/"
