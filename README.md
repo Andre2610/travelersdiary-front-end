@@ -83,3 +83,4 @@ The back-end was built in express and it is a REST a API. The database is built 
   - client runs on localhost:3000 by default;
 
 :exclamation: You will need to create your own google API key and place it on /config/constants.tsx `export const googleAPIkey = YOUR_API_KEY`, in order for the app to your in your local host.
+:exclamation: Repeat the same process for the OpenCage API and Cloudinary
