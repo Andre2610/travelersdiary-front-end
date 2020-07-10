@@ -61,6 +61,11 @@ The main goal of this project is to gain experience developing a full-stack app.
 
 ## **Demo**
 
+![General-use](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/generalview.gif?raw=true)
+![Login-singup](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/signup_signin.gif?raw=true)
+![Create-post](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/createpost.gif?raw=true)
+![End-trip](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/generalview.gif?raw=true)
+
 ## **Server repository**
 
 The back-end was built in express and it is a REST a API. The database is built using Postgres and Sequelize. You can find the back-end's repository [HERE](https://github.com/Andre2610/travelersdiary-back-end)
@@ -82,5 +87,5 @@ The back-end was built in express and it is a REST a API. The database is built 
   - afterwards first run just run the script `npm run start` to start development;
   - client runs on localhost:3000 by default;
 
-:exclamation: You will need to create your own google API key and place it on /config/constants.tsx `export const googleAPIkey = YOUR_API_KEY`, in order for the app to your in your local host.
+:exclamation: You will need to create your own google API key and place it on /config/constants.tsx `export const googleAPIkey = YOUR_API_KEY`, in order for the app to your in your local host.</br>
 :exclamation: Repeat the same process for the OpenCage API and Cloudinary
