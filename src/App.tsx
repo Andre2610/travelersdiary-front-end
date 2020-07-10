@@ -8,7 +8,6 @@ import Messagebox from "./Components/AppStateComponents/Messagebox";
 import Homepage from "./Pages/Homepage";
 import TripDetails from "./Pages/TripDetails";
 import MyPage from "./Pages/MyPage";
-import Footer from "./Components/Footer/Footer";
 import { getUserWithStoredToken } from "./Store/users/actions";
 import { selectAppLoading } from "./Store/appState/selector";
 import Loading from "./Components/AppStateComponents/Loading";

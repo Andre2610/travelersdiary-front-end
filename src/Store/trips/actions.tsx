@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { apiUrl, cloudinaryUrl } from "../../config/constants";
+import { apiUrl } from "../../config/constants";
 import {
   AppActions,
   GetState,
@@ -11,12 +11,7 @@ import {
   ADD_USER_TRIP,
 } from "../StoreTypes/actions";
 import { Trip, TripDetails, NewPost, Post } from "../../Types/model";
-import {
-  showMessageWithTimeout,
-  setMessage,
-  appDoneLoading,
-  appLoading,
-} from "../appState/actions";
+import { setMessage, appDoneLoading, appLoading } from "../appState/actions";
 
 export const allTripsFetched = (trips: Trip[]): AppActions => ({
   type: FETCH_TRIPS,
