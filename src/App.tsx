@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { CloudinaryContext } from "cloudinary-react";
+import "./App.css";
+import { Switch, Route, useHistory } from "react-router-dom";
+import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core";
+import Navigation from "./Components/Navigation/Navigation";
+import Messagebox from "./Components/AppStateComponents/Messagebox";
+import Homepage from "./Pages/Homepage";
+import TripDetails from "./Pages/TripDetails";
+import MyPage from "./Pages/MyPage";
+import Footer from "./Components/Footer/Footer";
+import { getUserWithStoredToken } from "./Store/users/actions";
+import { selectAppLoading } from "./Store/appState/selector";
+import Loading from "./Components/AppStateComponents/Loading";
+import { cloud_name } from "./config/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { CustomTheme } from "./Style/CustomTheme";
 
 function App() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const loading = useSelector(selectAppLoading);
+  useEffect(() => {
+    dispatch(getUserWithStoredToken());
+  }, [dispatch, history]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={CustomTheme}>
+      <ColorModeProvider>
+        <CloudinaryContext cloudname={cloud_name}>
+          <CSSReset />
+          <Navigation />
+          <Messagebox />
+          {loading ? <Loading /> : null}
+          <Switch>
+            <Route path="/trip/:id?" component={TripDetails} />
+            <Route path="/users/:id?" component={MyPage} />
+            <Route path="/" component={Homepage} />
+          </Switch>
+          {/* <Footer /> */}
+        </CloudinaryContext>
+      </ColorModeProvider>
+    </ThemeProvider>
   );
 }
 

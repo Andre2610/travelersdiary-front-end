@@ -1,44 +1,83 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# **Traveler's Diary**
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [Introduction](##Introduction)
+- [Traveler's Diary](##Traveler's-Diary)
+- [Goals of this project](##Goals-of-this-project)
+- [Technologies used](##Technologies-used)
+- [Demo](##Demo)
+- [Server repository](##Server-repository)
 
-### `npm start`
+## **Introduction**
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Hi, I am Andre, and this is my portfolio project, a web application App called Traveler's Diary. This is a MVP and not the final version. It is fully functional but missing some features that will be implemented in the future.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## **Traveler's Diary**
 
-### `npm test`
+The idea behind this project is to give user's a platform to write their experiences while traveling by starting a trip and then make posts on that trip in a blog like style. Once the trip is over, the user can end the trip and all of the posts created during his/her trip will always remain grouped up. Once a user visits a trip, they will be able to read all the posts of that trip as well as check where the posts where made from, creating a sort of timeline of the trip.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## **Goals of this project**
 
-### `npm run build`
+The main goal of this project is to gain experience developing a full-stack app. I also put a little extra emphasis on exploring new technologies and see how well and how fast I would be able to adapt to something new while also consolidating the knowledge of the technologies learned during the academy. For that purpose, I decided to use typescript in the front-end while keeping it simple in the back-end with technologies I was already familiar with. I used a Chakra-UI for the UI design which was also new to me. </br> I tried to commit with clear messages and when merging, I tried to give a bullet point list of what was done while being a bit more descriptive on more intrecate merges.</br> In short:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Practice full-stack development;
+- Practice the use of external API's
+- Learn new technologies
+- Implement a developer's approach by creating and following User stories and wireframes which can be found here:
+  - [Kanban with user stories](https://github.com/Andre2610/travelersdiary-front-end/projects/1)
+- Practice with version control. A few examples of pull requests:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+  - [Feat-user-login/signup](https://github.com/Andre2610/travelersdiary-front-end/pull/8)
+  - [Feat-start-newtrip](https://github.com/Andre2610/travelersdiary-front-end/pull/10)
+  - [Styling](https://github.com/Andre2610/travelersdiary-front-end/pull/12)
+  - [Feat-appState](https://github.com/Andre2610/travelersdiary-front-end/pull/13)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **Technologies used**
 
-### `npm run eject`
+**Back end**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Express
+- REST
+- Sequelize
+- Postgres
+- NodeJS
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Front end**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Typescript
+- React
+- Redux
+- Axios
+- Chakra-UI
+- Geocode-Geolocation
+- React-google-maps
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**External API's**
 
-## Learn More
+- [Googlemaps API](https://cloud.google.com/maps-platform/?hl=en)
+- [OpenCage](https://opencagedata.com/api)
+- [Cloudinary](https://cloudinary.com/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## **Demo**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## **Server repository**
+
+The back-end was built in express and it is a REST a API. The database is built using Postgres and Sequelize. You can find the back-end's repository [HERE](https://github.com/Andre2610/travelersdiary-back-end)
+
+## **Setup**
+
+- **Server setup**
+
+  - clone the repository;
+  - cd into the project directory
+  - on first run, run the script `npm run initialize`, this will run `npm i && npm run resetDB && npm run start`;
+  - afterwards simply run `npm run start` which will run the script `npx nodemon index.js` or `node index.js`
+  - server runs on port 5000 by default
+
+- **Client setup**
+  - clone the repository;
+  - cd into the project directory;
+  - on first run, run the script `npm run initialize`, this will run `npm install && react-scripts start`;
+  - afterwards first run just run the script `npm run start` to start development;
+  - client runs on localhost:3000 by default;

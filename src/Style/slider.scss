@@ -1,0 +1,50 @@
+// .slider {
+//   border: 1px solid red;
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   box-sizing: border-box;
+//   margin: 0;
+//   padding: 0;
+//   display: flex;
+//   align-items: center;
+//   overflow: hidden;
+//   background: black;
+//   .arrow {
+//     height: 2vh;
+//   }
+// }
+
+// .slide {
+//   border: 1px solid blue;
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   transition: 0.5;
+// }
+
+// #goLeft {
+//   left: 0;
+//   @extend %btn-styles;
+// }
+// #goRight {
+//   right: 0;
+//   @extend %btn-styles;
+// }
+
+// %btn-styles {
+//   position: absolute;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   width: 15%;
+//   height: 100%;
+//   background: none;
+//   border: none;
+//   outline: none;
+//   transition: 0.5s;
+//   &:hover {
+//     background: rgba(0, 0, 0, 0.349);
+//     cursor: pointer;
+//     color: whitesmoke;
+//   }
+// }
