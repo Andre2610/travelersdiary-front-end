@@ -1,15 +1,13 @@
 # **Traveler's Diary**
 
-Try Traveler's Diary for yourself [HERE](https://travelersdiary.netlify.app/)
-
 ## Table of contents
 
-- [Introduction](##Introduction)
-- [Traveler's Diary](##Traveler's-Diary)
-- [Goals of this project](##Goals-of-this-project)
-- [Technologies used](##Technologies-used)
-- [Demo](##Demo)
-- [Server repository](##Server-repository)
+- [Introduction](#Introduction)
+- [Traveler's Diary](#Traveler's-Diary)
+- [Goals of this project](#Goals-of-this-project)
+- [Technologies used](#Technologies-used)
+- [Demo](#Demo)
+- [Server repository](#Server-repository)
 
 ## **Introduction**
 
@@ -27,13 +25,7 @@ The main goal of this project is to gain experience developing a full-stack app.
 - Practice the use of external API's
 - Learn new technologies
 - Implement a developer's approach by creating and following User stories and wireframes which can be found here:
-
   - [Kanban with user stories](https://github.com/Andre2610/travelersdiary-front-end/projects/1)
-  - [Database model](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/Database_Models.png?raw=true)
-  - [Landing page and user's homepage](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/Wireframe_Homepage_UserHome.png?raw=true)
-  - [Trip overview and Post details](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/Trip_&_Post_Details.png?raw=true)
-  - [Login & Signup](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/Login_signup.png?raw=true)
-
 - Practice with version control. A few examples of pull requests:
 
   - [Feat-user-login/signup](https://github.com/Andre2610/travelersdiary-front-end/pull/8)
@@ -69,17 +61,9 @@ The main goal of this project is to gain experience developing a full-stack app.
 
 ## **Demo**
 
-![general-user](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/generalview.gif?raw=true)
-
-![signup-signin](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/signup_signin.gif?raw=true)
-
-![create-post](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/createpost.gif?raw=true)
-
-![end-trip](https://github.com/Andre2610/travelersdiary-front-end/blob/Development/Project_Info/end_trip.gif?raw=true)
-
 ## **Server repository**
 
-The back-end is a REST API using node.js. The database was built using Postgres and Sequelize for the ORM. You can find the back-end's repository [HERE](https://github.com/Andre2610/travelersdiary-back-end)
+The back-end was built in express and it is a REST a API. The database is built using Postgres and Sequelize. You can find the back-end's repository [HERE](https://github.com/Andre2610/travelersdiary-back-end)
 
 ## **Setup**
 
@@ -97,3 +81,6 @@ The back-end is a REST API using node.js. The database was built using Postgres 
   - on first run, run the script `npm run initialize`, this will run `npm install && react-scripts start`;
   - afterwards first run just run the script `npm run start` to start development;
   - client runs on localhost:3000 by default;
+
+:exclamation: You will need to create your own google API key and place it on /config/constants.tsx `export const googleAPIkey = YOUR_API_KEY`, in order for the app to your in your local host.
+:exclamation: Repeat the same process for the OpenCage API and Cloudinary
