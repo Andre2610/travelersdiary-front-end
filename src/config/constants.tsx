@@ -1,4 +1,4 @@
-export const apiUrl = "http://localhost:5000";
+export const apiUrl = "https://travelersdiary-backend.herokuapp.com/";
 export const opencageAPIkey = "fcc03450647a4e74940e8aaf46082204";
 export const googleAPIkey = "AIzaSyD4gANItWmlUyOdU2jvFsdQ4khgO_iUeLM";
 export const cloudinaryUrl =
