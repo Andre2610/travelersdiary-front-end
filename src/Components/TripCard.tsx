@@ -51,8 +51,10 @@ export default function TripCard(props: Trip) {
   }
   return (
     <>
-      <Heading className="tripTitle">{tripTitle}</Heading>
-      <Text bg="white.500" mb="1rem">
+      <Heading className="tripTitle" textAlign="center">
+        {tripTitle}
+      </Heading>
+      <Text bg="white.500" mb="1rem" textAlign="center">
         Trip started on: {startDate}
         {endDate ? ` and ended on ${endDate}` : null}
       </Text>
