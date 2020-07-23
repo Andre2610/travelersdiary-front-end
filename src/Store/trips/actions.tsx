@@ -113,8 +113,6 @@ export function createNewTrip(tripDetails: TripDetails) {
 export function endTrip(data: Trip) {
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     const token = getState().users.token;
-    console.log("endtrip data", data);
-    console.log(`the endpoint: ${apiUrl}/trips/endtrip/${data.id}`);
     try {
       dispatch(appLoading());
       const res = await axios.patch(
@@ -126,7 +124,6 @@ export function endTrip(data: Trip) {
           },
         }
       );
-      console.log("my res", res.data);
       dispatch(updateUserTrips(res.data));
       dispatch(appDoneLoading());
     } catch (error) {
@@ -171,10 +168,8 @@ export function createNewPost(newPost: NewPost, images: any) {
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
         dispatch(setMessage("error", true, error.response.data.message));
       } else {
-        console.log(error.message);
         dispatch(setMessage("error", true, error.message));
       }
       dispatch(appDoneLoading());

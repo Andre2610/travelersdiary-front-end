@@ -20,6 +20,7 @@ const initialState: User = {
   title: null,
   about: null,
   trips: [],
+  verified: false,
 };
 
 export default (state = initialState, action: UserActionTypes) => {
