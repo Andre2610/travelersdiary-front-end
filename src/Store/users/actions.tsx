@@ -40,16 +40,21 @@ export const login = (credentials: Credentials) => {
         password,
       });
 
-      dispatch(userFetched(res.data));
-      dispatch(
-        // @ts-ignore
-        showMessageWithTimeout(
-          "success",
-          false,
-          `Hello ${res.data.firstName}, welcome back`,
-          1500
-        )
-      );
+      if (res.data.verified) {
+        dispatch(userFetched(res.data));
+        const message = `Hello ${res.data.firstName}, welcome back to Traveler's Diary.`;
+        dispatch(
+          // @ts-ignore
+          showMessageWithTimeout("success", false, message, 1500)
+        );
+      } else {
+        console.log("message to verify account");
+        const message = `Hello, ${res.data.firstName}, please verify your account by clicking the link sent to your email`;
+        dispatch(
+          // @ts-ignore
+          showMessageWithTimeout("info", false, message, 4000)
+        );
+      }
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -80,15 +85,10 @@ export const signUp = (signUpData: SignupData) => {
         data,
       });
 
-      dispatch(userFetched(res.data));
+      const message = `Welcome to Traveler's Diary ${res.data.firstName}, please make sure to verify your account before logging in.`;
       dispatch(
         // @ts-ignore
-        showMessageWithTimeout(
-          "success",
-          false,
-          `Hello ${res.data.firstName}, your account was created successfuly`,
-          1500
-        )
+        showMessageWithTimeout("success", false, message, 1500)
       );
       dispatch(appDoneLoading());
     } catch (error) {
@@ -120,10 +120,8 @@ export const getUserWithStoredToken = () => {
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
-        dispatch(setMessage("error", true, error.response.data.message));
       } else {
         console.log(error.message);
-        dispatch(setMessage("error", true, error.message));
       }
       dispatch(appDoneLoading());
       dispatch(logOut());
