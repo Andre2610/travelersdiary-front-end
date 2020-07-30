@@ -32,6 +32,7 @@ export type User = {
   title: string | null;
   token: string | null;
   trips: Trip[];
+  verified: boolean;
 };
 
 export type NoTokenUser = {
@@ -42,6 +43,7 @@ export type NoTokenUser = {
   about: string | null;
   title: string | null;
   trips: Trip[];
+  verified: boolean;
 };
 
 export type DefaultMarker = {

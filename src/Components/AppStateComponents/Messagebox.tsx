@@ -20,7 +20,7 @@ export default function MessageBox() {
     <Alert
       // @ts-ignore
       status={message.variant}
-      style={{ zIndex: 60 }}
+      style={{ position: "fixed", zIndex: 60 }}
       variant="solid"
       position="absolute"
       top="4.5rem"
