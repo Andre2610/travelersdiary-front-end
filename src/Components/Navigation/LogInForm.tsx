@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Credentials } from "../../Types/model";
+import { Credentials } from "../../Types/userTypes";
 import { login } from "../../Store/users/actions";
 import {
   Flex,

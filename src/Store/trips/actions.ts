@@ -2,7 +2,7 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
 import { FETCH_TRIPS, FETCH_SINGLE_TRIP } from "./types";
-import { AppActions, GetState } from "../type";
+import { AppActions, GetState } from "../types";
 import { Trip } from "../../Types/tripTypes";
 import { setMessage, appDoneLoading, appLoading } from "../appState/actions";
 

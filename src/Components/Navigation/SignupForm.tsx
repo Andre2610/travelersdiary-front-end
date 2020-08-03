@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../Store/users/actions";
-import { SignupData } from "../../Types/model";
+import { SignupData } from "../../Types/userTypes";
 import { showMessageWithTimeout } from "../../Store/appState/actions";
 import {
   Flex,

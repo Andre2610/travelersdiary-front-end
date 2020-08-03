@@ -30,7 +30,7 @@ export default (state = initialState, action: UserActionTypes) => {
       if (userToken) localStorage.setItem("token", userToken);
       return { ...state, ...action.user };
     case TOKEN_STILL_VALID:
-      return { ...state, ...action.noTokenUser };
+      return { ...state, ...action.user };
     case LOG_OUT:
       localStorage.removeItem("token");
       return { ...initialState, token: null };

@@ -12,17 +12,6 @@ export type User = {
   verified: boolean;
 };
 
-export type NoTokenUser = {
-  id: number | null;
-  firstName: string | null;
-  lastName: string | null;
-  email: string | null;
-  about: string | null;
-  title: string | null;
-  trips: Trip[];
-  verified: boolean;
-};
-
 export type Credentials = {
   email: string;
   password: string;

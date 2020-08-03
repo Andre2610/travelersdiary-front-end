@@ -2,12 +2,7 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
 import { Trip, Post, NewPost, TripDetails } from "../../Types/tripTypes";
-import {
-  User,
-  NoTokenUser,
-  Credentials,
-  SignupData,
-} from "../../Types/userTypes";
+import { User, Credentials, SignupData } from "../../Types/userTypes";
 import {
   FETCH_USER,
   TOKEN_STILL_VALID,
@@ -16,7 +11,7 @@ import {
   UPDATE_USER_POSTS,
   UPDATE_USER_TRIPS,
 } from "./types";
-import { AppActions, GetState } from "../type";
+import { AppActions, GetState } from "../types";
 import { selectToken } from "./selector";
 import {
   showMessageWithTimeout,
@@ -30,9 +25,9 @@ export const userFetched = (user: User): AppActions => ({
   user,
 });
 
-const tokenStillValid = (noTokenUser: NoTokenUser): AppActions => ({
+const tokenStillValid = (user: User): AppActions => ({
   type: TOKEN_STILL_VALID,
-  noTokenUser,
+  user,
 });
 
 export const addUserTrip = (trip: Trip): AppActions => ({

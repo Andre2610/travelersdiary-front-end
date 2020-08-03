@@ -8,7 +8,7 @@ import {
   TabPanel,
   TabPanels,
 } from "@chakra-ui/core";
-import { Picture } from "../Types/model";
+import { Picture } from "../Types/tripTypes";
 
 export default function Slider(props: { pictures: Picture[] }) {
   return (

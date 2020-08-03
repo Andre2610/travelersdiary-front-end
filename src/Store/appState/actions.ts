@@ -5,7 +5,7 @@ import {
   SET_MESSAGE,
   CLEAR_MESSAGE,
 } from "./types";
-import { AppActions } from "../type";
+import { AppActions } from "../types";
 
 export const appLoading = (): AppActions => ({ type: APP_LOADING });
 export const appDoneLoading = (): AppActions => ({

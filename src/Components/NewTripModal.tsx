@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createNewTrip } from "../Store/trips/actions";
+import { createNewTrip } from "../Store/users/actions";
 import { showMessageWithTimeout } from "../Store/appState/actions";
-import { TripDetails } from "../Types/model";
+import { TripDetails } from "../Types/tripTypes";
 import {
   Flex,
   Button,

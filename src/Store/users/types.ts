@@ -1,5 +1,5 @@
 import { Trip, Post } from "../../Types/tripTypes";
-import { User, NoTokenUser } from "../../Types/userTypes";
+import { User } from "../../Types/userTypes";
 
 export const FETCH_MORE_TRIPS = "FETCH_MORE_TRIPS";
 export const FETCH_USER = "FETCH_USER";
@@ -15,7 +15,7 @@ export type fetchUser = {
 };
 export type fetchNoTokenUser = {
   type: typeof TOKEN_STILL_VALID;
-  noTokenUser: NoTokenUser;
+  user: User;
 };
 export type logOut = {
   type: typeof LOG_OUT;

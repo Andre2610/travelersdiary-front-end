@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Post, DefaultMarker } from "../Types/model";
+import { Post, DefaultMarker } from "../Types/tripTypes";
 import {
   withScriptjs,
   withGoogleMap,

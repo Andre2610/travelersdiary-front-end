@@ -64,9 +64,7 @@ export default function TripDetails() {
   function postsRender(post: Post) {
     const { title, content, pictures } = post;
 
-    const paragraphs = content
-      ? content.split("\n")
-      : ["Something went wrong, dont yell at me!"];
+    const paragraphs = content ? content.split("\n") : [];
     if (pictures.length > 0) {
       return (
         <Flex wrap="wrap" flexDirection="row" justify="space-around">
