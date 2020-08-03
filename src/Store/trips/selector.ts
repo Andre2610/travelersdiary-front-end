@@ -1,5 +1,5 @@
-import { Trip } from "../../Types/model";
-import { StoreState } from "../StoreTypes/actions";
+import { Trip } from "../../Types/tripTypes";
+import { StoreState } from "../types";
 
 export const selectAllTrips = (state: StoreState) => {
   return state.trips;

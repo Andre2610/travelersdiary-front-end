@@ -17,7 +17,7 @@ export default function TripCard(props: Trip) {
           <Heading as="h3" size="sm" w="95%" m="auto" mt="1rem" mb="0.5rem">
             {title}
           </Heading>
-          <Box w="50%">
+          <Box w="95%">
             {paragraphs.map((paragraph, i) => (
               <Text key={i} my="0.5rem">
                 {paragraph}
@@ -65,10 +65,10 @@ export default function TripCard(props: Trip) {
             .map((post) => {
               const { id, title, content, pictures } = post;
               return (
-                <Box key={id}>
+                <>
                   <Box key={id}>{postsRender(title, content, pictures)}</Box>
                   <Divider borderColor="gray.500" py={2} />
-                </Box>
+                </>
               );
             })
         : null}

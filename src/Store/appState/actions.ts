@@ -1,11 +1,11 @@
 import { DEFAULT_MESSAGE_TIMEOUT } from "../../config/constants";
 import {
-  AppActions,
   APP_LOADING,
   APP_DONE_LOADING,
   SET_MESSAGE,
   CLEAR_MESSAGE,
-} from "../StoreTypes/actions";
+} from "./types";
+import { AppActions } from "../type";
 
 export const appLoading = (): AppActions => ({ type: APP_LOADING });
 export const appDoneLoading = (): AppActions => ({

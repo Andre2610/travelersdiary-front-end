@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { CloudinaryContext } from "cloudinary-react";
-import "./App.css";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core";
 import Navigation from "./Components/Navigation/Navigation";

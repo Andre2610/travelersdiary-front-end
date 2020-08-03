@@ -1,4 +1,4 @@
-import { User } from "../../Types/model";
+import { User } from "../../Types/userTypes";
 import {
   UserActionTypes,
   FETCH_USER,
@@ -7,7 +7,7 @@ import {
   UPDATE_USER_TRIPS,
   UPDATE_USER_POSTS,
   ADD_USER_TRIP,
-} from "../StoreTypes/actions";
+} from "./types";
 
 const token = localStorage.getItem("token");
 
