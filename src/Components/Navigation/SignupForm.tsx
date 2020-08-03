@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../Store/users/actions";
 import { SignupData } from "../../Types/userTypes";
+import { OnClick, OnChange } from "../../Types/eventListenerTypes";
 import { showMessageWithTimeout } from "../../Store/appState/actions";
 import {
   Flex,
@@ -22,17 +23,18 @@ import "../../Style/GenStyle.css";
 
 export default function SignupForm(props: any) {
   const dispatch = useDispatch();
-  const { onClose, set_ModalForm } = props;
-  const [signUpData, set_signUpData] = useState<SignupData>({
+  const initialState: SignupData = {
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     title: "",
     about: "",
-  });
+  };
+  const { onClose, set_ModalForm } = props;
+  const [signUpData, set_signUpData] = useState<SignupData>(initialState);
 
-  function submitHandler(event: any) {
+  function submitHandler(event: OnClick) {
     event.preventDefault();
     const { firstName, lastName, email, password } = signUpData;
     if (!firstName || !lastName || !email || !password) {
@@ -40,14 +42,7 @@ export default function SignupForm(props: any) {
       dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       dispatch(signUp(signUpData));
-      set_signUpData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        title: "",
-        about: "",
-      });
+      set_signUpData(initialState);
     }
   }
 
@@ -69,7 +64,7 @@ export default function SignupForm(props: any) {
                   variant="flushed"
                   isRequired
                   value={signUpData.firstName}
-                  onChange={(e: any) =>
+                  onChange={(e: OnChange) =>
                     set_signUpData({ ...signUpData, firstName: e.target.value })
                   }
                 />
@@ -88,7 +83,7 @@ export default function SignupForm(props: any) {
                   variant="flushed"
                   isRequired
                   value={signUpData.lastName}
-                  onChange={(e: any) =>
+                  onChange={(e: OnChange) =>
                     set_signUpData({ ...signUpData, lastName: e.target.value })
                   }
                 />
@@ -107,7 +102,7 @@ export default function SignupForm(props: any) {
                   variant="flushed"
                   isRequired
                   value={signUpData.email}
-                  onChange={(e: any) =>
+                  onChange={(e: OnChange) =>
                     set_signUpData({ ...signUpData, email: e.target.value })
                   }
                 />
@@ -126,7 +121,7 @@ export default function SignupForm(props: any) {
                   variant="flushed"
                   isRequired
                   value={signUpData.password}
-                  onChange={(e: any) =>
+                  onChange={(e: OnChange) =>
                     set_signUpData({ ...signUpData, password: e.target.value })
                   }
                 />
@@ -144,7 +139,7 @@ export default function SignupForm(props: any) {
                   placeholder="Your homepage title"
                   variant="flushed"
                   value={signUpData.title}
-                  onChange={(e: any) =>
+                  onChange={(e: OnChange) =>
                     set_signUpData({ ...signUpData, title: e.target.value })
                   }
                 />
@@ -162,7 +157,7 @@ export default function SignupForm(props: any) {
                   placeholder="Tell us a line about you"
                   variant="flushed"
                   value={signUpData.about}
-                  onChange={(e: any) =>
+                  onChange={(e: OnChange) =>
                     set_signUpData({ ...signUpData, about: e.target.value })
                   }
                 />

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { createNewTrip } from "../Store/users/actions";
 import { showMessageWithTimeout } from "../Store/appState/actions";
 import { TripDetails } from "../Types/tripTypes";
+import { OnClick, OnChange } from "../Types/eventListenerTypes";
 import {
   Flex,
   Button,
@@ -23,13 +24,14 @@ import "../Style/GenStyle.css";
 
 export default function NewTripModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const dispatch = useDispatch();
-  const [tripDetails, set_tripDetails] = useState<TripDetails>({
+  const initialState: TripDetails = {
     tripTitle: "",
     startDate: "",
     endDate: "",
-  });
-  function submitHandler(e: any) {
+  };
+  const dispatch = useDispatch();
+  const [tripDetails, set_tripDetails] = useState<TripDetails>(initialState);
+  function submitHandler(e: OnClick) {
     e.preventDefault();
     const { tripTitle, startDate } = tripDetails;
     if (!tripTitle || !startDate) {
@@ -38,11 +40,7 @@ export default function NewTripModal() {
       dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       dispatch(createNewTrip(tripDetails));
-      set_tripDetails({
-        tripTitle: "",
-        startDate: "",
-        endDate: "",
-      });
+      set_tripDetails(initialState);
     }
   }
 
@@ -74,7 +72,7 @@ export default function NewTripModal() {
                     variant="flushed"
                     isRequired
                     value={tripDetails.tripTitle}
-                    onChange={(e: any) =>
+                    onChange={(e: OnChange) =>
                       set_tripDetails({
                         ...tripDetails,
                         tripTitle: e.target.value,
@@ -96,7 +94,7 @@ export default function NewTripModal() {
                     variant="flushed"
                     isRequired
                     value={tripDetails.startDate}
-                    onChange={(e: any) =>
+                    onChange={(e: OnChange) =>
                       set_tripDetails({
                         ...tripDetails,
                         startDate: e.target.value,

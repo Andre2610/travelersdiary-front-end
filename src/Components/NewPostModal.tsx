@@ -50,9 +50,7 @@ export default function NewTripModal() {
       if (!error) {
         console.log(photos);
         if (photos.event === "success") {
-          // @ts-ignore
           images = [...images, photos.info.url];
-          console.log("whats in images", images);
         }
       } else {
         console.log(error);
