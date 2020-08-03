@@ -4,11 +4,12 @@ import { opencageAPIkey } from "../config/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { showMessageWithTimeout } from "../Store/appState/actions";
-import { fetchSpecificTrip, endTrip } from "../Store/trips/actions";
+import { fetchSpecificTrip } from "../Store/trips/actions";
+import { endTrip } from "../Store/users/actions";
 import { selectIdTrip } from "../Store/trips/selector";
 import { selectUser, selectUserTrip } from "../Store/users/selector";
 import { selectAppLoading } from "../Store/appState/selector";
-import { Trip, Post, DefaultMarker } from "../Types/model";
+import { Trip, Post, DefaultMarker } from "../Types/tripTypes";
 import Slider from "../Components/slider";
 import GoogleMaps from "../Components/GoogleMaps";
 import NewPostModal from "../Components/NewPostModal";
@@ -63,9 +64,7 @@ export default function TripDetails() {
   function postsRender(post: Post) {
     const { title, content, pictures } = post;
 
-    const paragraphs = content
-      ? content.split("\n")
-      : ["Something went wrong, dont yell at me!"];
+    const paragraphs = content ? content.split("\n") : [];
     if (pictures.length > 0) {
       return (
         <Flex wrap="wrap" flexDirection="row" justify="space-around">

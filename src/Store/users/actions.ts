@@ -1,14 +1,17 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
+import { Trip, Post, NewPost, TripDetails } from "../../Types/tripTypes";
+import { User, Credentials, SignupData } from "../../Types/userTypes";
 import {
-  AppActions,
-  GetState,
   FETCH_USER,
   TOKEN_STILL_VALID,
   LOG_OUT,
-} from "../StoreTypes/actions";
-import { User, NoTokenUser, Credentials, SignupData } from "../../Types/model";
+  ADD_USER_TRIP,
+  UPDATE_USER_POSTS,
+  UPDATE_USER_TRIPS,
+} from "./types";
+import { AppActions, GetState } from "../types";
 import { selectToken } from "./selector";
 import {
   showMessageWithTimeout,
@@ -22,9 +25,23 @@ export const userFetched = (user: User): AppActions => ({
   user,
 });
 
-const tokenStillValid = (noTokenUser: NoTokenUser): AppActions => ({
+const tokenStillValid = (user: User): AppActions => ({
   type: TOKEN_STILL_VALID,
-  noTokenUser,
+  user,
+});
+
+export const addUserTrip = (trip: Trip): AppActions => ({
+  type: ADD_USER_TRIP,
+  trip,
+});
+export const updateUserTrips = (trip: Trip): AppActions => ({
+  type: UPDATE_USER_TRIPS,
+  trip,
+});
+
+export const updateUserPosts = (post: Post): AppActions => ({
+  type: UPDATE_USER_POSTS,
+  post,
 });
 
 export const logOut = (): AppActions => ({ type: LOG_OUT });
@@ -128,3 +145,103 @@ export const getUserWithStoredToken = () => {
     }
   };
 };
+
+// Create new trip
+export function createNewTrip(tripDetails: TripDetails) {
+  return async function thunk(dispatch: Dispatch, getState: GetState) {
+    const userId = getState().users.id;
+    const token = getState().users.token;
+    const data = { ...tripDetails, userId };
+    try {
+      dispatch(appLoading());
+      const res = await axios.post(
+        `${apiUrl}/trips/newtrip`,
+        { data },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(addUserTrip(res.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("error", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("error", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+}
+
+// end trip
+export function endTrip(data: Trip) {
+  return async function thunk(dispatch: Dispatch, getState: GetState) {
+    const token = getState().users.token;
+    try {
+      dispatch(appLoading());
+      const res = await axios.patch(
+        `${apiUrl}/trips/endtrip/${data.id}`,
+        { data },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(updateUserTrips(res.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("error", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("error", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+}
+
+// Create new post
+export function createNewPost(newPost: NewPost, images: any) {
+  return async function thunk(dispatch: Dispatch, getState: GetState) {
+    const token = getState().users.token;
+    const { latitude, longitude, title, content, tripId } = newPost;
+
+    const data = {
+      latitude,
+      longitude,
+      title,
+      content,
+      tripId,
+      pictures: [...images],
+    };
+    try {
+      dispatch(appLoading());
+      const res = await axios.post(
+        `${apiUrl}/trips/newpost`,
+        { data },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(updateUserPosts(res.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        dispatch(setMessage("error", true, error.response.data.message));
+      } else {
+        dispatch(setMessage("error", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+}

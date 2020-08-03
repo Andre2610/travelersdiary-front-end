@@ -1,10 +1,10 @@
 import {
+  AppStateActionTypes,
   APP_LOADING,
   APP_DONE_LOADING,
   SET_MESSAGE,
   CLEAR_MESSAGE,
-} from "../StoreTypes/actions";
-import { AppStateActionTypes } from "../StoreTypes/actions";
+} from "./types";
 
 const initialState = {
   loading: false,

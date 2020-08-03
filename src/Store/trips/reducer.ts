@@ -1,9 +1,5 @@
-import { Trip } from "../../Types/model";
-import {
-  TripActionTypes,
-  FETCH_TRIPS,
-  FETCH_SINGLE_TRIP,
-} from "../StoreTypes/actions";
+import { Trip } from "../../Types/tripTypes";
+import { TripActionTypes, FETCH_TRIPS, FETCH_SINGLE_TRIP } from "./types";
 
 const initialState: Trip[] = [];
 

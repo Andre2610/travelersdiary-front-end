@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Credentials } from "../../Types/model";
+import { Credentials } from "../../Types/userTypes";
+import { OnClick, OnChange } from "../../Types/eventListenerTypes";
 import { login } from "../../Store/users/actions";
 import {
   Flex,
@@ -28,7 +29,7 @@ export default function LogInForm(props: any) {
   });
   const dispatch = useDispatch();
 
-  function submitHandler(event: any) {
+  function submitHandler(event: OnClick): void {
     event.preventDefault();
     const { email, password } = credentials;
     if (!email || !password) {
@@ -60,7 +61,7 @@ export default function LogInForm(props: any) {
                   variant="flushed"
                   isRequired
                   value={credentials.email}
-                  onChange={(e: any) =>
+                  onChange={(e: OnChange) =>
                     set_credentials({ ...credentials, email: e.target.value })
                   }
                 />
@@ -77,7 +78,7 @@ export default function LogInForm(props: any) {
                   variant="flushed"
                   isRequired
                   value={credentials.password}
-                  onChange={(e: any) =>
+                  onChange={(e: OnChange) =>
                     set_credentials({
                       ...credentials,
                       password: e.target.value,

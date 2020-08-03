@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import TripCard from "../Components/TripCard";
 import Loading from "../Components/AppStateComponents/Loading";
-import { Trip } from "../Types/model";
+import { Trip, Post } from "../Types/tripTypes";
 import { Box } from "@chakra-ui/core";
 import { fetchTrips } from "../Store/trips/actions";
 import { selectAllTrips } from "../Store/trips/selector";
@@ -28,7 +28,7 @@ export default function Homepage() {
         {allTrips
           .sort((a: Trip, b: Trip) => b.id - a.id)
           .map((trip) => {
-            const sortedPosts = trip.posts.sort((a, b) => {
+            const sortedPosts = trip.posts.sort((a: Post, b: Post) => {
               return b.id - a.id;
             });
             const post = [{ ...sortedPosts[0] }];

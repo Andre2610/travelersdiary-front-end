@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { createNewPost } from "../Store/trips/actions";
+import { createNewPost } from "../Store/users/actions";
 import { showMessageWithTimeout } from "../Store/appState/actions";
-import { NewPost, NewPicture } from "../Types/model";
+import { NewPost, NewPicture } from "../Types/tripTypes";
 import { openUploadWidget } from "../config/CloudinaryService";
 import {
   Flex,
@@ -50,9 +50,7 @@ export default function NewTripModal() {
       if (!error) {
         console.log(photos);
         if (photos.event === "success") {
-          // @ts-ignore
           images = [...images, photos.info.url];
-          console.log("whats in images", images);
         }
       } else {
         console.log(error);
