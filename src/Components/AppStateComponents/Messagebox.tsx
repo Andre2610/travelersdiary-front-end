@@ -1,4 +1,5 @@
 import React from "react";
+// import { UserMessage } from "../Types/model";
 import { useSelector, useDispatch } from "react-redux";
 import { selectMessage } from "../../Store/appState/selector";
 import {
@@ -17,6 +18,7 @@ export default function MessageBox() {
 
   return (
     <Alert
+      // @ts-ignore
       status={message.variant}
       style={{ position: "fixed", zIndex: 60 }}
       variant="solid"
@@ -24,7 +26,11 @@ export default function MessageBox() {
       top="4.5rem"
     >
       <AlertIcon />
+      {/*
+    //@ts-ignore */}
       <AlertDescription>{message.text}</AlertDescription>
+      {/*
+    //@ts-ignore */}
       {message.dismissable ? (
         <CloseButton
           onClick={() => dispatch(clearMessage())}
