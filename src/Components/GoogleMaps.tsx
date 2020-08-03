@@ -78,11 +78,8 @@ const MyMapComponent = withScriptjs(
 export default (props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
   return (
     <MyMapComponent
-      //@ts-ignore
       googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleAPIkey}`}
-      //@ts-ignore
       loadingElement={<div style={{ height: `100%`, width: `100%` }} />}
-      //@ts-ignore
       containerElement={
         <div
           style={{
@@ -93,9 +90,7 @@ export default (props: { posts: Post[]; moveToMarker: DefaultMarker }) => {
           }}
         />
       }
-      //@ts-ignore
       mapElement={<div style={{ height: `50vh`, width: `63vw` }} />}
-      //@ts-ignore
       posts={props.posts}
       moveToMarker={props.moveToMarker}
     />
