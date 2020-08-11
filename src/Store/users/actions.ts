@@ -3,7 +3,10 @@ import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
 import { Trip, Post, NewPost, TripDetails } from "../../Types/tripTypes";
 import { User, Credentials, SignupData } from "../../Types/userTypes";
+import { selectToken } from "./selector";
+import { GetState } from "../types";
 import {
+  UserActionTypes,
   FETCH_USER,
   TOKEN_STILL_VALID,
   LOG_OUT,
@@ -11,8 +14,6 @@ import {
   UPDATE_USER_POSTS,
   UPDATE_USER_TRIPS,
 } from "./types";
-import { AppActions, GetState } from "../types";
-import { selectToken } from "./selector";
 import {
   showMessageWithTimeout,
   setMessage,
@@ -20,35 +21,34 @@ import {
   appLoading,
 } from "../appState/actions";
 
-export const userFetched = (user: User): AppActions => ({
+export const userFetched = (user: User): UserActionTypes => ({
   type: FETCH_USER,
   user,
 });
 
-const tokenStillValid = (user: User): AppActions => ({
+export const tokenStillValid = (user: User): UserActionTypes => ({
   type: TOKEN_STILL_VALID,
   user,
 });
 
-export const addUserTrip = (trip: Trip): AppActions => ({
+export const addUserTrip = (trip: Trip): UserActionTypes => ({
   type: ADD_USER_TRIP,
   trip,
 });
-export const updateUserTrips = (trip: Trip): AppActions => ({
+export const updateUserTrips = (trip: Trip): UserActionTypes => ({
   type: UPDATE_USER_TRIPS,
   trip,
 });
 
-export const updateUserPosts = (post: Post): AppActions => ({
+export const updateUserPosts = (post: Post): UserActionTypes => ({
   type: UPDATE_USER_POSTS,
   post,
 });
 
-export const logOut = (): AppActions => ({ type: LOG_OUT });
+export const logOut = (): UserActionTypes => ({ type: LOG_OUT });
 
 export const login = (credentials: Credentials) => {
   const { email, password } = credentials;
-
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     try {
       dispatch(appLoading());
