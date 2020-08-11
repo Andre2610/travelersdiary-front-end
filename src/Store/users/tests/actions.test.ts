@@ -55,6 +55,7 @@ describe("test userFetched and log out", () => {
     test("should return a payload object with null payload and type LOG_OUT", () => {
       const expected = {
         type: LOG_OUT,
+        user: null,
       };
       expect(logOut()).toEqual(expected);
     });
@@ -73,3 +74,5 @@ describe("test userFetched and log out", () => {
     });
   });
 });
+
+jest.mock("../../axios.ts");

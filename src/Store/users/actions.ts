@@ -7,6 +7,9 @@ import { selectToken } from "./selector";
 import { GetState } from "../types";
 import {
   UserActionTypes,
+  AuthTypes,
+  TripTypes,
+  PostTypes,
   FETCH_USER,
   TOKEN_STILL_VALID,
   LOG_OUT,
@@ -21,31 +24,31 @@ import {
   appLoading,
 } from "../appState/actions";
 
-export const userFetched = (user: User): UserActionTypes => ({
+export const userFetched = (user: User): AuthTypes => ({
   type: FETCH_USER,
   user,
 });
 
-export const tokenStillValid = (user: User): UserActionTypes => ({
+export const tokenStillValid = (user: User): AuthTypes => ({
   type: TOKEN_STILL_VALID,
   user,
 });
 
-export const addUserTrip = (trip: Trip): UserActionTypes => ({
+export const addUserTrip = (trip: Trip): TripTypes => ({
   type: ADD_USER_TRIP,
   trip,
 });
-export const updateUserTrips = (trip: Trip): UserActionTypes => ({
+export const updateUserTrips = (trip: Trip): TripTypes => ({
   type: UPDATE_USER_TRIPS,
   trip,
 });
 
-export const updateUserPosts = (post: Post): UserActionTypes => ({
+export const updateUserPosts = (post: Post): PostTypes => ({
   type: UPDATE_USER_POSTS,
   post,
 });
 
-export const logOut = (): UserActionTypes => ({ type: LOG_OUT });
+export const logOut = (): AuthTypes => ({ type: LOG_OUT, user: null });
 
 export const login = (credentials: Credentials) => {
   const { email, password } = credentials;
