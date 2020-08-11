@@ -46,6 +46,9 @@ describe("test userFetched and log out", () => {
       };
       expect(userFetched(user)).toEqual(expected);
     });
+    test("should return a payload that is the same as user object passed in", () => {
+      expect(userFetched(user).user).toEqual(user);
+    });
   });
 
   describe("if logOut is called", () => {
@@ -63,14 +66,10 @@ describe("test userFetched and log out", () => {
         user,
       };
       expect(tokenStillValid(user)).toEqual(expected);
+    });
 
-      //   test("payload should be the same as user object passed for still logged in", () => {
-      //     const expected = {
-      //       type: "TOKEN_STILL_VALID",
-      //       payload: user,
-      //     };
-      //     expect(tokenStillValid(user).payload).toEqual(user);
-      //   });
+    test("payload should be the same as user object passed for still logged in", () => {
+      expect(tokenStillValid(user).user).toEqual(user);
     });
   });
 });
