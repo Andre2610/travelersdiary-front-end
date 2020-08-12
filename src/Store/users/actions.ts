@@ -6,7 +6,6 @@ import { User, Credentials, SignupData } from "../../Types/userTypes";
 import { selectToken } from "./selector";
 import { GetState } from "../types";
 import {
-  UserActionTypes,
   AuthTypes,
   TripTypes,
   PostTypes,
@@ -68,7 +67,6 @@ export const login = (credentials: Credentials) => {
           showMessageWithTimeout("success", false, message, 1500)
         );
       } else {
-        console.log("message to verify account");
         const message = `Hello, ${res.data.firstName}, please verify your account by clicking the link sent to your email`;
         dispatch(
           // @ts-ignore

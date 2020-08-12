@@ -17,7 +17,7 @@ Hi, I am Andre, and this is my portfolio project, a web application App called T
 
 The idea behind this project is to give user's a platform to write their experiences while traveling by starting a trip and then make posts on that trip in a blog like style. Once the trip is over, the user can end the trip and all of the posts created during his/her trip will always remain grouped up. Once a user visits a trip, they will be able to read all the posts of that trip as well as check where the posts where made from, creating a sort of timeline of the trip.
 When a new accounts are created, users will have to verified it with the link sent to their email.
-You can find a deployed version of Traveler's Diary [HERE](https://travelersdiary.netlify.app).
+You can find a deployed version of Traveler's Diary [HERE](https://travelersdiary.netlify.app). Use the very safe credentials that follow if you wish to test it without creating an account: email: a@a.com, password: a.
 
 ## **Goals of this project**
 
