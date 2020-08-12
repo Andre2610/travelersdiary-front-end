@@ -48,14 +48,17 @@ const user: User = {
   trips: [],
   verified: false,
 };
-const credentials: Credentials = { email: "test@test.com", password: "123" };
 
-const mockShowMessageWithTimeout = showMessageWithTimeout(
-  "success",
-  false,
-  "message",
-  1500
-);
+const signUpData: SignupData = {
+  firstName: "John",
+  lastName: "Doe",
+  email: "test@test.com",
+  password: "123",
+  title: "Test title",
+  about: "Test about",
+};
+
+const credentials: Credentials = { email: "test@test.com", password: "123" };
 
 describe("test userFetched and log out", () => {
   describe("if given an object with user info", () => {
@@ -110,17 +113,11 @@ describe("#postLogin", () => {
       if (response.verified) {
         expect(dispatch(userFetched(response)));
         expect(
-          dispatch(
-            // @ts-ignore
-            showMessageWithTimeout(mockShowMessageWithTimeout)
-          )
+          dispatch(showMessageWithTimeout("success", false, "message", 1500))
         );
       } else {
         expect(
-          dispatch(
-            // @ts-ignore
-            showMessageWithTimeout(mockShowMessageWithTimeout)
-          )
+          dispatch(showMessageWithTimeout("success", false, "message", 1500))
         );
       }
       expect(dispatch).toHaveBeenCalledWith(appDoneLoading());
@@ -136,6 +133,43 @@ describe("#postLogin", () => {
       const dispatch = jest.fn();
       const getState = jest.fn().mockReturnValueOnce([]);
       await login(credentials)(dispatch, getState);
+      if (error.response) {
+        expect(
+          dispatch(setMessage("error", true, error.response.data.message))
+        );
+      } else {
+        expect(dispatch(setMessage("error", true, defaultError.message)));
+      }
+      expect(dispatch(appDoneLoading()));
+      expect(dispatch).toHaveBeenCalledTimes(5);
+    });
+  });
+});
+
+describe("#postSignUp", () => {
+  describe("when called and success", () => {
+    test("should dispatch user feedback message", async () => {
+      const response = "Success";
+      mockedAxios.post.mockImplementationOnce(() => Promise.resolve(response));
+      const dispatch = jest.fn();
+      const getState = jest.fn().mockReturnValueOnce([]);
+      await signUp(signUpData)(dispatch, getState);
+      expect(dispatch).toHaveBeenCalledWith(appLoading());
+      expect(
+        dispatch(showMessageWithTimeout("success", false, "message", 1500))
+      );
+      expect(dispatch).toHaveBeenCalledWith(appDoneLoading());
+      expect(dispatch).toHaveBeenCalledTimes(4);
+    });
+  });
+  describe("when called and failed", () => {
+    test("should dispatch an action message", async () => {
+      const error = { response: { data: { message: "error" } } };
+      const defaultError = { message: "error" };
+      mockedAxios.post.mockImplementationOnce(() => Promise.reject(error));
+      const dispatch = jest.fn();
+      const getState = jest.fn().mockReturnValueOnce([]);
+      await signUp(signUpData)(dispatch, getState);
       if (error.response) {
         expect(
           dispatch(setMessage("error", true, error.response.data.message))
