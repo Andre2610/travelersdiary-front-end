@@ -19,6 +19,7 @@ export type fetchNoTokenUser = {
 };
 export type logOut = {
   type: typeof LOG_OUT;
+  user: null;
 };
 export type addnewtrip = {
   type: typeof ADD_USER_TRIP;
@@ -33,10 +34,10 @@ export type updateUserPosts = {
   post: Post;
 };
 
-export type UserActionTypes =
-  | fetchUser
-  | fetchNoTokenUser
-  | logOut
-  | addnewtrip
-  | updateUserTrip
-  | updateUserPosts;
+export type AuthTypes = fetchUser | fetchNoTokenUser | logOut;
+
+export type TripTypes = addnewtrip | updateUserTrip;
+
+export type PostTypes = updateUserPosts;
+
+export type UserActionTypes = AuthTypes | TripTypes | PostTypes;
