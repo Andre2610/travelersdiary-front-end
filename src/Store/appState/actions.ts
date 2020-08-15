@@ -1,25 +1,26 @@
 import { DEFAULT_MESSAGE_TIMEOUT } from "../../config/constants";
+import { Dispatch } from "redux";
 import {
+  AppStateActionTypes,
   APP_LOADING,
   APP_DONE_LOADING,
   SET_MESSAGE,
   CLEAR_MESSAGE,
 } from "./types";
-import { AppActions } from "../types";
 
-export const appLoading = (): AppActions => ({ type: APP_LOADING });
-export const appDoneLoading = (): AppActions => ({
+export const appLoading = (): AppStateActionTypes => ({ type: APP_LOADING });
+export const appDoneLoading = (): AppStateActionTypes => ({
   type: APP_DONE_LOADING,
 });
-export const clearMessage = (): AppActions => ({
+export const clearMessage = (): AppStateActionTypes => ({
   type: CLEAR_MESSAGE,
 });
 
 export const setMessage = (
-  variant: any,
+  variant: string,
   dismissable: boolean,
   text: string
-) => {
+): AppStateActionTypes => {
   return {
     type: SET_MESSAGE,
     message: {
@@ -36,9 +37,8 @@ export const showMessageWithTimeout = (
   text: string,
   timeOutMilliSeconds: number
 ) => {
-  return (dispatch: any) => {
+  return (dispatch: Dispatch) => {
     dispatch(setMessage(variant, dismissable, text));
-
     const timeout = timeOutMilliSeconds || DEFAULT_MESSAGE_TIMEOUT;
     setTimeout(() => dispatch(clearMessage()), timeout);
   };
