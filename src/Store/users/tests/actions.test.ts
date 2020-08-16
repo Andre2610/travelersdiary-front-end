@@ -63,6 +63,25 @@ const signUpData: SignupData = {
 
 const credentials: Credentials = { email: "test@test.com", password: "123" };
 
+const trip: Trip = {
+  id: 1,
+  tripTitle: "Trip title",
+  posts: [],
+  startDate: "01/01/2020",
+  endDate: "01/10/2020",
+  userId: 1,
+};
+
+const post: Post = {
+  id: 1,
+  latitude: 1,
+  longitude: 1,
+  title: "A post",
+  content: "A mock post",
+  pictures: [],
+  tripId: 1,
+};
+
 describe("test userFetched and log out", () => {
   describe("if given an object with user info", () => {
     test("should return an object containing payload user info and type FETCH_USER", () => {
@@ -86,6 +105,7 @@ describe("test userFetched and log out", () => {
       expect(logOut()).toEqual(expected);
     });
   });
+
   describe("if given an object of user info", () => {
     test("should return an object containing payload user info and type TOKEN_STILL_VALID", () => {
       const expected = {
@@ -97,6 +117,45 @@ describe("test userFetched and log out", () => {
 
     test("payload should be the same as user object passed for still logged in", () => {
       expect(tokenStillValid(user).user).toEqual(user);
+    });
+  });
+
+  describe("if given an object of trip details", () => {
+    test("should return an object containing payload trip info and type ADD_USER_TRIP", () => {
+      const expected = {
+        type: ADD_USER_TRIP,
+        trip,
+      };
+      expect(addUserTrip(trip)).toEqual(expected);
+    });
+
+    test("payload should be the same as trip object passed to add new trip", () => {
+      expect(addUserTrip(trip).trip).toEqual(trip);
+    });
+    test("should return an object containing payload trip info and type UPDATE_USER_TRIPS", () => {
+      const expected = {
+        type: UPDATE_USER_TRIPS,
+        trip,
+      };
+      expect(updateUserTrips(trip)).toEqual(expected);
+    });
+
+    test("payload should be the same as trip object passed", () => {
+      expect(updateUserTrips(trip).trip).toEqual(trip);
+    });
+  });
+
+  describe("if given an object of post info", () => {
+    test("should return an object containing payload post info and type UPDATE_USER_POSTS", () => {
+      const expected = {
+        type: UPDATE_USER_POSTS,
+        post,
+      };
+      expect(updateUserPosts(post)).toEqual(expected);
+    });
+
+    test("payload should be the same as post object passed", () => {
+      expect(updateUserPosts(post).post).toEqual(post);
     });
   });
 });
