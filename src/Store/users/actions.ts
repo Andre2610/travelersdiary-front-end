@@ -6,7 +6,6 @@ import { User, Credentials, SignupData } from "../../Types/userTypes";
 import { selectToken } from "./selector";
 import { GetState } from "../types";
 import {
-  UserActionTypes,
   AuthTypes,
   TripTypes,
   PostTypes,
@@ -68,7 +67,6 @@ export const login = (credentials: Credentials) => {
           showMessageWithTimeout("success", false, message, 1500)
         );
       } else {
-        console.log("message to verify account");
         const message = `Hello, ${res.data.firstName}, please verify your account by clicking the link sent to your email`;
         dispatch(
           // @ts-ignore
@@ -78,10 +76,8 @@ export const login = (credentials: Credentials) => {
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
         dispatch(setMessage("error", true, error.response.data.message));
       } else {
-        console.log(error.message);
         dispatch(setMessage("error", true, error.message));
       }
       dispatch(appDoneLoading());
@@ -113,10 +109,8 @@ export const signUp = (signUpData: SignupData) => {
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
         dispatch(setMessage("error", true, error.response.data.message));
       } else {
-        console.log(error.message);
         dispatch(setMessage("error", true, error.message));
       }
       dispatch(appDoneLoading());
