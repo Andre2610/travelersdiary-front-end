@@ -26,7 +26,6 @@ export default function MyPage() {
   } else {
     if (!user.id) return null;
 
-    //@ts-ignore
     const about = user.about
       ? user.about
           .split("\n")

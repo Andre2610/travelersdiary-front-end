@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment";
 import { opencageAPIkey } from "../config/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -108,17 +109,19 @@ export default function TripDetails() {
       <>
         <Flex w="30vw" m="auto" justify="space-around" mb="2rem">
           <NewPostModal />
-          <Button
-            minW="10vw"
-            maxW="10vw"
-            className="navbtn"
-            variantColor="customBtn"
-            onClick={(e) => set_toggle_endDate(!toggle_endDate)}
-          >
-            End Trip
-          </Button>
+          {!oneTrip.endDate ? (
+            <Button
+              minW="10vw"
+              maxW="10vw"
+              className="navbtn"
+              variantColor="customBtn"
+              onClick={(e) => set_toggle_endDate(!toggle_endDate)}
+            >
+              End Trip
+            </Button>
+          ) : null}
         </Flex>
-        <Collapse mt={4} isOpen={toggle_endDate} m="auto" w="15vw">
+        <Collapse mt={4} isOpen={toggle_endDate} m="auto" w="15vw" mb={6}>
           <FormControl>
             <InputGroup maxH="10vh">
               <Flex
@@ -167,9 +170,16 @@ export default function TripDetails() {
       const message = "Please pick a date to end your trip";
       dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
-      const endingTrip = { ...oneTrip, endDate };
-      dispatch(endTrip(endingTrip));
-      set_toggle_endDate(!toggle_endDate);
+      const momentStartTripDate = moment(oneTrip.startDate);
+      const momentEndTripDate = moment(endDate);
+      if (momentStartTripDate > momentEndTripDate) {
+        const message = "Trip can not end before the date it started!";
+        dispatch(showMessageWithTimeout("error", true, message, 3000));
+      } else {
+        const endingTrip = { ...oneTrip, endDate };
+        dispatch(endTrip(endingTrip));
+        set_toggle_endDate(!toggle_endDate);
+      }
     }
   }
 
