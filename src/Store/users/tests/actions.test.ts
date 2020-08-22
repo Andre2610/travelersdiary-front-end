@@ -22,12 +22,6 @@ import {
   UPDATE_USER_TRIPS,
 } from "../types";
 import {
-  APP_LOADING,
-  APP_DONE_LOADING,
-  SET_MESSAGE,
-  CLEAR_MESSAGE,
-} from "../../appState/types";
-import {
   showMessageWithTimeout,
   setMessage,
   appDoneLoading,
@@ -35,7 +29,6 @@ import {
 } from "../../appState/actions";
 import { Trip, Post, NewPost, TripDetails } from "../../../Types/tripTypes";
 import { User, Credentials, SignupData } from "../../../Types/userTypes";
-import { AppActions, GetState } from "../../types";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -82,8 +75,8 @@ const post: Post = {
   tripId: 1,
 };
 
-describe("test userFetched and log out", () => {
-  describe("if given an object with user info", () => {
+describe("Test action creators in users slice", () => {
+  describe("if given an object with user info to userFetched", () => {
     test("should return an object containing payload user info and type FETCH_USER", () => {
       const expected = {
         type: FETCH_USER,
@@ -106,7 +99,7 @@ describe("test userFetched and log out", () => {
     });
   });
 
-  describe("if given an object of user info", () => {
+  describe("if given an object with user info to tokenStillValid", () => {
     test("should return an object containing payload user info and type TOKEN_STILL_VALID", () => {
       const expected = {
         type: TOKEN_STILL_VALID,
@@ -114,13 +107,12 @@ describe("test userFetched and log out", () => {
       };
       expect(tokenStillValid(user)).toEqual(expected);
     });
-
     test("payload should be the same as user object passed for still logged in", () => {
       expect(tokenStillValid(user).user).toEqual(user);
     });
   });
 
-  describe("if given an object of trip details", () => {
+  describe("if given an object of trip details to addUserTrip", () => {
     test("should return an object containing payload trip info and type ADD_USER_TRIP", () => {
       const expected = {
         type: ADD_USER_TRIP,
@@ -128,10 +120,12 @@ describe("test userFetched and log out", () => {
       };
       expect(addUserTrip(trip)).toEqual(expected);
     });
-
     test("payload should be the same as trip object passed to add new trip", () => {
       expect(addUserTrip(trip).trip).toEqual(trip);
     });
+  });
+
+  describe("if given an object of trip details to updateUserTrips", () => {
     test("should return an object containing payload trip info and type UPDATE_USER_TRIPS", () => {
       const expected = {
         type: UPDATE_USER_TRIPS,
@@ -139,7 +133,6 @@ describe("test userFetched and log out", () => {
       };
       expect(updateUserTrips(trip)).toEqual(expected);
     });
-
     test("payload should be the same as trip object passed", () => {
       expect(updateUserTrips(trip).trip).toEqual(trip);
     });
@@ -168,6 +161,7 @@ describe("#postLogin", () => {
       const dispatch = jest.fn();
       const getState = jest.fn();
       await login(credentials)(dispatch, getState);
+      expect(mockedAxios.post).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith(appLoading());
       expect(dispatch).toHaveBeenCalledWith(userFetched(response.data));
       //   expect(dispatch).toHaveBeenCalledWith(

@@ -102,10 +102,7 @@ export const signUp = (signUpData: SignupData) => {
       });
 
       const message = `Welcome to Traveler's Diary ${res.data.firstName}, please make sure to verify your account before logging in.`;
-      dispatch(
-        // @ts-ignore
-        showMessageWithTimeout("success", false, message, 1500)
-      );
+      dispatch<any>(showMessageWithTimeout("success", false, message, 1500));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
