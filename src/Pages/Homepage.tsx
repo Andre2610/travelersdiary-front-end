@@ -24,36 +24,39 @@ export default function Homepage() {
     return <Loading />;
   } else {
     return (
-      <Box w="100vw" m="auto" bg="blackAlpha.300" p="2vh" top="1" mt="3rem">
-        {allTrips
-          .sort((a: Trip, b: Trip) => b.id - a.id)
-          .map((trip) => {
-            const sortedPosts = trip.posts.sort((a: Post, b: Post) => {
-              return b.id - a.id;
-            });
-            const post = [{ ...sortedPosts[0] }];
-            return (
-              <Box
-                key={trip.id}
-                rounded="lg"
-                w="80%"
-                m="auto"
-                p="15px"
-                my="3vh"
-                border="2px solid gray"
-                overflow="hidden"
-              >
-                <TripCard
-                  id={trip.id}
-                  tripTitle={trip.tripTitle}
-                  posts={post}
-                  startDate={trip.startDate}
-                  endDate={trip.endDate}
-                  userId={trip.userId}
-                />
-              </Box>
-            );
-          })}
+      <Box>
+        <Box></Box>
+        <Box w="100vw" m="auto" bg="blackAlpha.300" p="2vh" top="1" mt="3rem">
+          {allTrips
+            .sort((a: Trip, b: Trip) => b.id - a.id)
+            .map((trip) => {
+              const sortedPosts = trip.posts.sort((a: Post, b: Post) => {
+                return b.id - a.id;
+              });
+              const post = [{ ...sortedPosts[0] }];
+              return (
+                <Box
+                  key={trip.id}
+                  rounded="lg"
+                  w="80%"
+                  m="auto"
+                  p="15px"
+                  my="3vh"
+                  border="2px solid gray"
+                  overflow="hidden"
+                >
+                  <TripCard
+                    id={trip.id}
+                    tripTitle={trip.tripTitle}
+                    posts={post}
+                    startDate={trip.startDate}
+                    endDate={trip.endDate}
+                    userId={trip.userId}
+                  />
+                </Box>
+              );
+            })}
+        </Box>
       </Box>
     );
   }

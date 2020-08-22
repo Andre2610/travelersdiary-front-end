@@ -177,9 +177,9 @@ describe("#postLogin", () => {
       const getState = jest.fn();
       await login(credentials)(dispatch, getState);
       expect(dispatch).toHaveBeenCalledWith(appLoading());
-      //   expect(dispatch).toHaveBeenCalledWith(
-      //     showMessageWithTimeout("info", false, "message", 1500)
-      //   );
+      // expect(dispatch).toHaveBeenCalledWith(
+      //   showMessageWithTimeout("info", false, "message", 1500)
+      // );
       expect(dispatch).toHaveBeenCalledWith(appDoneLoading());
       expect(dispatch).toHaveBeenCalledTimes(3);
     });
@@ -187,7 +187,6 @@ describe("#postLogin", () => {
   describe("when called and failed", () => {
     test("should dispatch an action message if response is an error", async () => {
       const error = { response: { data: { message: "error" } } };
-      const defaultError = { message: "error" };
       mockedAxios.post.mockImplementationOnce(() => Promise.reject(error));
       const dispatch = jest.fn();
       const getState = jest.fn().mockReturnValueOnce([]);
