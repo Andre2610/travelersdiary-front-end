@@ -6,3 +6,9 @@
 .modalLabel {
   font-weight: 600 !important;
 }
+
+.tripCardContainer:hover {
+  transition: ease-in 0.2s;
+  transform: scale(1.005);
+  box-shadow: 0px 1px 10px 0.1em #aeaeae !important;
+}

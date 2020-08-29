@@ -190,7 +190,15 @@ export default function TripDetails() {
   }, [id, user]);
 
   const isUser = oneTrip && user.id === oneTrip.userId;
-  const validation = oneTrip && user.token && !oneTrip.endDate && isUser;
+  const isTripOver = () => {
+    if (oneTrip.endDate) {
+      const momentCurrentDate = moment(new Date());
+      const momentEndTripDate = moment(endDate);
+      if (momentCurrentDate > momentEndTripDate) return true;
+    }
+    return false;
+  };
+  const validation = oneTrip && user.token && !isTripOver() && isUser;
   const menu = validation ? tripControlMenu() : null;
 
   if (loading) {

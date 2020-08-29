@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import TripCard from "../Components/TripCard";
+import TripCard from "../Components/tripCard/TripCard";
 import Loading from "../Components/AppStateComponents/Loading";
 import { Trip, Post } from "../Types/tripTypes";
 import { Box } from "@chakra-ui/core";
@@ -44,6 +44,7 @@ export default function Homepage() {
                   my="3vh"
                   border="2px solid gray"
                   overflow="hidden"
+                  className="tripCardContainer"
                 >
                   <TripCard
                     id={trip.id}

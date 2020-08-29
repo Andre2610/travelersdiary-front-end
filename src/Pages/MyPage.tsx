@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../Store/users/selector";
 import { selectAppLoading } from "../Store/appState/selector";
 import { Trip } from "../Types/tripTypes";
-import TripCard from "../Components/TripCard";
+import TripCard from "../Components/tripCard/TripCard";
 import NewTripModal from "../Components/NewTripModal";
 import Loading from "../Components/AppStateComponents/Loading";
 import "../Style/GenStyle.css";
