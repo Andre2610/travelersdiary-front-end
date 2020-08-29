@@ -1,9 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Trip, Picture, Post } from "../Types/tripTypes";
+import { Trip, Picture, Post } from "../../Types/tripTypes";
 import { Flex, Text, Box, Heading, Button, Divider } from "@chakra-ui/core";
-import Slider from "./slider";
+import Slider from "../slider";
 import "../Style/GenStyle.css";
+import "./TripCard.css";
 
 export default function TripCard(props: Trip) {
   const { id, tripTitle, posts, startDate, endDate } = props;
@@ -49,6 +50,7 @@ export default function TripCard(props: Trip) {
   function visitTripOnClickHandler(id: number) {
     history.push(`/trip/${id}`);
   }
+
   return (
     <Box key={id}>
       <Heading className="tripTitle" textAlign="center">
@@ -61,8 +63,8 @@ export default function TripCard(props: Trip) {
 
       {posts
         ? posts
-            .sort((a: Post, b: Post) => b.id - a.id)
-            .map((post: Post) => {
+            .sort((a, b) => b.id - a.id)
+            .map((post) => {
               const { id, title, content, pictures } = post;
               return (
                 <Box key={id}>
