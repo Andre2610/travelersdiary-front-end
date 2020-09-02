@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Trip, Picture, Post } from "../../Types/tripTypes";
 import { Flex, Text, Box, Heading, Button, Divider } from "@chakra-ui/core";
 import Slider from "../slider";
-import "../Style/GenStyle.css";
+import "../../Style/GenStyle.css";
 import "./TripCard.css";
 
 export default function TripCard(props: Trip) {
