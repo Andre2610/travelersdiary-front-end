@@ -1,16 +1,16 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
-import { FETCH_TRIPS, FETCH_SINGLE_TRIP } from "./types";
+import { TripActionTypes, FETCH_TRIPS, FETCH_SINGLE_TRIP } from "./types";
 import { AppActions, GetState } from "../types";
 import { Trip } from "../../Types/tripTypes";
 import { setMessage, appDoneLoading, appLoading } from "../appState/actions";
 
-export const allTripsFetched = (trips: Trip[]): AppActions => ({
+export const allTripsFetched = (trips: Trip[]): TripActionTypes => ({
   type: FETCH_TRIPS,
   trips,
 });
-export const fetchOneTrip = (trips: Trip[]): AppActions => ({
+export const fetchOneTrip = (trips: Trip[]): TripActionTypes => ({
   type: FETCH_SINGLE_TRIP,
   trips,
 });
