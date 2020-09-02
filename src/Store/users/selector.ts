@@ -1,5 +1,5 @@
-import { StoreState } from "../StoreTypes/actions";
-import { Trip } from "../../Types/model";
+import { StoreState } from "../types";
+import { Trip } from "../../Types/tripTypes";
 
 export const selectToken = (state: StoreState) => state.users.token;
 

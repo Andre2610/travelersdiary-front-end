@@ -1,81 +1,144 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { apiUrl } from "../../config/constants";
+import { Trip, Post, NewPost, TripDetails } from "../../Types/tripTypes";
+import { User, Credentials, SignupData } from "../../Types/userTypes";
+import { selectToken } from "./selector";
+import { GetState } from "../types";
 import {
-  AppActions,
-  GetState,
-  FETCH_TRIPS,
-  FETCH_SINGLE_TRIP,
-  UPDATE_USER_TRIPS,
-  UPDATE_USER_POSTS,
+  AuthTypes,
+  TripTypes,
+  PostTypes,
+  FETCH_USER,
+  TOKEN_STILL_VALID,
+  LOG_OUT,
   ADD_USER_TRIP,
-} from "../StoreTypes/actions";
-import { Trip, TripDetails, NewPost, Post } from "../../Types/model";
-import { setMessage, appDoneLoading, appLoading } from "../appState/actions";
+  UPDATE_USER_POSTS,
+  UPDATE_USER_TRIPS,
+} from "./types";
+import {
+  showMessageWithTimeout,
+  setMessage,
+  appDoneLoading,
+  appLoading,
+} from "../appState/actions";
 
-export const allTripsFetched = (trips: Trip[]): AppActions => ({
-  type: FETCH_TRIPS,
-  trips,
-});
-export const fetchOneTrip = (trips: Trip[]): AppActions => ({
-  type: FETCH_SINGLE_TRIP,
-  trips,
+export const userFetched = (user: User): AuthTypes => ({
+  type: FETCH_USER,
+  user,
 });
 
-export const addUserTrip = (trip: Trip): AppActions => ({
+export const tokenStillValid = (user: User): AuthTypes => ({
+  type: TOKEN_STILL_VALID,
+  user,
+});
+
+export const addUserTrip = (trip: Trip): TripTypes => ({
   type: ADD_USER_TRIP,
   trip,
 });
-export const updateUserTrips = (trip: Trip): AppActions => ({
+export const updateUserTrips = (trip: Trip): TripTypes => ({
   type: UPDATE_USER_TRIPS,
   trip,
 });
 
-export const updateUserPosts = (post: Post): AppActions => ({
+export const updateUserPosts = (post: Post): PostTypes => ({
   type: UPDATE_USER_POSTS,
   post,
 });
 
-export function fetchTrips() {
-  return async function thunk(dispatch: Dispatch, getState: GetState) {
-    try {
-      dispatch(appLoading());
-      const res = await axios.get(`${apiUrl}/trips`);
-      // console.log("What is my response inside actions", res.data);
-      dispatch(allTripsFetched(res.data));
-      dispatch(appDoneLoading());
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.data.message);
-        dispatch(setMessage("error", true, error.response.data.message));
-      } else {
-        console.log(error.message);
-        dispatch(setMessage("error", true, error.message));
-      }
-      dispatch(appDoneLoading());
-    }
-  };
-}
+export const logOut = (): AuthTypes => ({ type: LOG_OUT, user: null });
 
-export function fetchSpecificTrip(id: number) {
+export const login = (credentials: Credentials) => {
+  const { email, password } = credentials;
   return async function thunk(dispatch: Dispatch, getState: GetState) {
     try {
       dispatch(appLoading());
-      const res = await axios.get(`${apiUrl}/trips/${id}`);
-      dispatch(fetchOneTrip(res.data));
+      const res = await axios.post(`${apiUrl}/auth/login`, {
+        email,
+        password,
+      });
+
+      if (res.data.verified) {
+        dispatch(userFetched(res.data));
+        const message = `Hello ${res.data.firstName}, welcome back to Traveler's Diary.`;
+        dispatch(
+          // @ts-ignore
+          showMessageWithTimeout("success", false, message, 1500)
+        );
+      } else {
+        const message = `Hello, ${res.data.firstName}, please verify your account by clicking the link sent to your email`;
+        dispatch(
+          // @ts-ignore
+          showMessageWithTimeout("info", false, message, 4000)
+        );
+      }
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
         dispatch(setMessage("error", true, error.response.data.message));
       } else {
-        console.log(error.message);
         dispatch(setMessage("error", true, error.message));
       }
       dispatch(appDoneLoading());
     }
   };
-}
+};
+export const signUp = (signUpData: SignupData) => {
+  return async (dispatch: Dispatch, getState: GetState) => {
+    dispatch(appLoading());
+
+    const title = !signUpData.title
+      ? `${signUpData.firstName}'s homepage`
+      : signUpData.title;
+    const about = !signUpData.about
+      ? (signUpData.about = "Nothing to say about myself!")
+      : signUpData.about;
+
+    const data = { ...signUpData, title, about };
+    try {
+      const res = await axios.post(`${apiUrl}/auth/signup`, {
+        data,
+      });
+
+      const message = `Welcome to Traveler's Diary ${res.data.firstName}, please make sure to verify your account before logging in.`;
+      dispatch<any>(showMessageWithTimeout("success", false, message, 1500));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        dispatch(setMessage("error", true, error.response.data.message));
+      } else {
+        dispatch(setMessage("error", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const getUserWithStoredToken = () => {
+  return async (dispatch: Dispatch, getState: GetState) => {
+    const token = selectToken(getState());
+
+    if (token === null) return;
+    dispatch(appLoading());
+    try {
+      const res = await axios.get(`${apiUrl}/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      dispatch(tokenStillValid(res.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+      dispatch(appDoneLoading());
+      dispatch(logOut());
+    }
+  };
+};
 
 // Create new trip
 export function createNewTrip(tripDetails: TripDetails) {

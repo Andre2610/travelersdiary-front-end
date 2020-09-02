@@ -1,4 +1,4 @@
-import { User } from "../../Types/model";
+import { User } from "../../Types/userTypes";
 import {
   UserActionTypes,
   FETCH_USER,
@@ -7,7 +7,7 @@ import {
   UPDATE_USER_TRIPS,
   UPDATE_USER_POSTS,
   ADD_USER_TRIP,
-} from "../StoreTypes/actions";
+} from "./types";
 
 const token = localStorage.getItem("token");
 
@@ -30,7 +30,7 @@ export default (state = initialState, action: UserActionTypes) => {
       if (userToken) localStorage.setItem("token", userToken);
       return { ...state, ...action.user };
     case TOKEN_STILL_VALID:
-      return { ...state, ...action.noTokenUser };
+      return { ...state, ...action.user };
     case LOG_OUT:
       localStorage.removeItem("token");
       return { ...initialState, token: null };

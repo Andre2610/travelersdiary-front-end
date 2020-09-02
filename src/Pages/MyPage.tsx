@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../Store/users/selector";
 import { selectAppLoading } from "../Store/appState/selector";
-import { Trip } from "../Types/model";
-import TripCard from "../Components/TripCard";
+import { Trip } from "../Types/tripTypes";
+import TripCard from "../Components/tripCard/TripCard";
 import NewTripModal from "../Components/NewTripModal";
 import Loading from "../Components/AppStateComponents/Loading";
 import "../Style/GenStyle.css";
@@ -26,10 +26,11 @@ export default function MyPage() {
   } else {
     if (!user.id) return null;
 
-    //@ts-ignore
     const about = user.about
-      .split("\n")
-      .map((paragraph, i) => <Text key={i}>{paragraph}</Text>);
+      ? user.about
+          .split("\n")
+          .map((paragraph, i) => <Text key={i}>{paragraph}</Text>)
+      : [];
 
     return (
       <Box w="100vw" m="auto" bg="blackAlpha.300" p="2vh" top="1" mt="3rem">

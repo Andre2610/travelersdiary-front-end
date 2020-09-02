@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment";
 import { opencageAPIkey } from "../config/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { showMessageWithTimeout } from "../Store/appState/actions";
-import { fetchSpecificTrip, endTrip } from "../Store/trips/actions";
+import { fetchSpecificTrip } from "../Store/trips/actions";
+import { endTrip } from "../Store/users/actions";
 import { selectIdTrip } from "../Store/trips/selector";
 import { selectUser, selectUserTrip } from "../Store/users/selector";
 import { selectAppLoading } from "../Store/appState/selector";
-import { Trip, Post, DefaultMarker } from "../Types/model";
+import { Trip, Post, DefaultMarker } from "../Types/tripTypes";
 import Slider from "../Components/slider";
 import GoogleMaps from "../Components/GoogleMaps";
 import NewPostModal from "../Components/NewPostModal";
@@ -63,9 +65,7 @@ export default function TripDetails() {
   function postsRender(post: Post) {
     const { title, content, pictures } = post;
 
-    const paragraphs = content
-      ? content.split("\n")
-      : ["Something went wrong, dont yell at me!"];
+    const paragraphs = content ? content.split("\n") : [];
     if (pictures.length > 0) {
       return (
         <Flex wrap="wrap" flexDirection="row" justify="space-around">
@@ -109,17 +109,19 @@ export default function TripDetails() {
       <>
         <Flex w="30vw" m="auto" justify="space-around" mb="2rem">
           <NewPostModal />
-          <Button
-            minW="10vw"
-            maxW="10vw"
-            className="navbtn"
-            variantColor="customBtn"
-            onClick={(e) => set_toggle_endDate(!toggle_endDate)}
-          >
-            End Trip
-          </Button>
+          {!oneTrip.endDate ? (
+            <Button
+              minW="10vw"
+              maxW="10vw"
+              className="navbtn"
+              variantColor="customBtn"
+              onClick={(e) => set_toggle_endDate(!toggle_endDate)}
+            >
+              End Trip
+            </Button>
+          ) : null}
         </Flex>
-        <Collapse mt={4} isOpen={toggle_endDate} m="auto" w="15vw">
+        <Collapse mt={4} isOpen={toggle_endDate} m="auto" w="15vw" mb={6}>
           <FormControl>
             <InputGroup maxH="10vh">
               <Flex
@@ -168,9 +170,16 @@ export default function TripDetails() {
       const message = "Please pick a date to end your trip";
       dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
-      const endingTrip = { ...oneTrip, endDate };
-      dispatch(endTrip(endingTrip));
-      set_toggle_endDate(!toggle_endDate);
+      const momentStartTripDate = moment(oneTrip.startDate);
+      const momentEndTripDate = moment(endDate);
+      if (momentStartTripDate > momentEndTripDate) {
+        const message = "Trip can not end before the date it started!";
+        dispatch(showMessageWithTimeout("error", true, message, 3000));
+      } else {
+        const endingTrip = { ...oneTrip, endDate };
+        dispatch(endTrip(endingTrip));
+        set_toggle_endDate(!toggle_endDate);
+      }
     }
   }
 
@@ -181,7 +190,15 @@ export default function TripDetails() {
   }, [id, user]);
 
   const isUser = oneTrip && user.id === oneTrip.userId;
-  const validation = oneTrip && user.token && !oneTrip.endDate && isUser;
+  const isTripOver = () => {
+    if (oneTrip.endDate) {
+      const momentCurrentDate = moment(new Date());
+      const momentEndTripDate = moment(endDate);
+      if (momentCurrentDate > momentEndTripDate) return true;
+    }
+    return false;
+  };
+  const validation = oneTrip && user.token && !isTripOver() && isUser;
   const menu = validation ? tripControlMenu() : null;
 
   if (loading) {
