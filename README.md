@@ -1,5 +1,7 @@
 # **Traveler's Diary**
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b942ebe7-0e49-47c5-b84c-59aa49768789/deploy-status)](https://app.netlify.com/sites/travelersdiary/deploys)
+
 ## Table of contents
 
 - [Introduction](#Introduction)

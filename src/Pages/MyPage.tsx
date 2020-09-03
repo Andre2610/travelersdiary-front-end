@@ -81,6 +81,7 @@ export default function MyPage() {
                   my="3vh"
                   border="2px solid gray"
                   overflow="hidden"
+                  className="tripCardContainer"
                 >
                   <TripCard
                     id={trip.id}
