@@ -7,9 +7,10 @@ import Messagebox from "./Components/AppStateComponents/Messagebox";
 import Homepage from "./Pages/Homepage";
 import TripDetails from "./Pages/TripDetails";
 import MyPage from "./Pages/MyPage";
+import Loading from "./Components/AppStateComponents/Loading";
+import Footer from "./Components/Footer/Footer";
 import { getUserWithStoredToken } from "./Store/users/actions";
 import { selectAppLoading } from "./Store/appState/selector";
-import Loading from "./Components/AppStateComponents/Loading";
 import { cloud_name } from "./config/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { CustomTheme } from "./Style/CustomTheme";
@@ -30,11 +31,11 @@ function App() {
           <Messagebox />
           {loading ? <Loading /> : null}
           <Switch>
-            <Route path="/trip/:id?" component={TripDetails} />
-            <Route path="/users/:id?" component={MyPage} />
+            <Route path="/trip/:id" component={TripDetails} />
+            <Route path="/users/:id" component={MyPage} />
             <Route path="/" component={Homepage} />
           </Switch>
-          {/* <Footer /> */}
+          <Footer />
         </CloudinaryContext>
       </ColorModeProvider>
     </ThemeProvider>

@@ -21,8 +21,6 @@ export default function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
     return (
       <Box onClick={toggleColorMode}>
-        {/*
-        // *@ts-ignore  */}
         {colorMode === "dark" ? (
           <IconButton
             variantColor="customBtn"

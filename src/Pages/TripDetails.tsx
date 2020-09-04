@@ -51,6 +51,7 @@ export default function TripDetails() {
     address: "",
     flag: "",
   });
+
   async function reverseGeoCode(lat: number, lng: number) {
     const res = await axios.get(
       `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${opencageAPIkey}`
@@ -61,11 +62,6 @@ export default function TripDetails() {
       address: res.data.results[0].formatted,
       flag: res.data.results[0].annotations.flag,
     });
-  }
-
-  function googleMapsRender(posts: Post[], moveToMarker: DefaultMarker) {
-    //@ts-ignore
-    return <GoogleMaps posts={posts} moveToMarker={moveToMarker} />;
   }
 
   function tripControlMenu() {
@@ -124,7 +120,6 @@ export default function TripDetails() {
   function tabOnClickHandler(tabIndex: number, post: Post) {
     const { latitude, longitude } = post;
     reverseGeoCode(latitude, longitude);
-
     set_postIndex(tabIndex);
   }
 
@@ -188,13 +183,13 @@ export default function TripDetails() {
           <Tabs variant="soft-rounded" variantColor="customTab">
             <Box w="100%">
               {menu}
-              <Box w="25%">
-                <Box w="25%" position="fixed">
+              <Box>
+                <Box>
                   <TabList
-                    d="row"
+                    display="block"
                     alignSelf="left"
-                    w="100%"
-                    position="relative"
+                    w="25%"
+                    position="fixed"
                   >
                     {oneTrip.posts
                       .sort((a, b) => a.id - b.id)
@@ -215,9 +210,9 @@ export default function TripDetails() {
                   </TabList>
                 </Box>
               </Box>
-              <Box m="auto" display="block" w="100%" alignSelf="right">
+              <Box position="relative">
                 <TabPanels
-                  float="right"
+                  marginLeft="30%"
                   w="70%"
                   border="2px solid gray"
                   mb="2rem"
@@ -226,8 +221,11 @@ export default function TripDetails() {
                 >
                   <PostCard post={oneTrip.posts[postIndex]} />
                 </TabPanels>
-                <Flex float="right" mb="2rem">
-                  {googleMapsRender(oneTrip.posts, moveToMarker)}
+                <Flex marginLeft="30%" mb="2rem">
+                  <GoogleMaps
+                    posts={oneTrip.posts}
+                    moveToMarker={moveToMarker}
+                  />
                 </Flex>
               </Box>
             </Box>
