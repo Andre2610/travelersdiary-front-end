@@ -76,7 +76,7 @@ export const login = (credentials: Credentials) => {
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        dispatch(setMessage("error", true, error.response.data.message));
+        dispatch(setMessage("error", true, error.message));
       } else {
         dispatch(setMessage("error", true, error.message));
       }

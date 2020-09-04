@@ -4,6 +4,12 @@ import { useParams } from "react-router-dom";
 import { createNewPost } from "../Store/users/actions";
 import { showMessageWithTimeout } from "../Store/appState/actions";
 import { NewPost, NewPicture } from "../Types/tripTypes";
+import {
+  cloud_name,
+  upload_preset,
+  cloud_API_Key,
+  cloud_API_Secret,
+} from "../config/constants";
 import { openUploadWidget } from "../config/CloudinaryService";
 import {
   Flex,
@@ -41,9 +47,11 @@ export default function NewTripModal() {
 
   const beginUpload = (tag: string) => {
     const uploadOptions = {
-      cloudName: "dui8yvobq",
+      cloud_name: cloud_name,
+      api_key: cloud_API_Key,
+      api_secret: cloud_API_Secret,
       tags: [tag],
-      uploadPreset: "cloudinaryapi",
+      uploadPreset: upload_preset,
     };
 
     openUploadWidget(uploadOptions, (error: any, photos: any) => {

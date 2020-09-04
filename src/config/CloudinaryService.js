@@ -2,6 +2,7 @@ import { Cloudinary as CoreCloudinary, Util } from "cloudinary-core";
 import { cloud_name } from "./constants.tsx";
 
 export const url = (publicId, options) => {
+  console.log("Whats my publicId", publicId);
   const scOptions = Util.withSnakeCaseKeys(options);
   const cl = CoreCloudinary.new();
   return cl.url(publicId, scOptions);
@@ -14,7 +15,7 @@ export const openUploadWidget = (options, callback) => {
 
 export async function fetchPhotos(imageTag, setter) {
   const options = {
-    cloudName: { cloud_name },
+    cloud_name: { cloud_name },
     format: "json",
     type: "list",
     version: Math.ceil(new Date().getTime() / 1000),

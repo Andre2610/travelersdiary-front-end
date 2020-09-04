@@ -16,8 +16,8 @@ export default function Footer() {
         //@ts-ignore */}
         <IconButton
           icon={FaGithub}
-          variantColor="customIcon"
-          className="iconBtn"
+          variantColor="customBtn"
+          className="navbtn"
         />
       </Link>
     </Flex>

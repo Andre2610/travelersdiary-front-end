@@ -22,11 +22,12 @@ import { showMessageWithTimeout } from "../../Store/appState/actions";
 import "../../Style/GenStyle.css";
 
 export default function LogInForm(props: any) {
-  const { onClose, set_ModalForm } = props;
-  const [credentials, set_credentials] = useState<Credentials>({
+  const initialState = {
     email: "",
     password: "",
-  });
+  };
+  const { onClose, set_ModalForm } = props;
+  const [credentials, set_credentials] = useState<Credentials>(initialState);
   const dispatch = useDispatch();
 
   function submitHandler(event: OnClick): void {
@@ -37,10 +38,7 @@ export default function LogInForm(props: any) {
       dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       dispatch(login(credentials));
-      set_credentials({
-        email: "",
-        password: "",
-      });
+      set_credentials(initialState);
     }
   }
   return (
