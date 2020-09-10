@@ -12,13 +12,11 @@ import { selectUser, selectUserTrip } from "../Store/users/selector";
 import { selectAppLoading } from "../Store/appState/selector";
 import { Trip, Post, DefaultMarker } from "../Types/tripTypes";
 import PostCard from "../Components/postCard/PostCard";
-import Slider from "../Components/slider";
 import GoogleMaps from "../Components/GoogleMaps";
 import NewPostModal from "../Components/NewPostModal";
 import Loading from "../Components/AppStateComponents/Loading";
 import {
   Flex,
-  Text,
   Box,
   Heading,
   Button,
@@ -67,12 +65,10 @@ export default function TripDetails() {
   function tripControlMenu() {
     return (
       <>
-        <Flex w="30vw" m="auto" justify="space-around" mb="2rem">
+        <Flex width="30vw" margin="auto" justify="space-around" mb="2rem">
           <NewPostModal />
           {!oneTrip.endDate ? (
             <Button
-              minW="10vw"
-              maxW="10vw"
               className="navbtn"
               variantColor="customBtn"
               onClick={(e) => set_toggle_endDate(!toggle_endDate)}
@@ -190,6 +186,7 @@ export default function TripDetails() {
                     alignSelf="left"
                     w="25%"
                     position="fixed"
+                    zIndex={1}
                   >
                     {oneTrip.posts
                       .sort((a, b) => a.id - b.id)
@@ -201,7 +198,7 @@ export default function TripDetails() {
                             w="100%"
                             my={5}
                             onClick={(e) => tabOnClickHandler(i, post)}
-                            className="navbtn"
+                            className="tabBtn"
                           >
                             {post.title}
                           </Tab>
@@ -219,7 +216,7 @@ export default function TripDetails() {
                   py="1rem"
                   className="tripCardContainer"
                 >
-                  <PostCard post={oneTrip.posts[postIndex]} />
+                  <PostCard post={oneTrip.posts[postIndex]} isUser={isUser} />
                 </TabPanels>
                 <Flex marginLeft="30%" mb="2rem">
                   <GoogleMaps

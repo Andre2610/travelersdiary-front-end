@@ -3,6 +3,10 @@
   transform: scale(1.1);
 }
 
+.tabBtn:hover {
+  transition: ease-in 0.2s;
+  transform: scale(1.1);
+}
 .modalLabel {
   font-weight: 600 !important;
 }
