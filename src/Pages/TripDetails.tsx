@@ -74,7 +74,6 @@ export default function TripDetails() {
     return false;
   };
   const validation = oneTrip && user.token && !isTripOver() && isUser;
-  console.log("validation", isUser);
   const menu = validation ? <PostMenu oneTrip={oneTrip} /> : null;
 
   if (loading) {

@@ -12,8 +12,8 @@ export default function PostCard(props: { post: Post; isUser: boolean }) {
   const paragraphs = content ? content.split("\n") : [];
   const user = useSelector(selectUser);
   const postOptions = props.isUser ? (
-    <PostOwnerOptions />
-  ) : user ? (
+    <PostOwnerOptions post={props.post} />
+  ) : user.token ? (
     <PostVisitorOptions />
   ) : null;
 
