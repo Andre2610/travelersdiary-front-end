@@ -4,6 +4,13 @@ import { useParams } from "react-router-dom";
 import { createNewPost } from "../Store/users/actions";
 import { showMessageWithTimeout } from "../Store/appState/actions";
 import { NewPost, NewPicture } from "../Types/tripTypes";
+import { OnClick, OnChange } from "../Types/eventListenerTypes";
+import {
+  cloud_name,
+  upload_preset,
+  cloud_API_Key,
+  cloud_API_Secret,
+} from "../config/constants";
 import { openUploadWidget } from "../config/CloudinaryService";
 import {
   Flex,
@@ -30,20 +37,21 @@ export default function NewTripModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [newPost, set_newPost] = useState<NewPost>({
+  const initialState = {
     latitude: 0,
     longitude: 0,
     title: "",
     content: "",
     pictures: [],
     tripId: id,
-  });
+  };
+  const [newPost, set_newPost] = useState<NewPost>(initialState);
 
   const beginUpload = (tag: string) => {
     const uploadOptions = {
-      cloudName: "dui8yvobq",
+      cloud_name: cloud_name,
       tags: [tag],
-      uploadPreset: "cloudinaryapi",
+      uploadPreset: upload_preset,
     };
 
     openUploadWidget(uploadOptions, (error: any, photos: any) => {
@@ -74,7 +82,7 @@ export default function NewTripModal() {
     dispatch(showMessageWithTimeout("error", true, err.message, 3000));
   }
 
-  function submitHandler(e: any) {
+  function submitHandler(e: OnClick) {
     e.preventDefault();
     const { title, content } = newPost;
     if (!title || !content) {
@@ -82,14 +90,7 @@ export default function NewTripModal() {
       dispatch(showMessageWithTimeout("error", true, message, 3000));
     } else {
       dispatch(createNewPost(newPost, images));
-      set_newPost({
-        latitude: 0,
-        longitude: 0,
-        title: "",
-        content: "",
-        pictures: [],
-        tripId: id,
-      });
+      set_newPost(initialState);
       images = [];
     }
   }
@@ -134,7 +135,7 @@ export default function NewTripModal() {
                     variant="flushed"
                     isRequired
                     value={newPost.title}
-                    onChange={(e: any) =>
+                    onChange={(e: OnChange) =>
                       set_newPost({
                         ...newPost,
                         title: e.target.value,
@@ -159,7 +160,7 @@ export default function NewTripModal() {
                     variant="flushed"
                     isRequired
                     value={newPost.content}
-                    onChange={(e: any) =>
+                    onChange={(e: OnChange) =>
                       set_newPost({
                         ...newPost,
                         content: e.target.value,
@@ -186,17 +187,6 @@ export default function NewTripModal() {
                   >
                     Choose
                   </Button>
-                  {/* <Input
-                    type="file"
-                    placeholder="When will your trip begin"
-                    variant="flushed"
-                    onChange={(e: any) =>
-                      set_newPost({
-                        ...newPost,
-                        pictures: [...newPost.pictures, e.target.value],
-                      })
-                    }
-                  /> */}
                 </Flex>
               </InputGroup>
             </FormControl>
@@ -208,7 +198,7 @@ export default function NewTripModal() {
               className="navbtn"
               variantColor="customBtn"
               mr={3}
-              onClick={(e) => submitHandler(e)}
+              onClick={(e: OnClick) => submitHandler(e)}
             >
               Submit
             </Button>
