@@ -1,11 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../Store/users/selector";
 import { Post } from "../../Types/tripTypes";
 import { Flex, Heading, Box, Text } from "@chakra-ui/core";
 import Slider from "../slider";
+import PostOwnerOptions from "../../Components/postOptions/PostOwnerOptions";
+import PostVisitorOptions from "../../Components/postOptions/PostVisitorOptions";
 
-export default function PostCard(props: { post: Post }) {
+export default function PostCard(props: { post: Post; isUser: boolean }) {
   const { title, content, pictures } = props.post;
   const paragraphs = content ? content.split("\n") : [];
+  const user = useSelector(selectUser);
+  const postOptions = props.isUser ? (
+    <PostOwnerOptions post={props.post} />
+  ) : user.token ? (
+    <PostVisitorOptions />
+  ) : null;
 
   if (pictures.length > 0) {
     return (
@@ -23,6 +33,7 @@ export default function PostCard(props: { post: Post }) {
         <Box float="right" w="45%">
           <Slider pictures={pictures} />
         </Box>
+        {postOptions}
       </Flex>
     );
   }
@@ -32,7 +43,7 @@ export default function PostCard(props: { post: Post }) {
         {title}
       </Heading>
       {paragraphs.map((paragraph, i) => (
-        <Text key={i} m="auto" w="95%" my="0.5rem">
+        <Text key={i} marginX="auto" w="95%" marginY="0.5rem">
           {paragraph}
         </Text>
       ))}

@@ -13,7 +13,7 @@
 
 ## **Introduction**
 
-Hi, I am Andre, and this is my portfolio project, a web application App called Traveler's Diary. This is a MVP and not the final version. It is fully functional but missing some features that will be implemented in the future.
+Hi, my name is Andre, and this is my portfolio project, a web application App called Traveler's Diary. This is a MVP and not the final version. It is fully functional but missing some features that will be implemented in the future.
 
 ## [**Traveler's Diary**](https://travelersdiary.netlify.app)
 
