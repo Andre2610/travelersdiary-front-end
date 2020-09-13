@@ -5,12 +5,7 @@ import { createNewPost } from "../Store/users/actions";
 import { showMessageWithTimeout } from "../Store/appState/actions";
 import { NewPost, NewPicture } from "../Types/tripTypes";
 import { OnClick, OnChange } from "../Types/eventListenerTypes";
-import {
-  cloud_name,
-  upload_preset,
-  cloud_API_Key,
-  cloud_API_Secret,
-} from "../config/constants";
+import { cloud_name, upload_preset } from "../config/constants";
 import { openUploadWidget } from "../config/CloudinaryService";
 import {
   Flex,
