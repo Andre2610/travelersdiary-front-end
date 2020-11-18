@@ -45,6 +45,7 @@ export default function PostMenu(props: { oneTrip: Trip }) {
         <NewPostModal />
         {!oneTrip.endDate ? (
           <Button
+            minW="10vw"
             className="navbtn"
             variantColor="customBtn"
             onClick={(e: OnClick) => set_toggle_endDate(!toggle_endDate)}
